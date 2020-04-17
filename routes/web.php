@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/images/{path}/{attachment}', function ($path, $attachment) {
+	$file = sprintf('storage/%s/%s', $path, $attachment);
+	if (File::exists($file)) {
+		return Image::make($file)->response();
+	}
+});
+
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('/', 'HomeController@operation')->name('operation');
 

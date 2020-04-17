@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Account;
+use App\Operation;
 use App\Role;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -36,11 +38,23 @@ class User extends Authenticatable {
 		'email_verified_at' => 'datetime',
 	];
 
+	public function pathAttachment() {
+		return "/images/users/" . $this->picture;
+	}
+
 	public function role() {
 		return $this->belongsTo(Role::class);
 	}
 
 	public static function navigation() {
 		return auth()->check() ? auth()->user()->role->name : 'guest';
+	}
+
+	public function operations() {
+		return $this->hasMany(Operation::class);
+	}
+
+	public function accounts() {
+		return $this->hasMany(Account::class);
 	}
 }

@@ -16,6 +16,11 @@
   <ul class="navbar-nav">
     <li><a href="{{route('user.profile')}}">Mi perfil</a> </li>
     <li><a href="{{route('user.accounts')}}">Mis cuentas</a> </li>
+    <li class="align-items-center h-auto ml-sm-3">
+      <a class="btn btn-outline-primary shadow-none d-none d-sm-block" href="{{ route('home') }}">
+          Nueva operación
+      </a>
+    </li>
     @include('partials.navigations.logout')
   </ul>
 </nav>

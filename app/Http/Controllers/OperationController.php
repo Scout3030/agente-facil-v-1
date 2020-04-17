@@ -17,7 +17,7 @@ class OperationController extends Controller {
 	}
 
 	public function history() {
-		$operations = Operation::with(['operationType', 'bankOperation'])->whereUserId(auth()->user()->id)->paginate(10);
+		$operations = Operation::with(['operationType', 'payment', 'transfers'])->whereUserId(auth()->user()->id)->paginate(10);
 		// dd($operations);
 		return view('operation.history', compact('operations'));
 	}

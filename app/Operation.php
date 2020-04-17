@@ -2,9 +2,9 @@
 
 namespace App;
 
-use App\Account;
-use App\BankOperation;
 use App\OperationType;
+use App\Payment;
+use App\Transfer;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -28,11 +28,12 @@ class Operation extends Model {
 		return $this->belongsTo(OperationType::class);
 	}
 
-	public function accounts() {
-		return $this->hasMany(Account::class);
+	public function payment() {
+		return $this->hasOne(Payment::class);
 	}
 
-	public function bankOperation() {
-		return $this->belongsTo(BankOperation::class);
+	public function transfers() {
+		return $this->hasMany(Transfer::class);
 	}
+
 }

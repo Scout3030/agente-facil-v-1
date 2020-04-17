@@ -1,5 +1,6 @@
 <?php
 
+use App\OperationType;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder {
@@ -9,11 +10,11 @@ class DatabaseSeeder extends Seeder {
 	 * @return void
 	 */
 	public function run() {
-		Storage::deleteDirectory('users');
-		Storage::deleteDirectory('banks');
+		// Storage::deleteDirectory('users');
+		// Storage::deleteDirectory('banks');
 
-		Storage::makeDirectory('users');
-		Storage::makeDirectory('banks');
+		// Storage::makeDirectory('users');
+		// Storage::makeDirectory('banks');
 
 		factory(\App\Role::class, 1)->create(['name' => 'admin']);
 		factory(\App\Role::class, 1)->create(['name' => 'user']);
@@ -137,6 +138,14 @@ class DatabaseSeeder extends Seeder {
 
 		factory(\App\Account::class, 50)->create();
 
-		factory(\App\Operation::class, 50)->create();
+		factory(\App\Operation::class, 25)->create(['operation_type_id' => \App\OperationType::PAYMENT])
+			->each(function (\App\Operation $u) {
+				factory(\App\Payment::class, 1)->create(['operation_id' => $u->id]);
+			});
+
+		factory(\App\Operation::class, 25)->create(['operation_type_id' => \App\OperationType::TRANSFER])
+			->each(function (\App\Operation $u) {
+				factory(\App\Transfer::class, 2)->create(['operation_id' => $u->id]);
+			});
 	}
 }
