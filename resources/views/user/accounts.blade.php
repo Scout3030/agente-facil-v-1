@@ -45,9 +45,17 @@
                     <a href="#" data-target="#bank-account-details" data-toggle="modal" class="text-light btn-link mx-2">
                       <span class="mr-1"><i class="fas fa-share"></i></span>Más detales
                     </a>
-                    <a href="#" class="text-light btn-link mx-2">
+                    <a href="{{ route('user.accounts.destroy', $account->id) }}"
+                       class="text-light btn-link mx-2"
+                       onclick="event.preventDefault();
+                       document.getElementById('delete-account-{{$account->id}}').submit();"
+                    >
                       <span class="mr-1"><i class="fas fa-minus-circle"></i></span>Eliminar
                     </a>
+                    <form id="delete-account-{{$account->id}}" action="{{ route('user.accounts.destroy', $account->id) }}" method="POST" style="display: none;">
+                        @csrf
+                        @method('delete')
+                    </form>
                   </div>
                 </div>
               </div>
@@ -62,14 +70,15 @@
               @include('partials.accounts.add-card')
             @endforelse
 
-            @if(auth()->user()->accounts->count() % 2 == 0)
+            @if(auth()->user()->accounts->count() % 2 == 0 && auth()->user()->accounts->count() > 0)
             <div class="row mb-sm-1 mb-lg-3">
               @include('partials.accounts.add-card')
             </div>
             @endif
           </div>
-
-          @include('partials.accounts.account-detail')
+          @foreach(auth()->user()->accounts as $account)
+          @include('partials.accounts.account-detail', $account)
+          @endforeach
 
           @include('partials.accounts.modal-add-account')
 

@@ -20,6 +20,10 @@ class Operation extends Model {
 	const INPROCESS = 2;
 	const CANCELLED = 3;
 
+	protected $fillable = [
+		'user_id', 'operation_type_id', 'amount', 'deposit_code', 'transfer_code', 'status',
+	];
+
 	public function course() {
 		return $this->belongsTo(User::class);
 	}

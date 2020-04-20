@@ -34,13 +34,26 @@ Route::get('/images/{path}/{attachment}', function ($path, $attachment) {
 
 Route::group(['middleware' => ["auth"]], function () {
 	Route::get('/transferencia-interbancaria', 'OperationController@transfer')->name('operation.transfer');
+
 	Route::get('/pago-interbancario', 'OperationController@payment')->name('operation.payment');
+
+	Route::post('/deposito', 'OperationController@depositCreate')->name('operation.deposit.create');
+
+	Route::group(['middleware' => ['route']], function () {
+		Route::get('/deposito', 'OperationController@depositIndex')->name('operation.deposit.index');
+
+		Route::post('/operation/store', 'OperationController@store')->name('operation.store');
+	});
 
 	Route::post('/accounts', 'AccountController@getAccounts')->name('get.accounts');
 
 	Route::get('/historial', 'OperationController@history')->name('operation.history');
 
 	Route::get('/perfil', 'UserController@profile')->name('user.profile');
+	Route::put('/perfil', 'UserController@profileUpdate')->name('user.profile.update');
 
 	Route::get('/mis-cuentas', 'UserController@accounts')->name('user.accounts');
+
+	Route::post('/mis-cuentas', 'AccountController@store')->name('user.accounts.store');
+	Route::delete('/mis-cuentas/{account}', 'AccountController@destroy')->name('user.accounts.destroy');
 });

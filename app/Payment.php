@@ -7,6 +7,11 @@ use App\BankOperation;
 use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model {
+
+	protected $fillable = [
+		'operation_id', 'account_id', 'bank_operation_id', 'code',
+	];
+
 	public function account() {
 		return $this->belongsTo(Account::class);
 	}

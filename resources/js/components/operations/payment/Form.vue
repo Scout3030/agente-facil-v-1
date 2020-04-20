@@ -1,5 +1,8 @@
 <template>
-	<form id="form-send-money" method="post">
+	<form id="form-send-money" ref="form" method="post" action="/deposito" @submit.prevent="sendData">
+		<input type="hidden" name="_token" :value="csrf">
+		<input type="hidden" name="bankId" :value="from.id">
+		<input type="hidden" name="operationType" :value="2">
 		<div class="form-group">
             <label for="youSend">Monto</label>
             <div class="input-group">
@@ -8,6 +11,7 @@
 				</div>
 				<input type="number" class="form-control" v-model="operationAmount" step=".10" min="10" @change="setOperationAmount">
             </div>
+            <div class="error" v-if="!$v.operationAmount.required"><p :class="{ 'text-danger': !$v.operationAmount.$error }">El monto a transferir es requerido</p></div>
         </div>
 		<div class="form-group">
 			<label for="youSend">Convenio</label>
@@ -30,6 +34,7 @@
 				<option value="0" selected>Seleccione convenio</option>
 				<option v-for="item in services" :value="item">{{item.name}}</option>
 			</select>
+			<div class="error" v-if="!$v.selectedService.id.required || !$v.operationTo.id.required"><p :class="{ 'text-danger': !$v.operationFrom.id.$error }">Selecciona el convenio del banco afiliado</p></div>
 		</div>
 		<div class="form-group">
             <label for="youSend" v-if="selectedService">Dato requerido: {{selectedService.requirement}}</label>
@@ -37,6 +42,7 @@
             <div class="input-group">
 				<input type="text" class="form-control" v-model="requiredCode" @change="setOperationCode">
             </div>
+            <div class="error" v-if="!$v.requiredCode.required"><p :class="{ 'text-danger': !$v.requiredCode.$error }">El código de pago es obligatorio</p></div>
         </div>
 		<div class="form-group">
 			<label for="recipientGets">Transferir fondos desde</label>
@@ -59,6 +65,7 @@
 				<option value="0" selected>Seleccione cuenta</option>
 				<option v-for="item in accounts" :value="item">{{item.number}}</option>
 			</select>
+			<div class="error" v-if="!$v.operationFrom.id.required || !$v.operationFromAccount.id.required"><p :class="{ 'text-danger': !$v.operationFrom.id.$error }">Selecciona un banco y una cuenta de origen</p></div>
 		</div>
 		<hr>
 		<p class="mb-1">Comisión servicio <span class="text-3 float-right"> S/{{parseFloat(comission)}}</span></p>
@@ -68,6 +75,7 @@
 </template>
 
 <script>
+	import { required, numeric } from 'vuelidate/lib/validators'
 	import { mapState, mapMutations } from 'vuex'
 	export default{
 		data(){
@@ -79,7 +87,8 @@
 				accounts: [],
 				operationFromAccount: null,
 				requiredCode: null,
-				selectedService: null
+				selectedService: null,
+				csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			}
 		},
 		mounted(){
@@ -87,7 +96,6 @@
 			this.operationTo = this.to
 			this.operationAmount = this.amount
 			this.operationFromAccount = this.fromAccount
-			this.operationToAccount = this.toAccount
 			this.selectedService = this.operation
 			this.requiredCode = this.code
 			this.getBankAccounts(this.operationFrom.id).then(response => {
@@ -153,6 +161,15 @@
 					}
 				})
 				return data
+			},
+			sendData(){
+				this.$v.$touch()
+			    if (this.$v.$invalid) {
+			        this.submitStatus = 'ERROR'
+			        console.log('invalido')
+			    } else {
+		        	this.$refs.form.submit()
+			    }
 			}
 		},
 		filters: {
@@ -170,6 +187,38 @@
 			total(){
 				return `S/${parseFloat(this.operationAmount) + parseFloat(this.comission)}`
 			}
+		},
+		validations: {
+			operationFrom: {//
+		      id: {
+		      	required,
+		      	numeric
+		      }
+		    },
+			operationTo: {//
+		      id: {
+		      	required,
+		      	numeric
+		      }
+		    },
+			operationAmount: {//
+		      required,
+		    },
+			operationFromAccount: {//
+		      id: {
+		      	required,
+		      	numeric
+		      }
+		    },
+			selectedService: {//
+		      id: {
+		      	required,
+		      	numeric
+		      }
+		    },
+			requiredCode: {//
+		      required,
+		    }
 		},
 	}
 </script> 

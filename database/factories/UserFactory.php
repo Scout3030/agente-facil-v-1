@@ -27,6 +27,8 @@ $factory->define(User::class, function (Faker $faker) {
 		'slug' => Str::slug($name . " " . $last_name, '-'),
 		'email' => $faker->unique()->safeEmail,
 		'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
+		'phone' => $faker->phoneNumber,
+		'address' => $faker->address,
 		'remember_token' => Str::random(10),
 	];
 });

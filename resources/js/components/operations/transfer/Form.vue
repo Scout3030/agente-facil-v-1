@@ -1,5 +1,8 @@
 <template>
-	<form id="form-send-money" method="post">
+	<form id="form-send-money" ref="form" method="post" action="/deposito" @submit.prevent="sendData">
+		<input type="hidden" name="_token" :value="csrf">
+		<input type="hidden" name="bankId" :value="from.id">
+		<input type="hidden" name="operationType" :value="1">
 		<div class="form-group">
             <label for="youSend">Monto</label>
             <div class="input-group">
@@ -7,7 +10,9 @@
 					<span class="input-group-text">S/</span>
 				</div>
 				<input type="number" class="form-control" v-model="operationAmount" step=".10" min="10" @change="setOperationAmount">
+
             </div>
+            <div class="error" v-if="!$v.operationAmount.required">El monto a transferir es requerido</div>
         </div>
 		<div class="form-group">
 			<label for="youSend">Desde</label>
@@ -25,11 +30,13 @@
 						</select>
 					</span>
 				</div>
+				
 			</div>
 			<select class="custom-select" required="" v-if="accounts1.length" v-model="operationFromAccount" @change="setOperationFromAccount">
 				<option value="0" selected>Seleccione cuenta</option>
 				<option v-for="item in accounts1" :value="item">{{item.number}}</option>
 			</select>
+			<div class="error" v-if="!$v.operationFrom.id.required || !$v.operationFromAccount.id.required"><p :class="{ 'text-danger': !$v.operationFrom.id.$error }">Selecciona un banco y una cuenta de origen</p></div>
 		</div>
 		<div class="form-group">
 			<label for="recipientGets">Hacia</label>
@@ -52,15 +59,18 @@
 				<option value="0" selected>Seleccione cuenta</option>
 				<option v-for="item in accounts2" :value="item">{{item.number}}</option>
 			</select>
+			<div class="error" v-if="!$v.operationTo.id.required || !$v.operationToAccount.id.required"><p :class="{ 'text-danger': !$v.operationTo.id.$error }">Selecciona un banco y una cuenta de destino</p></div>
 		</div>
 		<hr>
 		<p class="mb-1">Comisión servicio <span class="text-3 float-right"> S/{{parseFloat(comission)}}</span></p>
 		<p class="font-weight-500">Total a transferir <span class="text-3 float-right">{{total}}</span></p>
 		<button class="btn btn-primary btn-block">Realizar operación</button>
+		<div v-if="!differentAccount" :class="{ 'text-danger': !differentAccount }">Las cuentas de origen y de destino no pueden ser las mismas</div>
 	</form>
 </template>
 
 <script>
+	import { required, numeric } from 'vuelidate/lib/validators'
 	import { mapState, mapMutations } from 'vuex'
 	export default{
 		data(){
@@ -72,7 +82,8 @@
 				accounts2: [],
 				operationFromAccount: null,
 				operationToAccount: null,
-
+				csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+				differentAccount: true
 			}
 		},
 		mounted(){
@@ -138,6 +149,20 @@
 					}
 				})
 				return data
+			},
+			sendData(){
+				console.log('submit!')
+			    this.$v.$touch()
+			    if (this.$v.$invalid) {
+			        this.submitStatus = 'ERROR'
+			        console.log('invalido')
+			    } else {
+			        if (this.operationFromAccount.id != this.operationToAccount.id) {
+			        	this.diferentAccount = true
+			        	this.$refs.form.submit()
+			        }
+			        this.differentAccount = false
+			    }
 			}
 
 		},
@@ -150,6 +175,36 @@
 		    	return value.replace(/\b[a-z]/g,c=>c.toUpperCase())
 
 		  	}
-		}
+		},
+		validations: {
+		    operationFrom : {
+		      id: {
+		      	required,
+		      	numeric
+		      }
+		    },
+			operationTo: {
+		      id: {
+		      	required,
+		      	numeric
+		      }
+		    },
+			operationAmount : {
+		      required,
+		      numeric
+		    },
+			operationFromAccount: {
+		      id: {
+		      	required,
+		      	numeric
+		      }
+		    },
+			operationToAccount: {
+		      id: {
+		      	required,
+		      	numeric
+		      }
+		    }
+		},
 	}
 </script>

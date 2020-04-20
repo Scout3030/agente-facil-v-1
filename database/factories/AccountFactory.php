@@ -12,5 +12,6 @@ $factory->define(Account::class, function (Faker $faker) {
 		'user_id' => \App\User::all()->random()->id,
 		'bank_id' => \App\Bank::all()->random()->id,
 		'number' => $faker->randomNumber(7, true),
+		'name' => $faker->name,
 	];
 });

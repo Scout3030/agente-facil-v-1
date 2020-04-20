@@ -18,7 +18,9 @@ class CreateAccountsTable extends Migration {
 			$table->unsignedBigInteger('bank_id');
 			$table->foreign('bank_id')->references('id')->on('banks');
 			$table->string('number');
+			$table->string('name');
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

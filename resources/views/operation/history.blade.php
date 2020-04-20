@@ -126,6 +126,7 @@
                   @if($operation->operationType->id == \App\OperationType::PAYMENT)
                   <div class="col col-sm-2">
                     <span class="text-nowrap">{{$operation->payment->account->bank->name}}</span>
+                    <br>
                     <span class="text-muted">{{$operation->payment->account->number}}</span>
                   </div>
 
@@ -158,7 +159,8 @@
                   </div>
                   @endif
                   <div class="col-3 col-sm-2 text-right text-4">
-                    <span class="text-nowrap">- S/{{$operation->amount}}</span>
+                    <span class="text-nowrap">S/{{$operation->amount}}</span>
+                    <br>
                     <span class="text-2 text-uppercase">(PEN)</span>
                   </div>
 

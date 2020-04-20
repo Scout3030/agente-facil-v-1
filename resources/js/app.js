@@ -4,7 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-// require('./bootstrap');
+//require('./bootstrap');
 
 window.Vue = require('vue');
 
@@ -27,6 +27,8 @@ Vue.component('operations-home-component', require('./components/home/Form.vue')
 
 Vue.component('transfer-form', require('./components/operations/transfer/Form.vue').default);
 Vue.component('payment-form', require('./components/operations/payment/Form.vue').default);
+Vue.component('deposit-payment-form', require('./components/operations/deposit/Payment.vue').default);
+Vue.component('deposit-transfer-form', require('./components/operations/deposit/Transfer.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
