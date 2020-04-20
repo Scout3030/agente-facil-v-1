@@ -3,10 +3,18 @@
   <nav class="primary-menu navbar navbar-expand-lg">
     <div id="header-nav" class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
-        <li class="active"><a href="about-us.html">Nosotros</a></li>
-        <li><a href="prices.html">Precios</a></li>
-        <li><a href="frequent-asked-questions.html">Preguntas frecuentes</a></li>
-        <li><a href="reviews.html">Opiniones</a></li>
+        <li @if (\Request::is('nosotros')) class="active" @endif>
+          <a href="{{route('about')}}">Nosotros</a>
+        </li>
+        <li @if (\Request::is('precios')) class="active" @endif>
+          <a href="{{route('prices')}}">Precios</a>
+        </li>
+        <li @if (\Request::is('preguntas-frecuentes')) class="active" @endif>
+          <a href="{{route('faq')}}">Preguntas frecuentes</a>
+        </li>
+        <li @if (\Request::is('opiniones')) class="active" @endif>
+          <a href="{{route('reviews')}}">Opiniones</a>
+        </li>
       </ul>
     </div>
   </nav>

@@ -25,12 +25,21 @@ Route::get('/images/{path}/{attachment}', function ($path, $attachment) {
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('/', 'HomeController@operation')->name('operation');
 
-Route::get('/images/{path}/{attachment}', function ($path, $attachment) {
-	$file = sprintf('storage/%s/%s', $path, $attachment);
-	if (File::exists($file)) {
-		return Image::make($file)->response();
-	}
-});
+Route::get('/nosotros', function () {
+	return view('about');
+})->name('about');
+
+Route::get('/precios', function () {
+	return view('prices');
+})->name('prices');
+
+Route::get('/preguntas-frecuentes', function () {
+	return view('faq');
+})->name('faq');
+
+Route::get('/opiniones', function () {
+	return view('reviews');
+})->name('reviews');
 
 Route::group(['middleware' => ["auth"]], function () {
 	Route::get('/transferencia-interbancaria', 'OperationController@transfer')->name('operation.transfer');
