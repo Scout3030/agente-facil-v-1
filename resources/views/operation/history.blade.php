@@ -96,7 +96,7 @@
             =============================== -->
             <div class="transaction-list">
               @forelse($operations as $operation)
-              <div class="transaction-item px-4 py-3" data-toggle="modal" data-target="#transaction-detail">
+              <div class="transaction-item px-4 py-3" data-toggle="modal" data-target="#transaction-detail" data-id="{{$operation->id}}">
                 <div class="row align-items-center flex-row">
                   <div class="col-2 col-sm-1 text-center">
                     <span class="d-block text-4 font-weight-300">{{$operation->created_at->format('d')}}</span>
@@ -111,9 +111,17 @@
 
                   @foreach($operation->transfers as $transfer)
                   <div class="col col-sm-2">
+                    @if($transfer->account_id != null)
                     <span class="text-nowrap">{{$transfer->account->bank->name}}</span>
                     <br>
                     <span class="text-muted">{{$transfer->account->number}}</span>
+                    @else
+                    <span class="text-nowrap">{{$transfer->bank->name}}</span>
+                    <br>
+                    <span class="text-muted">{{$transfer->account_number}}</span>
+                    <br>
+                    <span class="text-muted">(terceros)</span>
+                    @endif
                   </div>
                   @endforeach
 
@@ -137,6 +145,7 @@
 
                   <div class="col-3 col-sm-2">
                     <span class="text-nowrap">{{$operation->payment->bankOperation->name}}</span>
+                    <br>
                     <span class="text-muted">({{ucfirst(strtolower($operation->payment->bankOperation->bank->name))}})</span>
                   </div>
                   @endif
@@ -195,3 +204,39 @@
   <!-- Content end -->
 
 @endsection
+
+@push('scripts')
+
+<script>
+  $(document).ready(function() {
+    let modal = $('#transaction-detail')
+    $(document).on("click", '.transaction-item', function (e) {
+      // e.preventDefault();
+      const id = $(this).data('id');
+      jQuery.ajax({
+        url: '{{ route('operation.show') }}',
+        type: 'POST',
+        headers: {
+            'x-csrf-token': $("meta[name=csrf-token]").attr('content')
+        },
+        data: {
+            id: id
+        },
+        success: (res) => {
+          var description = (res.type == {{App\OperationType::TRANSFER}} ? 'Transferencia' : 'Pago')
+          modal.find('h3').text(description);
+          modal.find('.total-amount').text(res.totalAmount);
+          modal.find('.amount').text(res.amount);
+          modal.find('.comission').text(res.comission);
+          modal.find('.deposit-code').text(res.depositCode);
+          modal.find('.transfer-code').text(res.transferCode);
+          modal.find('.description').text(res.description);
+          modal.find('.status').text(res.status);
+          modal.find('.date').text(res.date);
+        }
+      })
+    });
+  });
+</script>
+
+@endpush

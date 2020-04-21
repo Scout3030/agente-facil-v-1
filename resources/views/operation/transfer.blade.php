@@ -13,7 +13,9 @@
 		<div class="row">
 			<div class="col-md-8 col-lg-6 col-xl-5 mx-auto">
 				<div class="bg-light shadow-sm rounded p-3 p-sm-4 mb-4">
-					<h3 class="text-5 font-weight-400 mb-3">Transferir</h3>
+					<h3 class="text-5 font-weight-400 mb-3 d-flex">Transferir</h3>
+
+					<button onclick="window.location.replace('{{route('user.accounts')}}')" class="btn btn-sm mb-3 float-right" style="background: #00E2CC; color: #fff">Añadir cuenta</button>
 					<!-- Send Money Form
 					============================================= -->
 					<transfer-form :banks="{{$banks}}"></transfer-form>

@@ -18,6 +18,7 @@ class CreateOperationsTable extends Migration {
 			$table->unsignedBigInteger('operation_type_id');
 			$table->foreign('operation_type_id')->references('id')->on('operation_types');
 			$table->float('amount', 8, 2);
+			$table->float('comission', 8, 2);
 			$table->string('deposit_code');
 			$table->string('transfer_code')->nullable();
 			$table->enum('status', [

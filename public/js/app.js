@@ -2258,6 +2258,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2268,7 +2289,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   props: ['account'],
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('payment', ['amount', 'comission', 'fromAccount', 'to', 'code', 'operation']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('payment', ['amount', 'comission', 'from', 'fromAccount', 'to', 'code', 'operation']), {
     icon: function icon() {
       return "bank ".concat(this.account.bank.icon);
     }
@@ -2361,6 +2382,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2371,7 +2420,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   props: ['account'],
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('transfer', ['amount', 'comission', 'fromAccount', 'toAccount']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('transfer', ['isMine', 'amount', 'comission', 'fromAccount', 'toAccount', 'from', 'to', 'ownerName', 'accountNumber']), {
     icon: function icon() {
       return "bank ".concat(this.account.bank.icon);
     }
@@ -2425,6 +2474,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -2801,6 +2851,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2814,7 +2890,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       operationFromAccount: null,
       operationToAccount: null,
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-      differentAccount: true
+      differentAccount: true,
+      mine: true,
+      toAccountOwner: null,
+      toAccountNumber: null
     };
   },
   mounted: function mounted() {
@@ -2825,6 +2904,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.operationAmount = this.amount;
     this.operationFromAccount = this.fromAccount;
     this.operationToAccount = this.toAccount;
+    this.toAccountNumber = this.accountNumber;
+    this.toAccountOwner = this.ownerName;
+    this.mine = this.isMine;
     this.getBankAccounts(this.operationFrom.id).then(function (response) {
       _this.accounts1 = response;
     });
@@ -2833,12 +2915,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
   },
   props: ['banks'],
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])('transfer', ['from', 'to', 'amount', 'comission', 'fromAccount', 'toAccount']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])('transfer', ['from', 'to', 'amount', 'comission', 'fromAccount', 'toAccount', 'isMine', 'ownerName', 'accountNumber']), {
     total: function total() {
       return "S/".concat(parseFloat(this.operationAmount) + parseFloat(this.comission));
     }
   }),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapMutations"])('transfer', ['setFrom', 'setTo', 'setAmount', 'setComission', 'setFromAccount', 'setToAccount']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapMutations"])('transfer', ['setFrom', 'setTo', 'setAmount', 'setComission', 'setFromAccount', 'setToAccount', 'setIsMine', 'setAccountNumber', 'setOwnerName']), {
     icon: function icon(_icon) {
       return "bank ".concat(_icon);
     },
@@ -2907,19 +2989,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }))();
     },
     sendData: function sendData() {
-      console.log('submit!');
       this.$v.$touch();
 
       if (this.$v.$invalid) {
         this.submitStatus = 'ERROR';
         console.log('invalido');
       } else {
-        if (this.operationFromAccount.id != this.operationToAccount.id) {
-          this.diferentAccount = true;
+        if (this.isMine == false) {
           this.$refs.form.submit();
+        } else {
+          if (this.operationFromAccount.id != this.operationToAccount.id) {
+            this.differentAccount = true;
+            this.$refs.form.submit();
+          } else {
+            this.differentAccount = false;
+          }
         }
-
-        this.differentAccount = false;
       }
     }
   }),
@@ -2959,9 +3044,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     operationToAccount: {
       id: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["required"],
         numeric: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["numeric"]
-      }
+      },
+      requiredIf: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["requiredIf"])(function (vueInstance) {
+        console.log("vueInstance", vueInstance);
+        return vueInstance.mine == true;
+      })
+    },
+    toAccountNumber: {
+      requiredIf: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["requiredIf"])(function (vueInstance) {
+        // console.log("vueInstance", vueInstance);
+        return vueInstance.mine == false;
+      })
+    },
+    toAccountOwner: {
+      requiredIf: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["requiredIf"])(function (vueInstance) {
+        // console.log("vueInstance", vueInstance);
+        return vueInstance.mine == false;
+      })
     }
   }
 });
@@ -7171,14 +7271,20 @@ var render = function() {
     "div",
     { staticClass: "bg-light shadow-sm rounded p-3 p-sm-4 mb-4" },
     [
-      _c("div", { staticClass: "text-center bg-primary p-4 rounded mb-4" }, [
+      _c("div", { staticClass: "text-center bg-primary p-3 rounded mb-3" }, [
         _c("h3", { staticClass: "text-10 text-white font-weight-400" }, [
           _vm._v("S/" + _vm._s(_vm.amount + _vm.comission))
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "text-white" }, [
-          _vm._v("Para realizar tu operación")
-        ])
+        _c(
+          "a",
+          {
+            staticClass:
+              "btn btn-outline-light btn-sm shadow-none text-uppercase rounded-pill text-1",
+            attrs: { href: "javascript:void(0)" }
+          },
+          [_vm._v("Pago interbancario")]
+        )
       ]),
       _vm._v(" "),
       _c(
@@ -7210,7 +7316,7 @@ var render = function() {
           _vm._v(" "),
           _c("input", {
             attrs: { type: "hidden", name: "amount" },
-            domProps: { value: _vm.amount + _vm.comission }
+            domProps: { value: _vm.amount }
           }),
           _vm._v(" "),
           _c("input", {
@@ -7228,8 +7334,79 @@ var render = function() {
             domProps: { value: _vm.code }
           }),
           _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "alert alert-info rounded shadow-sm py-3 px-4 px-sm-2 mb-4"
+            },
+            [
+              _c("div", { staticClass: "row" }, [
+                _c(
+                  "p",
+                  { staticClass: "col-sm-5 opacity-7 text-sm-right mb-0" },
+                  [_vm._v("Pago a:")]
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "col-sm-7" }, [
+                  _vm._v(_vm._s(_vm.operation.name))
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "col-sm-5 opacity-7 text-sm-right" }, [
+                  _vm._v("Código de pago:")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "col-sm-7 mb-0" }, [
+                  _vm._v(_vm._s(_vm.code))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c(
+                  "p",
+                  { staticClass: "col-sm-5 opacity-7 text-sm-right mb-0" },
+                  [_vm._v("Transferencia desde:")]
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "col-sm-7" }, [
+                  _vm._v(_vm._s(_vm.from.name))
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "col-sm-5 opacity-7 text-sm-right" }, [
+                  _vm._v("Cuenta :")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "col-sm-7" }, [
+                  _vm._v(_vm._s(_vm.fromAccount.number))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c(
+                  "p",
+                  { staticClass: "col-sm-5 opacity-7 text-sm-right mb-0" },
+                  [_vm._v("Monto:")]
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "col-sm-7" }, [
+                  _vm._v("S/" + _vm._s(_vm.amount))
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "col-sm-5 opacity-7 text-sm-right" }, [
+                  _vm._v("Servicio:")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "col-sm-7" }, [
+                  _vm._v("S/" + _vm._s(_vm.comission))
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "withdrawto" } }, [_vm._v("A cuenta")]),
+            _c("label", { attrs: { for: "withdrawto" } }, [
+              _vm._v("Realizar transferencia de fondos a cuenta")
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group" }, [
               _c("div", { staticClass: "input-group-append" }, [
@@ -7270,7 +7447,13 @@ var render = function() {
                 attrs: { type: "text", disabled: "" },
                 domProps: { value: _vm.account.number }
               })
-            ])
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "text", disabled: "" },
+              domProps: { value: _vm.account.name }
+            })
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
@@ -7299,7 +7482,8 @@ var render = function() {
                 attrs: {
                   type: "text",
                   name: "deposit_code",
-                  placeholder: "Ingrese número de operación"
+                  placeholder: "Ingrese número de operación",
+                  autocomplete: "off"
                 },
                 domProps: { value: _vm.$v.depositCode.$model },
                 on: {
@@ -7320,9 +7504,7 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            !_vm.$v.depositCode.required ||
-            !_vm.$v.depositCode.numeric ||
-            !_vm.$v.depositCode.minLength
+            _vm.$v.depositCode.$error
               ? _c("div", { staticClass: "error" }, [
                   _c(
                     "p",
@@ -7382,14 +7564,20 @@ var render = function() {
     "div",
     { staticClass: "bg-light shadow-sm rounded p-3 p-sm-4 mb-4" },
     [
-      _c("div", { staticClass: "text-center bg-primary p-4 rounded mb-4" }, [
+      _c("div", { staticClass: "text-center bg-primary p-3 rounded mb-3" }, [
         _c("h3", { staticClass: "text-10 text-white font-weight-400" }, [
           _vm._v("S/" + _vm._s(_vm.amount + _vm.comission))
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "text-white" }, [
-          _vm._v("Para realizar tu transferencia")
-        ])
+        _c(
+          "a",
+          {
+            staticClass:
+              "btn btn-outline-light btn-sm shadow-none text-uppercase rounded-pill text-1",
+            attrs: { href: "javascript:void(0)" }
+          },
+          [_vm._v("Transferencia interbancaria")]
+        )
       ]),
       _vm._v(" "),
       _c(
@@ -7421,7 +7609,7 @@ var render = function() {
           _vm._v(" "),
           _c("input", {
             attrs: { type: "hidden", name: "amount" },
-            domProps: { value: _vm.amount + _vm.comission }
+            domProps: { value: _vm.amount }
           }),
           _vm._v(" "),
           _c("input", {
@@ -7429,10 +7617,97 @@ var render = function() {
             domProps: { value: _vm.fromAccount.id }
           }),
           _vm._v(" "),
-          _c("input", {
-            attrs: { type: "hidden", name: "to" },
-            domProps: { value: _vm.toAccount.id }
-          }),
+          _vm.isMine == true
+            ? _c("input", {
+                attrs: { type: "hidden", name: "to" },
+                domProps: { value: _vm.toAccount.id }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.isMine == false
+            ? _c("input", {
+                attrs: { type: "hidden", name: "account_number" },
+                domProps: { value: _vm.accountNumber }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.isMine == false
+            ? _c("input", {
+                attrs: { type: "hidden", name: "name" },
+                domProps: { value: _vm.ownerName }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.isMine == false
+            ? _c("input", {
+                attrs: { type: "hidden", name: "bank_id" },
+                domProps: { value: _vm.to.id }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { staticClass: "alert alert-info rounded shadow-sm" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("p", { staticClass: "col-sm-5 opacity-7 text-sm-right" }, [
+                _vm._v("Banco de destino:")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "col-sm-7" }, [
+                _vm._v(_vm._s(_vm.to.name))
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "col-sm-5 opacity-7 text-sm-right" }, [
+                _vm._v("Cuenta de destino :")
+              ]),
+              _vm._v(" "),
+              _vm.isMine == true
+                ? _c("p", { staticClass: "col-sm-7" }, [
+                    _vm._v(_vm._s(_vm.toAccount.number))
+                  ])
+                : _c("p", { staticClass: "col-sm-7" }, [
+                    _vm._v(_vm._s(_vm.accountNumber) + " (terceros)")
+                  ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "p",
+                { staticClass: "col-sm-5 opacity-7 text-sm-right mb-0" },
+                [_vm._v("Banco de origen:")]
+              ),
+              _vm._v(" "),
+              _c("p", { staticClass: "col-sm-7" }, [
+                _vm._v(_vm._s(_vm.from.name))
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "col-sm-5 opacity-7 text-sm-right" }, [
+                _vm._v("Cuenta de origen:")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "col-sm-7" }, [
+                _vm._v(_vm._s(_vm.fromAccount.number))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("p", { staticClass: "col-sm-5 opacity-7 text-sm-right" }, [
+                _vm._v("Monto:")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "col-sm-7" }, [
+                _vm._v("S/" + _vm._s(_vm.amount))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("p", { staticClass: "col-sm-5 opacity-7 text-sm-right" }, [
+                _vm._v("Servicio:")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "col-sm-7" }, [
+                _vm._v("S/" + _vm._s(_vm.comission))
+              ])
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "withdrawto" } }, [_vm._v("A cuenta")]),
@@ -7476,7 +7751,13 @@ var render = function() {
                 attrs: { type: "text", disabled: "" },
                 domProps: { value: _vm.account.number }
               })
-            ])
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "text", disabled: "" },
+              domProps: { value: _vm.account.name }
+            })
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
@@ -7505,7 +7786,8 @@ var render = function() {
                 attrs: {
                   type: "text",
                   name: "deposit_code",
-                  placeholder: "Ingrese número de operación"
+                  placeholder: "Ingrese número de operación",
+                  autocomplete: "off"
                 },
                 domProps: { value: _vm.$v.code.$model },
                 on: {
@@ -7522,7 +7804,7 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            !_vm.$v.code.required || !_vm.$v.code.numeric
+            _vm.$v.code.$error
               ? _c("div", { staticClass: "error" }, [
                   _c("p", { class: { "text-danger": _vm.$v.code.$error } }, [
                     _vm._v("Ingrese un número de operación válido")
@@ -7628,11 +7910,11 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        !_vm.$v.operationAmount.required
+        !_vm.$v.operationAmount.required && _vm.$v.operationAmount.$error
           ? _c("div", { staticClass: "error" }, [
               _c(
                 "p",
-                { class: { "text-danger": !_vm.$v.operationAmount.$error } },
+                { class: { "text-danger": _vm.$v.operationAmount.$error } },
                 [_vm._v("El monto a transferir es requerido")]
               )
             ])
@@ -7783,11 +8065,11 @@ var render = function() {
           2
         ),
         _vm._v(" "),
-        !_vm.$v.selectedService.id.required || !_vm.$v.operationTo.id.required
+        !_vm.$v.selectedService.id.required && _vm.$v.selectedService.id.$error
           ? _c("div", { staticClass: "error" }, [
               _c(
                 "p",
-                { class: { "text-danger": !_vm.$v.operationFrom.id.$error } },
+                { class: { "text-danger": _vm.$v.selectedService.id.$error } },
                 [_vm._v("Selecciona el convenio del banco afiliado")]
               )
             ])
@@ -7797,9 +8079,10 @@ var render = function() {
       _c("div", { staticClass: "form-group" }, [
         _vm.selectedService
           ? _c("label", { attrs: { for: "youSend" } }, [
-              _vm._v(
-                "Dato requerido: " + _vm._s(_vm.selectedService.requirement)
-              )
+              _vm._v("Dato requerido: "),
+              _c("span", { staticClass: "text-muted" }, [
+                _vm._v(_vm._s(_vm.selectedService.requirement))
+              ])
             ])
           : _c("label", { attrs: { for: "youSend" } }, [
               _vm._v("Dato requerido:")
@@ -7830,12 +8113,12 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        !_vm.$v.requiredCode.required
+        !_vm.$v.requiredCode.required && _vm.$v.requiredCode.$error
           ? _c("div", { staticClass: "error" }, [
               _c(
                 "p",
-                { class: { "text-danger": !_vm.$v.requiredCode.$error } },
-                [_vm._v("El código de pago es obligatorio")]
+                { class: { "text-danger": _vm.$v.requiredCode.$error } },
+                [_vm._v("El código es obligatorio")]
               )
             ])
           : _vm._e()
@@ -7989,13 +8272,28 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        !_vm.$v.operationFrom.id.required ||
-        !_vm.$v.operationFromAccount.id.required
+        !_vm.$v.operationFrom.id.required && _vm.$v.operationFrom.id.$error
           ? _c("div", { staticClass: "error" }, [
               _c(
                 "p",
-                { class: { "text-danger": !_vm.$v.operationFrom.id.$error } },
-                [_vm._v("Selecciona un banco y una cuenta de origen")]
+                { class: { "text-danger": _vm.$v.operationFrom.id.$error } },
+                [_vm._v("Selecciona un banco de origen")]
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        !_vm.$v.operationFromAccount.id.required &&
+        _vm.$v.operationFromAccount.id.$error &&
+        !_vm.$v.operationFrom.id.$error
+          ? _c("div", { staticClass: "error" }, [
+              _c(
+                "p",
+                {
+                  class: {
+                    "text-danger": _vm.$v.operationFromAccount.id.$error
+                  }
+                },
+                [_vm._v("Selecciona una cuenta de origen")]
               )
             ])
           : _vm._e()
@@ -8230,7 +8528,6 @@ var render = function() {
                   }
                 ],
                 staticClass: "custom-select",
-                attrs: { required: "" },
                 on: {
                   change: [
                     function($event) {
@@ -8265,13 +8562,28 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        !_vm.$v.operationFrom.id.required ||
-        !_vm.$v.operationFromAccount.id.required
+        !_vm.$v.operationFrom.id.required && _vm.$v.operationFrom.id.$error
           ? _c("div", { staticClass: "error" }, [
               _c(
                 "p",
-                { class: { "text-danger": !_vm.$v.operationFrom.id.$error } },
-                [_vm._v("Selecciona un banco y una cuenta de origen")]
+                { class: { "text-danger": _vm.$v.operationFrom.id.$error } },
+                [_vm._v("Selecciona un banco de origen")]
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        !_vm.$v.operationFromAccount.id.required &&
+        _vm.$v.operationFromAccount.id.$error &&
+        !_vm.$v.operationFrom.id.$error
+          ? _c("div", { staticClass: "error" }, [
+              _c(
+                "p",
+                {
+                  class: {
+                    "text-danger": _vm.$v.operationFromAccount.id.$error
+                  }
+                },
+                [_vm._v("Selecciona una cuenta de origen")]
               )
             ])
           : _vm._e()
@@ -8279,6 +8591,34 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
         _c("label", { attrs: { for: "recipientGets" } }, [_vm._v("Hacia")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3 text-right" }, [
+          _vm.mine
+            ? _c("i", {
+                staticClass: "fa fa-stop-circle",
+                staticStyle: { cursor: "pointer" },
+                on: {
+                  click: function($event) {
+                    _vm.setIsMine(false)
+                    _vm.mine = false
+                  }
+                }
+              })
+            : _c("i", {
+                staticClass: "fa fa-stop-circle",
+                staticStyle: { cursor: "pointer", color: "#00E2CC" },
+                on: {
+                  click: function($event) {
+                    _vm.setIsMine(true)
+                    _vm.mine = true
+                  }
+                }
+              }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "check" } }, [
+            _vm._v("La cuenta de destino no es mia")
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "input-group" }, [
           _c(
@@ -8346,7 +8686,7 @@ var render = function() {
                                 value: "0"
                               }
                             },
-                            [_vm._v("Seleccionar banco de emisión")]
+                            [_vm._v("Seleccionar banco de destino")]
                           ),
                           _vm._v(" "),
                           _vm._l(_vm.banks, function(item) {
@@ -8375,7 +8715,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm.accounts2.length
+        _vm.accounts2.length && _vm.isMine == true
           ? _c(
               "select",
               {
@@ -8423,17 +8763,122 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        !_vm.$v.operationTo.id.required ||
-        !_vm.$v.operationToAccount.id.required
+        !_vm.$v.operationTo.id.required && _vm.$v.operationTo.id.$error
           ? _c("div", { staticClass: "error" }, [
               _c(
                 "p",
-                { class: { "text-danger": !_vm.$v.operationTo.id.$error } },
-                [_vm._v("Selecciona un banco y una cuenta de destino")]
+                { class: { "text-danger": _vm.$v.operationTo.id.$error } },
+                [_vm._v("Selecciona un banco de destino")]
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        !_vm.$v.operationToAccount.id.requiredIf &&
+        _vm.$v.operationToAccount.id.$error &&
+        !_vm.$v.operationTo.id.$error
+          ? _c("div", { staticClass: "error" }, [
+              _c(
+                "p",
+                {
+                  class: { "text-danger": _vm.$v.operationToAccount.id.$error }
+                },
+                [_vm._v("Selecciona una cuenta de destino")]
               )
             ])
           : _vm._e()
       ]),
+      _vm._v(" "),
+      _vm.mine == false
+        ? _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "youSend" } }, [
+              _vm._v("Cuenta de destino")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.toAccountNumber,
+                    expression: "toAccountNumber"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.toAccountNumber },
+                on: {
+                  change: function($event) {
+                    return _vm.setAccountNumber(_vm.toAccountNumber)
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.toAccountNumber = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            !_vm.$v.toAccountNumber.required && _vm.$v.toAccountNumber.$error
+              ? _c("div", { staticClass: "error" }, [
+                  _c(
+                    "p",
+                    { class: { "text-danger": _vm.$v.toAccountNumber.$error } },
+                    [_vm._v("Este campo es obligatorio")]
+                  )
+                ])
+              : _vm._e()
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.mine == false
+        ? _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "youSend" } }, [
+              _vm._v("Titular de cuenta de destino")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.toAccountOwner,
+                    expression: "toAccountOwner"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.toAccountOwner },
+                on: {
+                  change: function($event) {
+                    return _vm.setOwnerName(_vm.toAccountOwner)
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.toAccountOwner = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            !_vm.$v.toAccountOwner.required && _vm.$v.toAccountOwner.$error
+              ? _c("div", { staticClass: "error" }, [
+                  _c(
+                    "p",
+                    { class: { "text-danger": _vm.$v.toAccountOwner.$error } },
+                    [_vm._v("Este campo es obligatorio")]
+                  )
+                ])
+              : _vm._e()
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
@@ -8472,6 +8917,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-prepend" }, [
       _c("span", { staticClass: "input-group-text" }, [_vm._v("S/")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("N° ")])
     ])
   }
 ]
@@ -29795,7 +30248,7 @@ var namespaced = true;
 /*!****************************************************!*\
   !*** ./resources/js/modules/transfer/mutations.js ***!
   \****************************************************/
-/*! exports provided: setFrom, setTo, setFromAccount, setToAccount, setAmount, setComission, categoriesError */
+/*! exports provided: setFrom, setTo, setFromAccount, setToAccount, setAmount, setComission, setCheck, setIsMine, setAccountNumber, setOwnerName, categoriesError */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29806,6 +30259,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setToAccount", function() { return setToAccount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAmount", function() { return setAmount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setComission", function() { return setComission; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCheck", function() { return setCheck; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setIsMine", function() { return setIsMine; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAccountNumber", function() { return setAccountNumber; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setOwnerName", function() { return setOwnerName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "categoriesError", function() { return categoriesError; });
 function setFrom(state, bank) {
   state.from = bank;
@@ -29824,6 +30281,20 @@ function setAmount(state, amount) {
 }
 function setComission(state, comission) {
   state.comission = parseFloat(comission);
+}
+/* If the client is not the owner */
+
+function setCheck(state, check) {
+  state.check = check;
+}
+function setIsMine(state, isMine) {
+  state.isMine = isMine;
+}
+function setAccountNumber(state, accountNumber) {
+  state.accountNumber = accountNumber;
+}
+function setOwnerName(state, ownerName) {
+  state.ownerName = ownerName;
 }
 function categoriesError(state, payload) {
   // state.error = truestate.errorMessage = payload
@@ -29848,7 +30319,12 @@ __webpack_require__.r(__webpack_exports__);
   amount: 149,
   comission: 1,
   fromAccount: 0,
-  toAccount: 0
+  toAccount: 0,
+
+  /* If the client is not the owner */
+  isMine: true,
+  ownerName: null,
+  accountNumber: null
 });
 
 /***/ }),

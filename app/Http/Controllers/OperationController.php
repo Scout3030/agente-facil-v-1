@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\Bank;
 use App\Operation;
+use App\OperationType;
 use App\Payment;
 use App\Transfer;
 use Illuminate\Http\Request;
@@ -20,10 +21,6 @@ class OperationController extends Controller {
 		return view('operation.payment', compact('banks'));
 	}
 
-	// public function depositIndex() {
-	// 	return view('operation.deposit');
-	// }
-
 	public function depositCreate(Request $request) {
 		session(['deposit' => true]);
 		$account = Account::with(['bank'])
@@ -35,13 +32,54 @@ class OperationController extends Controller {
 	}
 
 	public function history() {
-		$operations = Operation::with(['operationType', 'payment', 'transfers'])->whereUserId(auth()->user()->id)->orderBy('created_at', 'desc')->paginate(10);
+
+		$operations = Operation::with([
+			'operationType',
+			'payment.account' => function ($q) {
+				$q->withTrashed();
+			},
+			'transfers.account' => function ($q) {
+				$q->withTrashed();
+			},
+		])
+			->whereUserId(auth()->user()->id)
+			->orderBy('created_at', 'desc')
+			->paginate(10);
+
 		return view('operation.history', compact('operations'));
 	}
 
+	public function show() {
+		if (\request()->ajax()) {
+			$operation = Operation::with(['payment', 'transfers'])->whereId(\request('id'))->first();
+			if ($operation->operation_type_id == OperationType::TRANSFER) {
+				$description = 'Transferencia desde ' . $operation->transfers[0]->account->bank->name . ' hasta ' . $operation->transfers[1]->account->bank->name;
+			}
+			if ($operation->operation_type_id == OperationType::PAYMENT) {
+				$description = 'Pago al la institución ' . $operation->payment->bankOperation->name . ' por medio del banco ' . $operation->payment->account->bank->name;
+			}
+
+			return response()->json([
+				'type' => $operation->operation_type_id,
+				'amount' => 'S/' . $operation->amount,
+				'comission' => 'S/' . $operation->comission,
+				'totalAmount' => 'S/' . ($operation->amount + $operation->comission),
+				'depositCode' => $operation->deposit_code,
+				'transferCode' => $operation->transfer_code,
+				'description' => $description,
+				'status' => $operation->status == Operation::INPROCESS ? 'En proceso' : ($operation->status == Operation::COMPLETED ? 'Completada' : 'Cancelada'),
+				'date' => $operation->created_at->format('d-m-Y'),
+			]);
+		}
+		return abort(401);
+	}
+
 	public function store(Request $request) {
+
 		$request->merge(['user_id' => auth()->user()->id]);
 		$request->merge(['status' => \App\Operation::INPROCESS]);
+		$request->merge(['comission' => $request->amount > 500 ? 2 : 1]);
+
 		if ($request->operation_type_id == Operation::TRANSFER) {
 
 			$operation = Operation::create($request->input());
@@ -49,12 +87,27 @@ class OperationController extends Controller {
 				'operation_id' => $operation->id,
 				'account_id' => $request->from,
 			]);
-			Transfer::create([
-				'operation_id' => $operation->id,
-				'account_id' => $request->to,
-			]);
+
+			if ($request->has('to')) {
+
+				Transfer::create([
+					'operation_id' => $operation->id,
+					'account_id' => $request->to,
+				]);
+			}
+			if ($request->has('account_number')) {
+
+				Transfer::create([
+					'operation_id' => $operation->id,
+					'account_id' => null,
+					'account_number' => $request->account_number,
+					'bank_id' => $request->bank_id,
+					'name' => $request->name,
+				]);
+			}
+
 		}
-		// dd($request->all());
+
 		if ($request->operation_type_id == Operation::PAYMENT) {
 			$operation = Operation::create($request->input());
 			Payment::create([

@@ -22,6 +22,23 @@ export function setComission(state, comission){
 	state.comission = parseFloat(comission)
 }
 
+/* If the client is not the owner */
+export function setCheck(state, check){
+	state.check = check
+}
+
+export function setIsMine(state, isMine){
+	state.isMine = isMine
+}
+
+export function setAccountNumber(state, accountNumber){
+	state.accountNumber = accountNumber
+}
+
+export function setOwnerName(state, ownerName){
+	state.ownerName = ownerName
+}
+
 export function categoriesError( state, payload){
 	// state.error = truestate.errorMessage = payload
 	console.log('Error prro')

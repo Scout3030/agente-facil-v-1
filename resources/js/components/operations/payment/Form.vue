@@ -11,7 +11,7 @@
 				</div>
 				<input type="number" class="form-control" v-model="operationAmount" step=".10" min="10" @change="setOperationAmount">
             </div>
-            <div class="error" v-if="!$v.operationAmount.required"><p :class="{ 'text-danger': !$v.operationAmount.$error }">El monto a transferir es requerido</p></div>
+            <div class="error" v-if="!$v.operationAmount.required && $v.operationAmount.$error"><p :class="{ 'text-danger': $v.operationAmount.$error }">El monto a transferir es requerido</p></div>
         </div>
 		<div class="form-group">
 			<label for="youSend">Convenio</label>
@@ -34,15 +34,15 @@
 				<option value="0" selected>Seleccione convenio</option>
 				<option v-for="item in services" :value="item">{{item.name}}</option>
 			</select>
-			<div class="error" v-if="!$v.selectedService.id.required || !$v.operationTo.id.required"><p :class="{ 'text-danger': !$v.operationFrom.id.$error }">Selecciona el convenio del banco afiliado</p></div>
+			<div class="error" v-if="!$v.selectedService.id.required && $v.selectedService.id.$error"><p :class="{ 'text-danger': $v.selectedService.id.$error }">Selecciona el convenio del banco afiliado</p></div>
 		</div>
 		<div class="form-group">
-            <label for="youSend" v-if="selectedService">Dato requerido: {{selectedService.requirement}}</label>
+            <label for="youSend" v-if="selectedService">Dato requerido: <span class="text-muted">{{selectedService.requirement}}</span></label>
             <label for="youSend" v-else>Dato requerido:</label>
             <div class="input-group">
 				<input type="text" class="form-control" v-model="requiredCode" @change="setOperationCode">
             </div>
-            <div class="error" v-if="!$v.requiredCode.required"><p :class="{ 'text-danger': !$v.requiredCode.$error }">El código de pago es obligatorio</p></div>
+            <div class="error" v-if="!$v.requiredCode.required && $v.requiredCode.$error"><p :class="{ 'text-danger': $v.requiredCode.$error }">El código es obligatorio</p></div>
         </div>
 		<div class="form-group">
 			<label for="recipientGets">Transferir fondos desde</label>
@@ -65,7 +65,8 @@
 				<option value="0" selected>Seleccione cuenta</option>
 				<option v-for="item in accounts" :value="item">{{item.number}}</option>
 			</select>
-			<div class="error" v-if="!$v.operationFrom.id.required || !$v.operationFromAccount.id.required"><p :class="{ 'text-danger': !$v.operationFrom.id.$error }">Selecciona un banco y una cuenta de origen</p></div>
+			<div class="error" v-if="!$v.operationFrom.id.required && $v.operationFrom.id.$error"><p :class="{ 'text-danger': $v.operationFrom.id.$error }">Selecciona un banco de origen</p></div>
+			<div class="error" v-if="!$v.operationFromAccount.id.required && $v.operationFromAccount.id.$error && !$v.operationFrom.id.$error"><p :class="{ 'text-danger': $v.operationFromAccount.id.$error }">Selecciona una cuenta de origen</p></div>
 		</div>
 		<hr>
 		<p class="mb-1">Comisión servicio <span class="text-3 float-right"> S/{{parseFloat(comission)}}</span></p>

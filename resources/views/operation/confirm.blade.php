@@ -17,7 +17,7 @@
 						<p class="text-center text-success text-20 line-height-07"><i class="fas fa-check-circle"></i></p>
 						<p class="text-center text-success text-8 line-height-07">¡Operación completada!</p>
 					</div>
-					<p class="text-center text-3 mb-4">Nuestro operador verificará los datos y realizará tu operación en los próximos 20 minutos <a href="#">Gracias por utilizar nuestro servicio</a>.</p>
+					<p class="text-center text-3 mb-4">Nuestro operador verificará los datos y realizará tu operación en los próximos 20 minutos <br> <a href="#">Gracias por utilizar nuestro servicio</a>.</p>
 					<button onclick="window.location.replace('{{route('home')}}')" class="btn btn-primary btn-block">Realizar una nueva operación</button>
 					<a href="{{route('operation.history')}}" class="btn btn-link btn-block"><i class="fas fa-share-square"></i> Ver detalles de operación</a href="#">
 				</div>

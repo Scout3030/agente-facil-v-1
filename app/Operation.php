@@ -21,10 +21,10 @@ class Operation extends Model {
 	const CANCELLED = 3;
 
 	protected $fillable = [
-		'user_id', 'operation_type_id', 'amount', 'deposit_code', 'transfer_code', 'status',
+		'user_id', 'operation_type_id', 'amount', 'comission', 'deposit_code', 'transfer_code', 'status',
 	];
 
-	public function course() {
+	public function user() {
 		return $this->belongsTo(User::class);
 	}
 

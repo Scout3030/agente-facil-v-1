@@ -54,6 +54,8 @@ Route::group(['middleware' => ["auth"]], function () {
 		Route::post('/operation/store', 'OperationController@store')->name('operation.store');
 	});
 
+	Route::post('/operation/ajax', 'OperationController@show')->name('operation.show');
+
 	Route::post('/accounts', 'AccountController@getAccounts')->name('get.accounts');
 
 	Route::get('/historial', 'OperationController@history')->name('operation.history');
