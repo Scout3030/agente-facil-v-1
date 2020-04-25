@@ -20,6 +20,7 @@ class CreatePaymentsTable extends Migration {
 			$table->unsignedBigInteger('bank_operation_id');
 			$table->foreign('bank_operation_id')->references('id')->on('bank_operations');
 			$table->string('code');
+			$table->string('name');
 			$table->timestamps();
 		});
 	}

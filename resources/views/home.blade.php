@@ -69,7 +69,7 @@
             </div>
           </div>
         </div>
-        <div class="text-center mt-2"><a href="#" class="btn btn-outline-primary shadow-none text-uppercase">Regístrate</a></div>
+        <div class="text-center mt-2"><a href="{{route('register')}}" class="btn btn-outline-primary shadow-none text-uppercase">Regístrate</a></div>
       </div>
     </section>
     <!-- How it works End -->
@@ -79,7 +79,7 @@
     <section class="section">
       <div class="container">
         <h2 class="text-9 text-center">¿Por qué elegir Agence Fácil?</h2>
-        <p class="text-4 text-center mb-5">Here’s Top 4 reasons why using a Payyed account for manage your money.</p>
+        <p class="text-4 text-center mb-5">Razones para realizar tus operaciones por Agente Fácil.</p>
         <div class="row">
           <div class="col-md-6 mb-4 mb-md-0">
             <div class="hero-wrap section h-100 p-5 rounded">
@@ -97,32 +97,32 @@
           <div class="col-md-6">
             <div class="featured-box style-1">
               <div class="featured-box-icon text-primary"> <i class="far fa-check-circle"></i> </div>
-              <h3>Over 180 countries</h3>
+              <h3>Trabajamos con más de 20 bancos</h3>
               <p>Essent lisque persius interesset his et, in quot quidam.</p>
             </div>
             <div class="featured-box style-1">
               <div class="featured-box-icon text-primary"> <i class="far fa-check-circle"></i> </div>
-              <h3>Lower Fees</h3>
+              <h3>Bajas comisiones</h3>
               <p>Lisque persius interesset his et, in quot quidam persequeris.</p>
             </div>
             <div class="featured-box style-1">
               <div class="featured-box-icon text-primary"> <i class="far fa-check-circle"></i> </div>
-              <h3>Easy to Use</h3>
+              <h3>Operaciones en menos de 20 minutos</h3>
               <p>Essent lisque persius interesset his et, in quot quidam.</p>
             </div>
             <div class="featured-box style-1">
               <div class="featured-box-icon text-primary"> <i class="far fa-check-circle"></i> </div>
-              <h3>Faster Payments</h3>
+              <h3>Sin salir de casa</h3>
               <p>Quidam lisque persius interesset his et, in quot quidam.</p>
             </div>
             <div class="featured-box style-1">
               <div class="featured-box-icon text-primary"> <i class="far fa-check-circle"></i> </div>
-              <h3>100% secure</h3>
+              <h3>100% seguro</h3>
               <p>Essent lisque persius interesset his et, in quot quidam.</p>
             </div>
             <div class="featured-box style-1">
               <div class="featured-box-icon text-primary"> <i class="far fa-check-circle"></i> </div>
-              <h3>24/7 customer service</h3>
+              <h3>Soporte con respuestas en minutos</h3>
               <p>Quidam lisque persius interesset his et, in quot quidam.</p>
             </div>
           </div>
@@ -131,31 +131,7 @@
     </section>
     <!-- Why choose us End -->
 
-    <!-- Banks
-    ============================================= -->
-    <section class="section bg-white">
-      <div class="container">
-        <h2 class="text-9 text-center">Bancos</h2>
-        <p class="text-4 text-center mb-5">Realiza operaciones en todos estos bancos</p>
-        <div class="brands-grid separator-border">
-          <div class="row align-items-center">
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="{{asset('assets/images/partner/partner-1.png')}}" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="{{asset('assets/images/partner/partner-2.png')}}" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="{{asset('assets/images/partner/partner-3.png')}}" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="{{asset('assets/images/partner/partner-4.png')}}" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="{{asset('assets/images/partner/partner-5.png')}}" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="{{asset('assets/images/partner/partner-6.png')}}" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="{{asset('assets/images/partner/partner-7.png')}}" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="{{asset('assets/images/partner/partner-8.png')}}" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="{{asset('assets/images/partner/partner-9.png')}}" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="{{asset('assets/images/partner/partner-10.png')}}" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="{{asset('assets/images/partner/partner-11.png')}}" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="{{asset('assets/images/partner/partner-1.png')}}" alt="Brands"></a></div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Banks end -->
+    @include('shared.banks')
 
     <!-- How work
     ============================================= -->
@@ -210,7 +186,7 @@
                   <strong class="d-block font-weight-500">Dennis Jacques</strong> <span class="text-muted">User from USA</span> </div>
               </div>
             </div>
-            <div class="text-center mt-4"><a href="#" class="btn-link text-4">See more people review<i class="fas fa-chevron-right text-2 ml-2"></i></a></div>
+            <div class="text-center mt-4"><a href="{{route('reviews')}}" class="btn-link text-4">Ver más opiniones<i class="fas fa-chevron-right text-2 ml-2"></i></a></div>
           </div>
         </div>
       </div>
@@ -279,7 +255,7 @@
             <hr class="mt-0">
           </div>
         </div>
-        <div class="text-center mt-4"><a href="#" class="btn-link text-4">See more FAQ<i class="fas fa-chevron-right text-2 ml-2"></i></a></div>
+        <div class="text-center mt-4"><a href="{{route('faq')}}" class="btn-link text-4">Ver más preguntas frecuentes<i class="fas fa-chevron-right text-2 ml-2"></i></a></div>
       </div>
     </section>
     <!-- Frequently asked questions end -->
@@ -292,12 +268,13 @@
       <div class="hero-content">
         <div class="container d-md-flex text-center text-md-left align-items-center justify-content-center">
           <h2 class="text-6 font-weight-400 text-white mb-3 mb-md-0">¡Crea tu cuenta e inicia tu primera operación!</h2>
-          <a href="#" class="btn btn-outline-light text-nowrap ml-4">Registrarme</a> </div>
+          <a href="{{route('register')}}" class="btn btn-outline-light text-nowrap ml-4">Registrarme</a> </div>
       </div>
     </section>
     <!-- Special Offer end -->
   </div>
   <!-- Content end -->
+
 @endsection
 
 @push('scripts')

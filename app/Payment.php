@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model {
 
 	protected $fillable = [
-		'operation_id', 'account_id', 'bank_operation_id', 'code',
+		'operation_id', 'account_id', 'bank_operation_id', 'code', 'name',
 	];
 
 	public function account() {

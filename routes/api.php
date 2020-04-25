@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/banks', 'BankController@banks');
+Route::get('/admin/bank', 'Admin\BankController@banks');
 Route::get('/bank-operations/{bankId}', 'BankOperationController@bankOperations');

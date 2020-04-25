@@ -16,12 +16,15 @@
 			<input type="hidden" name="from" :value="fromAccount.id">
 			<input type="hidden" name="bank_operation_id" :value="operation.id">
 			<input type="hidden" name="code" :value="code">
+			<input type="hidden" name="name" :value="name">
 			<div class="alert alert-info rounded shadow-sm py-3 px-4 px-sm-2 mb-4">
                 <div class="row">
                   <p class="col-sm-5 opacity-7 text-sm-right mb-0">Pago a:</p>
                   <p class="col-sm-7">{{operation.name}}</p>
                   <p class="col-sm-5 opacity-7 text-sm-right">Código de pago:</p>
                   <p class="col-sm-7 mb-0">{{code}}</p>
+                  <p class="col-sm-5 opacity-7 text-sm-right">Beneficiario:</p>
+                  <p class="col-sm-7 mb-0">{{name}}</p>
                 </div>
                 <div class="row">
                   <p class="col-sm-5 opacity-7 text-sm-right mb-0">Transferencia desde:</p>
@@ -80,7 +83,7 @@ import { required, numeric, minLength } from 'vuelidate/lib/validators'
 		},
 		props: ['account'],
 		computed: {
-			...mapState('payment', ['amount', 'comission','from', 'fromAccount', 'to', 'code', 'operation']),
+			...mapState('payment', ['amount', 'comission','from', 'fromAccount', 'to', 'code', 'operation', 'name']),
 			icon(){
 				return `bank ${this.account.bank.icon}`
 			}

@@ -13,26 +13,22 @@
         <div class="row">
           <div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
             <div class="bg-light shadow-sm rounded p-4 text-center"> <span class="d-block text-17 text-primary mt-2 mb-3"><i class="fas fa-user-circle"></i></span>
-              <h3 class="text-body text-4">My Account</h3>
-              <p class="mb-0"><a class="text-muted btn-link" href="">See articles<span class="text-1 ml-1"><i class="fas fa-chevron-right"></i></span></a></p>
+              <h3 class="text-body text-4">Mi cuenta</h3>
             </div>
           </div>
           <div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
             <div class="bg-light shadow-sm rounded p-4 text-center"> <span class="d-block text-17 text-primary mt-2 mb-3"><i class="fas fa-money-check-alt"></i></span>
-              <h3 class="text-body text-4">Payment</h3>
-              <p class="mb-0"><a class="text-muted btn-link" href="">See articles<span class="text-1 ml-1"><i class="fas fa-chevron-right"></i></span></a></p>
+              <h3 class="text-body text-4">Depósitos</h3>
             </div>
           </div>
           <div class="col-sm-6 col-lg-3 mb-4 mb-sm-0">
             <div class="bg-light shadow-sm rounded p-4 text-center"> <span class="d-block text-17 text-primary mt-2 mb-3"><i class="fas fa-shield-alt"></i></span>
-              <h3 class="text-body text-4">Security</h3>
-              <p class="mb-0"><a class="text-muted btn-link" href="">See articles<span class="text-1 ml-1"><i class="fas fa-chevron-right"></i></span></a></p>
+              <h3 class="text-body text-4">Seguridad</h3>
             </div>
           </div>
           <div class="col-sm-6 col-lg-3">
             <div class="bg-light shadow-sm rounded p-4 text-center"> <span class="d-block text-17 text-primary mt-2 mb-3"><i class="fas fa-credit-card"></i></span>
-              <h3 class="text-body text-4">Payment Methods</h3>
-              <p class="mb-0"><a class="text-muted btn-link" href="">See articles<span class="text-1 ml-1"><i class="fas fa-chevron-right"></i></span></a></p>
+              <h3 class="text-body text-4">Pagos</h3>
             </div>
           </div>
         </div>
@@ -44,8 +40,8 @@
     ============================================= -->
     <section class="section bg-white">
       <div class="container">
-        <h2 class="text-9 text-center">Popular Topics</h2>
-        <p class="text-4 text-center mb-5">Lisque persius interesset his et, in quot quidam persequeris.</p>
+        <h2 class="text-9 text-center">Temas frecuentes</h2>
+        <p class="text-4 text-center mb-5">Ponemos a tu disposición las preguntas más solicitadas por nuestros clientes.</p>
         <div class="row">
           <div class="col-md-10 mx-auto">
             <div class="row">
@@ -140,7 +136,6 @@
             </div>
           </div>
         </div>
-        <div class="text-center mt-4"><a href="#" class="btn-link text-4">See more topics<i class="fas fa-chevron-right text-2 ml-2"></i></a></div>
       </div>
     </section>
     <!-- Popular Topics end -->
@@ -156,8 +151,8 @@
                 <div class="col-12 col-sm-auto text-13 text-light d-flex align-items-center justify-content-center"> <span class="px-4 ml-3 mr-2 mb-4 mb-sm-0"><i class="far fa-envelope"></i></span> </div>
                 <div class="col text-center text-sm-left">
                   <div class="">
-                    <h5 class="text-3 text-body">Can't find what you're looking for?</h5>
-                    <p class="text-muted mb-0">We want to answer all of your queries. Get in touch and we'll get back to you as soon as we can. <a class="btn-link" href="">Contact us<span class="text-1 ml-1"><i class="fas fa-chevron-right"></i></span></a></p>
+                    <h5 class="text-3 text-body">¿No encuentras lo que buscas?</h5>
+                    <p class="text-muted mb-0">Contáctanos y te responderemos en la brevedad del caso. <a class="btn-link" href="https://api.whatsapp.com/send?phone=51944001458&text=Hola%20necesito%20ayuda%20con%20una%20operaci%C3%B3n" target="_blank">Contactar<span class="text-1 ml-1"><i class="fas fa-chevron-right"></i></span></a></p>
                   </div>
                 </div>
               </div>
@@ -169,8 +164,8 @@
                 <div class="col-12 col-sm-auto text-13 text-light d-flex align-items-center justify-content-center"> <span class="px-4 ml-3 mr-2 mb-4 mb-sm-0"><i class="far fa-comment-alt"></i></span> </div>
                 <div class="col text-center text-sm-left">
                   <div class="">
-                    <h5 class="text-3 text-body">Technical questions</h5>
-                    <p class="text-muted mb-0">Have some technical questions? Hit us up on live chat or whatever. <a class="btn-link" href="">Click here<span class="text-1 ml-1"><i class="fas fa-chevron-right"></i></span></a></p>
+                    <h5 class="text-3 text-body">Tienes preguntas técnicas</h5>
+                    <p class="text-muted mb-0">Conctáctanos y te guiaremos en tu operación. <a class="btn-link" href="https://api.whatsapp.com/send?phone=51944001458&text=Hola%20necesito%20ayuda%20con%20una%20operaci%C3%B3n" target="_blank">Click aqui<span class="text-1 ml-1"><i class="fas fa-chevron-right"></i></span></a></p>
                   </div>
                 </div>
               </div>

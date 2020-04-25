@@ -30,6 +30,9 @@ Vue.component('payment-form', require('./components/operations/payment/Form.vue'
 Vue.component('deposit-payment-form', require('./components/operations/deposit/Payment.vue').default);
 Vue.component('deposit-transfer-form', require('./components/operations/deposit/Transfer.vue').default);
 
+/* ADMIN */
+Vue.component('admin-bank-list', require('./components/admin/bank/List.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

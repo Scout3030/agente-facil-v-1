@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use App\Bank;
+use App\Mail\NewOperation;
 use App\Operation;
 use App\OperationType;
 use App\Payment;
 use App\Transfer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OperationController extends Controller {
 	public function transfer() {
@@ -118,7 +120,10 @@ class OperationController extends Controller {
 			]);
 		}
 
+		Mail::to('roberth@gmail.com')->send(new NewOperation($operation));
+
 		session(['deposit' => false]);
 		return view('operation.confirm');
 	}
+
 }

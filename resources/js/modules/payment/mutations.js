@@ -26,6 +26,10 @@ export function setCode(state, code){
 	state.code = code
 }
 
+export function setName(state, name){
+	state.name = name
+}
+
 export function categoriesError( state, payload){
 	// state.error = truestate.errorMessage = payload
 	console.log('Error prro')

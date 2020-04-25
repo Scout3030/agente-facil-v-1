@@ -22,6 +22,7 @@ class CreateBankOperationsTable extends Migration {
 			])->default(\App\BankOperation::UNPUBLISHED);
 			$table->string('icon')->nullable();
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

@@ -67,4 +67,71 @@ Route::group(['middleware' => ["auth"]], function () {
 
 	Route::post('/mis-cuentas', 'AccountController@store')->name('user.accounts.store');
 	Route::delete('/mis-cuentas/{account}', 'AccountController@destroy')->name('user.accounts.destroy');
+
+	Route::group(['prefix' => "dashboard", "middleware" => [sprintf("role:%s", \App\Role::ADMIN)]], function () {
+
+		Route::get('/', 'Admin\HomeController@index')->name('admin.index');
+
+		Route::get('/operations', 'Admin\OperationController@index')
+			->name('admin.operation.index');
+
+		Route::get('/operations-ajax', 'Admin\OperationController@datatable')
+			->name('admin.operation.datatable');
+
+		Route::put('/deposit', 'Admin\OperationController@acreditDeposit')
+			->name('admin.operation.acreditdeposit');
+
+		Route::put('/cancel-operation', 'Admin\OperationController@cancelOperation')
+			->name('admin.operation.canceloperation');
+
+		Route::get('/complete-operation/{operation}', 'Admin\OperationController@completeOperation')
+			->name('admin.operation.completeoperation');
+
+		Route::put('/complete-operation/{operation}', 'Admin\OperationController@completeOperationStatus')
+			->name('admin.operation.completeoperationstatus');
+
+		Route::get('/operations-all', 'Admin\OperationController@all')->name('admin.operation.all');
+		Route::get('/operations-ajax-all', 'Admin\OperationController@datatableAll')
+			->name('admin.operation.datatableall');
+
+		/* BANKS */
+		Route::group(['prefix' => "bank"], function () {
+
+			Route::get('/', 'Admin\BankController@index')
+				->name('admin.bank.index');
+			Route::get('/edit/{bank}', 'Admin\BankController@edit')
+				->name('admin.bank.edit');
+			Route::put('/{bank}', 'Admin\BankController@update')
+				->name('admin.bank.update');
+			Route::post('/', 'Admin\BankController@store')
+				->name('admin.bank.store');
+			Route::delete('/{bank}', 'Admin\BankController@destroy')
+				->name('admin.bank.destroy');
+
+			Route::post('/status', 'Admin\BankController@status')
+				->name('admin.bank.status');
+		});
+
+		/* PAYMENTS */
+		Route::group(['prefix' => "payment"], function () {
+
+			Route::get('/', 'Admin\PaymentController@index')
+				->name('admin.payment.index');
+			Route::get('/edit/{bankOperation}', 'Admin\PaymentController@edit')
+				->name('admin.payment.edit');
+			Route::put('/{bankOperation}', 'Admin\PaymentController@update')
+				->name('admin.payment.update');
+			Route::post('/', 'Admin\PaymentController@store')
+				->name('admin.payment.store');
+			Route::delete('/{bankOperation}', 'Admin\PaymentController@destroy')
+				->name('admin.payment.destroy');
+
+			Route::get('/datatable', 'Admin\PaymentController@datatable')
+				->name('admin.payment.datatable');
+			Route::put('/status/{bankOperation}', 'Admin\PaymentController@status')
+				->name('admin.payment.status');
+		});
+
+	});
+
 });

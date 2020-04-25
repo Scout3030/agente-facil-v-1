@@ -14,5 +14,6 @@ $factory->define(Payment::class, function (Faker $faker) {
 		'account_id' => \App\Account::all()->random()->id,
 		'bank_operation_id' => \App\BankOperation::all()->random()->id,
 		'code' => $faker->bothify('#?#?#?#?'),
+		'name' => $faker->name,
 	];
 });

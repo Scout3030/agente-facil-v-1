@@ -13,11 +13,11 @@
         <div class="row">
           <div class="col-lg-6 d-flex">
             <div class="my-auto px-0 px-lg-5 mx-2">
-              <h2 class="text-9">Who we are</h2>
+              <h2 class="text-9">¿Quienes somos?</h2>
               <p class="text-4">Quidam lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. lisque persius interesset his et, in quot quidam mea essent possim iriure.</p>
             </div>
           </div>
-          <div class="col-lg-6 my-auto text-center"> <img class="img-fluid shadow-lg rounded-lg" src="images\who-we-are.jpg" alt=""> </div>
+          <div class="col-lg-6 my-auto text-center"> <img class="img-fluid shadow-lg rounded-lg" src="{{asset('assets/images/who-we-are.jpg')}}" alt=""> </div>
         </div>
       </div>
     </section>
@@ -30,13 +30,13 @@
         <div class="row no-gutters">
           <div class="col-lg-6 order-2 order-lg-1">
             <div class="row">
-              <div class="col-6 col-lg-7 ml-auto mb-lg-n5"> <img class="img-fluid rounded-lg shadow-lg" src="images\our-values-vision.jpg" alt="banner"> </div>
-              <div class="col-6 col-lg-8 mt-lg-n5"> <img class="img-fluid rounded-lg shadow-lg" src="images\our-values-mission.jpg" alt="banner"> </div>
+              <div class="col-6 col-lg-7 ml-auto mb-lg-n5"> <img class="img-fluid rounded-lg shadow-lg" src="{{asset('assets/images/our-values-vision.jpg')}}" alt="banner"> </div>
+              <div class="col-6 col-lg-8 mt-lg-n5"> <img class="img-fluid rounded-lg shadow-lg" src="{{asset('assets/images/our-values-mission.jpg')}}" alt="banner"> </div>
             </div>
           </div>
           <div class="col-lg-6 d-flex order-1 order-lg-2">
             <div class="my-auto px-0 px-lg-5">
-              <h2 class="text-9 mb-4">Our Values</h2>
+              <h2 class="text-9 mb-4">Nuestros valores</h2>
               <h4 class="text-4 font-weight-500">Our Mission</h4>
               <p class="tex-3">Quidam lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. lisque persius interesset his et, in quot quidam mea essent possim iriure.</p>
               <h4 class="text-4 font-weight-500 mb-2">Our Vision</h4>
@@ -54,11 +54,11 @@
     ============================================= -->
     <section class="section">
       <div class="container">
-        <h2 class="text-9 text-center">Leadership</h2>
+        <h2 class="text-9 text-center">Equipo</h2>
         <p class="text-4 text-center mb-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
         <div class="row">
           <div class="col-sm-6 col-md-3 text-center mb-4 mb-md-0">
-            <div class="team rounded d-inline-block"> <img class="img-fluid rounded" alt="" src="images\team\leader.jpg">
+            <div class="team rounded d-inline-block"> <img class="img-fluid rounded" alt="" src="{{asset('assets/images/team/leader.jpg')}}">
               <h3>Neil Patel</h3>
               <p class="text-muted">CEO &amp; Founder</p>
               <ul class="social-icons social-icons-sm d-inline-flex">
@@ -69,7 +69,7 @@
             </div>
           </div>
           <div class="col-sm-6 col-md-3 text-center mb-4 mb-md-0">
-            <div class="team rounded d-inline-block"> <img class="img-fluid rounded" alt="" src="images\team\leader-2.jpg">
+            <div class="team rounded d-inline-block"> <img class="img-fluid rounded" alt="" src="{{asset('assets/images/team/leader-2.jpg')}}">
               <h3>James Maxwell</h3>
               <p class="text-muted">Co-Founder</p>
               <ul class="social-icons social-icons-sm d-inline-flex">
@@ -80,7 +80,7 @@
             </div>
           </div>
           <div class="col-sm-6 col-md-3 text-center mb-4 mb-md-0">
-            <div class="team rounded d-inline-block"> <img class="img-fluid rounded" alt="" src="images\team\leader-3.jpg">
+            <div class="team rounded d-inline-block"> <img class="img-fluid rounded" alt="" src="{{asset('assets/images/team/leader-3.jpg')}}">
               <h3>Ruby Clinton</h3>
               <p class="text-muted">Chief Marketing Officer</p>
               <ul class="social-icons social-icons-sm d-inline-flex">
@@ -91,7 +91,7 @@
             </div>
           </div>
           <div class="col-sm-6 col-md-3 text-center mb-4 mb-md-0">
-            <div class="team rounded d-inline-block"> <img class="img-fluid rounded" alt="" src="images\team\leader-4.jpg">
+            <div class="team rounded d-inline-block"> <img class="img-fluid rounded" alt="" src="{{asset('assets/images/team/leader-4.jpg')}}">
               <h3>Miky Sheth</h3>
               <p class="text-muted">General Manager</p>
               <ul class="social-icons social-icons-sm d-inline-flex">
@@ -106,37 +106,13 @@
     </section>
     <!-- Leadership end -->
 
-    <!-- Our Investors
-    ============================================= -->
-    <section class="section bg-white">
-      <div class="container">
-        <h2 class="text-9 text-center">Our Investors</h2>
-        <p class="text-4 text-center mb-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-        <div class="brands-grid separator-border">
-          <div class="row align-items-center">
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="images\partner\partner-1.png" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="images\partner\partner-2.png" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="images\partner\partner-3.png" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="images\partner\partner-4.png" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="images\partner\partner-5.png" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="images\partner\partner-6.png" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="images\partner\partner-7.png" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="images\partner\partner-8.png" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="images\partner\partner-9.png" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="images\partner\partner-10.png" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="images\partner\partner-11.png" alt="Brands"></a></div>
-            <div class="col-6 col-sm-4 col-lg-2 text-center"><a href=""><img class="img-fluid" src="images\partner\partner-1.png" alt="Brands"></a></div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Our Investors end -->
+    @include('shared.banks')
 
     <!-- Testimonial
     ============================================= -->
     <section class="section">
       <div class="container">
-        <h2 class="text-9 text-center">What people are saying about Payyed</h2>
+        <h2 class="text-9 text-center">Qué dice la geste sobre AGENTE FÁCIL</h2>
         <p class="text-4 text-center mb-4">A payments experience people love to talk about</p>
         <div class="owl-carousel owl-theme" data-autoplay="true" data-nav="true" data-loop="true" data-margin="30" data-slideby="2" data-stagepadding="5" data-items-xs="1" data-items-sm="1" data-items-md="2" data-items-lg="2">
           <div class="item">
@@ -170,7 +146,7 @@
               <strong class="d-block font-weight-500">Dennis Jacques</strong> <span class="text-muted">User from USA</span> </div>
           </div>
         </div>
-        <div class="text-center mt-4"><a href="#" class="btn-link text-4">See more people review<i class="fas fa-chevron-right text-2 ml-2"></i></a></div>
+        <div class="text-center mt-4"><a href="{{route('reviews')}}" class="btn-link text-4">Ver más opiniones<i class="fas fa-chevron-right text-2 ml-2"></i></a></div>
       </div>
     </section>
     <!-- Testimonial end -->

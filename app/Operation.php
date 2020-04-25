@@ -20,8 +20,11 @@ class Operation extends Model {
 	const INPROCESS = 2;
 	const CANCELLED = 3;
 
+	const DEPOSITDONE = 1;
+	const DEPOSITINPROCESS = 2;
+
 	protected $fillable = [
-		'user_id', 'operation_type_id', 'amount', 'comission', 'deposit_code', 'transfer_code', 'status',
+		'user_id', 'operation_type_id', 'amount', 'comission', 'deposit_code', 'deposit_code_status', 'transfer_code', 'status',
 	];
 
 	public function user() {

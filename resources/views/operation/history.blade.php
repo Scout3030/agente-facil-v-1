@@ -185,8 +185,6 @@
 
             @include('partials.history.modal')
 
-            {{$operations->links()}}
-
             <!-- Pagination
             ============================================= -->
             <ul class="pagination justify-content-center mt-4 mb-0">

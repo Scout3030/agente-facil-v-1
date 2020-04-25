@@ -5,5 +5,7 @@ export default {
 	operation: 0,
 	amount: 200,
 	comission: 1,
-	code: null
+	/* owner's - bussines's code and name  */
+	code: null,
+	name: null
 }

@@ -6,7 +6,7 @@
       <div class="header-column justify-content-start">
         <!-- Logo
         ============================= -->
-        <div class="logo"> <a class="d-flex" href="{{route('home')}}" title="Agente Simple"><img src="{{asset('assets/images/logo.png')}}" alt="Agente Simple Logo"></a> </div>
+        <div class="logo"> <a class="d-flex" href="{{route('home')}}" title="Agente Facil"><img src="{{asset('assets/images/logo-agente-facil.png')}}" alt="Agente Facil Logo"></a> </div>
         <!-- Logo end -->
         <!-- Collapse Button
         ============================== -->
