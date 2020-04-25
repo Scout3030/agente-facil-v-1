@@ -18,8 +18,8 @@ class BankController extends Controller {
 	}
 
 	public function store(Request $request) {
-		$validatedData = $request->validate([
-			'name' => 'required|unique:posts|max:255',
+		$request->validate([
+			'name' => 'required|max:255',
 			'description' => 'required',
 			'icon' => 'required',
 		]);
@@ -27,7 +27,8 @@ class BankController extends Controller {
 		$logo = Helper::uploadFile('logo', 'banks');
 		$request->merge(['logo' => $logo]);
 		Bank::create($request->input());
-		return back();
+
+		return back()->with('message', __('Banco creado correctamente'));
 	}
 
 	public function update(Request $request, Bank $bank) {
@@ -42,15 +43,15 @@ class BankController extends Controller {
 			$request->merge(['logo' => $logo]);
 		}
 		$bank->fill($request->input())->save();
-		return redirect()->route('admin.bank.index')->with('message', ['success', __('Banco actualizado')]);
+		return redirect()->route('admin.bank.index')->with('message', __('Banco actualizado correctamente'));
 	}
 
 	public function destroy(Bank $bank) {
 		try {
 			$bank->delete();
-			return back()->with('message', ['success', __("Banco eliminado correctamente")]);
+			return back()->with('message', __("Banco eliminado correctamente"));
 		} catch (\Exception $exception) {
-			return back()->with('message', ['danger', __("Error eliminando el curso")]);
+			return back()->with('message', __("Error eliminando el curso"));
 		}
 	}
 

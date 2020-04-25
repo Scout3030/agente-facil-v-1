@@ -22,6 +22,14 @@
 				</button>
 			</div>
 		@endif
+		@if (session('message'))
+			<div class="alert alert-info alert-dismissible fade show" role="alert">
+				{{session('message')}}
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		@endif
 		<div class="main-card mb-3 card">
 			<div class="card-body">
 				<h5 class="card-title">Agregar banco</h5>
@@ -60,7 +68,3 @@
 </div>
 
 @endsection
-
-@push('scripts')
-
-@endpush

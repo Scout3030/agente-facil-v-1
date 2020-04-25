@@ -36,15 +36,15 @@ class PaymentController extends Controller {
 			'icon' => 'required',
 		]);
 		$bankOperation->fill($request->input())->save();
-		return back()->with('message', ['success', __('Convenio actualizado')]);
+		return back()->with('message', __('Convenio actualizado correctamente'));
 	}
 
 	public function destroy(BankOperation $bankOperation) {
 		try {
 			$bankOperation->delete();
-			return back()->with('message', ['success', __("Convenio eliminado correctamente")]);
+			return back()->with('message', __("Convenio eliminado correctamente"));
 		} catch (\Exception $exception) {
-			return back()->with('message', ['danger', __("Error eliminando el curso")]);
+			return back()->with('message', __("Error eliminando el curso"));
 		}
 	}
 
