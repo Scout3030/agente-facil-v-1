@@ -21,7 +21,7 @@ class PaymentController extends Controller {
 			'icon' => 'required',
 		]);
 		BankOperation::create($request->input());
-		return back();
+		return back()->with('message', __('Convenio creado correctamente'));
 	}
 
 	public function edit(BankOperation $bankOperation) {

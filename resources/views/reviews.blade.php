@@ -11,28 +11,20 @@
   <section class="section">
     <div class="container">
       <h2 class="text-9 text-center">Qué dice la gente sobre AGENTE FÁCIL</h2>
-      <p class="text-4 text-center mb-5">A payments experience people love to talk about</p>
+      <p class="text-4 text-center mb-5">Nuestros usuarios opinan</p>
       <div class="row">
+
+        @foreach(App\Review::get() as $review)
         <div class="col-lg-6 mb-4">
           <div class="testimonial rounded text-center p-4">
-            <p class="text-4">“Easy to use, reasonably priced simply dummy text of the printing and typesetting industry. Quidam lisque persius interesset his et, in quot quidam possim iriure.”</p>
-            <strong class="d-block font-weight-500">Jay Shah</strong> <span class="text-muted">Founder at Icomatic Pvt Ltd</span> </div>
+            <span class="text-muted">{{$review->title}}</span>
+            <p class="text-4">“{{$review->description}}”</p>
+            <strong class="d-block font-weight-500">{{$review->user->name}}</strong>
+
+          </div>
         </div>
-        <div class="col-lg-6 mb-4">
-          <div class="testimonial rounded text-center p-4">
-            <p class="text-4">“I am happy Working with printing and typesetting industry. Quidam lisque persius interesset his et, in quot quidam persequeris essent possim iriure.”</p>
-            <strong class="d-block font-weight-500">Patrick Cary</strong> <span class="text-muted">Freelancer from USA</span> </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <div class="testimonial rounded text-center p-4">
-            <p class="text-4">“Only trying it out since a few days. But up to now excellent. Seems to work flawlessly. I'm only using it for sending money to friends at the moment.”</p>
-            <strong class="d-block font-weight-500">Dennis Jacques</strong> <span class="text-muted">User from USA</span> </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <div class="testimonial rounded text-center p-4">
-            <p class="text-4">“I have used them twice now. Good rates, very efficient service and it denies high street banks an undeserved windfall. Excellent.”</p>
-            <strong class="d-block font-weight-500">Chris Tom</strong> <span class="text-muted">User from UK</span> </div>
-        </div>
+        @endforeach
+
       </div>
     </div>
   </section>

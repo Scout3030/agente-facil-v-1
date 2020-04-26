@@ -25,7 +25,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/font-awesome/css/all.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/bootstrap-select/css/bootstrap-select.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/currency-flags/css/currency-flags.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/currency-flags/css/banks.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/banks/css/banks.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/owl.carousel/assets/owl.carousel.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/stylesheet.css')}}">
 

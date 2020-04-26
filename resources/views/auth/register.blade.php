@@ -5,13 +5,13 @@
   ============================================= -->
 <div id="content">
     <div class="login-signup-page mx-auto my-5">
-        <h3 class="font-weight-400 text-center">Sign Up</h3>
-        <p class="lead text-center">Your Sign Up information is safe with us.</p>
+        <h3 class="font-weight-400 text-center">Regístrate</h3>
+        <p class="lead text-center">Tu información es reservada y segura.</p>
         <div class="bg-light shadow-md rounded p-4 mx-2">
             <form id="signupForm" method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="form-group">
-                    <label for="fullName">Full Name</label>
+                    <label for="fullName">Nombre</label>
                     <input id="fullName" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                     @error('name')
                         <span class="invalid-feedback" role="alert">
@@ -20,7 +20,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="emailAddress">Email Address</label>
+                    <label for="emailAddress">Correo electrónico</label>
                     <input id="emailAddress" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                     @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="loginPassword">Password</label>
+                    <label for="loginPassword">Contraseña</label>
                     <input id="loginPassword" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                     @error('password')
@@ -46,7 +46,7 @@
                     {{ __('Register') }}
                 </button>
             </form>
-            <p class="text-3 text-muted text-center mb-0">Already have an account? <a class="btn-link" href="{{route('login')}}">Log In</a></p>
+            <p class="text-3 text-muted text-center mb-0">¿Ya tiene una cuenta? <a class="btn-link" href="{{route('login')}}">Ingresa</a></p>
         </div>
     </div>
   <!-- Content end -->

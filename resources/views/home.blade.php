@@ -37,35 +37,35 @@
     ============================================= -->
     <section class="section bg-white">
       <div class="container">
-        <h2 class="text-9 text-center"> La manera mas simple de realizar transferencias y pagos interbancarios</h2>
-        <p class="text-4 text-center mb-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        <h2 class="text-9 text-center"> Agente Fácil, tu agente corresponsal multibanco online.</h2>
+        <p class="text-4 text-center mb-5">Realiza tus operaciones frecuentes en 4 simples pasos.</p>
         <div class="row">
           <div class="col-lg-3 mb-3">
             <div class="featured-box style-3">
               <div class="featured-box-icon text-light"><span class="w-100 text-20 font-weight-500">1</span></div>
               <h3>Crea tu cuenta</h3>
-              <p class="text-3">Become a register user first, then log in to your account and enter your card or bank details that is required for you.</p>
+              <p class="text-3">Crea tu cuenta e inicia sesión en la plataforma.</p>
             </div>
           </div>
           <div class="col-lg-3 mb-3">
             <div class="featured-box style-3">
               <div class="featured-box-icon text-light"><span class="w-100 text-20 font-weight-500">2</span></div>
               <h3>Elige la operación que deseas realizar</h3>
-              <p class="text-3">Enter your recipient's email address then add an amount with currency to send securely.</p>
+              <p class="text-3">Elige la operación que vas a realizar, puedes seleccionar entre transferencias interbancarias y pagos.</p>
             </div>
           </div>
           <div class="col-lg-3 mb-3">
             <div class="featured-box style-3">
               <div class="featured-box-icon text-light"><span class="w-100 text-20 font-weight-500">3</span></div>
               <h3>Deposita los fondos</h3>
-              <p class="text-3">After sending money, the recipient will be notified via an email when money has been transferred to their account.</p>
+              <p class="text-3">Envía los fondos para realizar tu operación.</p>
             </div>
           </div>
           <div class="col-lg-3 mb-3 mb-sm-0">
             <div class="featured-box style-3">
               <div class="featured-box-icon text-light"><span class="w-100 text-20 font-weight-500">4</span></div>
               <h3>Recibe tu confirmación de pago</h3>
-              <p class="text-3">After sending money, the recipient will be notified via an email when money has been transferred to their account.</p>
+              <p class="text-3">Nuestro equipo realizará tu operación y te enviará el comprobante respectivo.</p>
             </div>
           </div>
         </div>
@@ -97,33 +97,33 @@
           <div class="col-md-6">
             <div class="featured-box style-1">
               <div class="featured-box-icon text-primary"> <i class="far fa-check-circle"></i> </div>
-              <h3>Trabajamos con más de 20 bancos</h3>
-              <p>Essent lisque persius interesset his et, in quot quidam.</p>
+              <h3>Trabajamos con más de 20 bancos a nivel nacional</h3>
+              <p>Agente Fácil trabaja con la mayor cantidad posible de bancos, garantizando que puedas realizar tus operaciones.</p>
             </div>
             <div class="featured-box style-1">
               <div class="featured-box-icon text-primary"> <i class="far fa-check-circle"></i> </div>
               <h3>Bajas comisiones</h3>
-              <p>Lisque persius interesset his et, in quot quidam persequeris.</p>
+              <p>Un buen servicio a un bajo precio.</p>
             </div>
             <div class="featured-box style-1">
               <div class="featured-box-icon text-primary"> <i class="far fa-check-circle"></i> </div>
               <h3>Operaciones en menos de 20 minutos</h3>
-              <p>Essent lisque persius interesset his et, in quot quidam.</p>
+              <p>Tus operaciones son confirmadas en menos de 20 minutos.</p>
             </div>
             <div class="featured-box style-1">
               <div class="featured-box-icon text-primary"> <i class="far fa-check-circle"></i> </div>
               <h3>Sin salir de casa</h3>
-              <p>Quidam lisque persius interesset his et, in quot quidam.</p>
+              <p>Ingresa a Agente Fácil por internet, sin salir de casa y desde cualquier dispositivo.</p>
             </div>
-            <div class="featured-box style-1">
+            <!-- <div class="featured-box style-1">
               <div class="featured-box-icon text-primary"> <i class="far fa-check-circle"></i> </div>
               <h3>100% seguro</h3>
               <p>Essent lisque persius interesset his et, in quot quidam.</p>
-            </div>
+            </div> -->
             <div class="featured-box style-1">
               <div class="featured-box-icon text-primary"> <i class="far fa-check-circle"></i> </div>
               <h3>Soporte con respuestas en minutos</h3>
-              <p>Quidam lisque persius interesset his et, in quot quidam.</p>
+              <p>Si tienes preguntas, te respondemos minutos.</p>
             </div>
           </div>
         </div>
@@ -198,59 +198,25 @@
     <section class="section bg-white">
       <div class="container">
         <h2 class="text-9 text-center">Preguntas frecuentes</h2>
-        <p class="text-4 text-center mb-4 mb-sm-5">Can't find it here? Check out our <a href="help.html">Help center</a></p>
+        <p class="text-4 text-center mb-4 mb-sm-5">Si no encuentras respuesta, escríbenos a nuestro <a href="https://api.whatsapp.com/send?phone=51944001458&text=Hola%20necesito%20ayuda%20con%20una%20operaci%C3%B3n">Centro de atención</a></p>
         <div class="row">
           <div class="col-md-10 col-lg-8 mx-auto">
             <hr class="mb-0">
             <div class="accordion accordion-alternate arrow-right" id="popularTopics">
+
+              @foreach(App\Question::orderBy('title', 'asc')->take(6)->get() as $faq)
               <div class="card">
-                <div class="card-header" id="heading1">
-                  <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">What is Payyed?</a> </h5>
+                <div class="card-header" id="heading{{$faq->id}}">
+                  <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse{{$faq->id}}" aria-expanded="false" aria-controls="collapse{{$faq->id}}">{{$faq->title}}</a> </h5>
                 </div>
-                <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#popularTopics">
-                  <div class="card-body"> Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. Mutat tacimates id sit. Ridens mediocritatem ius an, eu nec magna imperdiet. </div>
+                <div id="collapse{{$faq->id}}" class="collapse" aria-labelledby="heading{{$faq->id}}" data-parent="#popularTopics">
+                  <div class="card-body">
+                    {{$faq->description}}
+                  </div>
                 </div>
               </div>
-              <div class="card">
-                <div class="card-header" id="heading2">
-                  <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">How to send money online?</a> </h5>
-                </div>
-                <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#popularTopics">
-                  <div class="card-body"> Iisque Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="heading3">
-                  <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">Is my money safe with Payyed?</a> </h5>
-                </div>
-                <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#popularTopics">
-                  <div class="card-body"> Iisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. Mutat tacimates id sit. Ridens mediocritatem ius an, eu nec magna imperdiet. </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="heading4">
-                  <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">How much fees does Payyed charge?</a> </h5>
-                </div>
-                <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#popularTopics">
-                  <div class="card-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="heading5">
-                  <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">What is the fastest way to send money abroad?</a> </h5>
-                </div>
-                <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#popularTopics">
-                  <div class="card-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="heading6">
-                  <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">Can I open an Payyed account for business?</a> </h5>
-                </div>
-                <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#popularTopics">
-                  <div class="card-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. </div>
-                </div>
-              </div>
+              @endforeach
+
             </div>
             <hr class="mt-0">
           </div>

@@ -41,8 +41,6 @@
 			<input type="number" step=".10" class="form-control" data-bv-field="amount" v-model="operationAmount" @change="setOperationAmount(operationAmount)" min="10">
 		</div>
 	</div>
-	<p class="text-muted mb-1">Total fees  - <span class="font-weight-500">7.21 USD</span></p>
-	<p class="text-muted">The current exchange rate is <span class="font-weight-500">1 USD = 1.42030 AUD</span></p>
 </div>
 </template>
 <script>

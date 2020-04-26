@@ -9,8 +9,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- icon -->
-    <link rel="icon" href="{{asset('assets/img/Fevicon.png')}}" type="image/png">
+    <!-- Favicon -->
+    <link href="{{asset('assets/images/favicon.png')}}" rel="icon">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,6 +19,7 @@
     <!-- Styles -->
     <link href="{{asset('admin/main.css')}}" rel="stylesheet"></head>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{asset('assets/vendor/banks/css/banks.css')}}" rel="stylesheet" type="text/css" >
     @stack('styles')
 </head>
 <body>

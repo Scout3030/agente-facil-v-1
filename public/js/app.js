@@ -2039,6 +2039,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     redirect: function redirect(bankId) {
       console.log(bankId);
       window.location.replace("bank/edit/".concat(bankId));
+    },
+    icon: function icon(_icon) {
+      return "bank ".concat(_icon, " mr-1");
     }
   }
 });
@@ -2163,8 +2166,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2233,8 +2234,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
 //
 //
 //
@@ -6592,7 +6591,9 @@ var render = function() {
       return _c("li", { staticClass: "list-group-item" }, [
         _c("div", { staticClass: "widget-content p-0" }, [
           _c("div", { staticClass: "widget-content-wrapper" }, [
-            _vm._m(0, true),
+            _c("div", { staticClass: "widget-content-left mr-3" }, [
+              _c("i", { class: _vm.icon(bank.icon) })
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "widget-content-left" }, [
               _c("div", { staticClass: "widget-heading" }, [
@@ -6688,19 +6689,7 @@ var render = function() {
     0
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "widget-content-left mr-3" }, [
-      _c("img", {
-        staticClass: "rounded-circle",
-        attrs: { width: "42", src: "assets/images/avatars/1.jpg", alt: "" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -7198,11 +7187,7 @@ var render = function() {
             ]
           )
         ])
-      ]),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _vm._m(2)
+      ])
     ]
   )
 }
@@ -7213,26 +7198,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-prepend" }, [
       _c("span", { staticClass: "input-group-text" }, [_vm._v("S/")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "text-muted mb-1" }, [
-      _vm._v("Total fees  - "),
-      _c("span", { staticClass: "font-weight-500" }, [_vm._v("7.21 USD")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "text-muted" }, [
-      _vm._v("The current exchange rate is "),
-      _c("span", { staticClass: "font-weight-500" }, [
-        _vm._v("1 USD = 1.42030 AUD")
-      ])
     ])
   }
 ]
@@ -7506,11 +7471,7 @@ var render = function() {
             }
           })
         ])
-      ]),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _vm._m(2)
+      ])
     ]
   )
 }
@@ -7521,26 +7482,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-prepend" }, [
       _c("span", { staticClass: "input-group-text" }, [_vm._v("S/")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "text-muted mb-1" }, [
-      _vm._v("Total fees  - "),
-      _c("span", { staticClass: "font-weight-500" }, [_vm._v("7.21 USD")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "text-muted" }, [
-      _vm._v("The current exchange rate is "),
-      _c("span", { staticClass: "font-weight-500" }, [
-        _vm._v("1 USD = 1.42030 AUD")
-      ])
     ])
   }
 ]

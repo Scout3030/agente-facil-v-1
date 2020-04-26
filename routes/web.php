@@ -132,6 +132,20 @@ Route::group(['middleware' => ["auth"]], function () {
 				->name('admin.payment.status');
 		});
 
+		Route::group(['prefix' => "faq"], function () {
+
+			Route::get('/', 'Admin\QuestionController@index')
+				->name('admin.faq.index');
+			Route::get('/edit/{question}', 'Admin\QuestionController@edit')
+				->name('admin.faq.edit');
+			Route::put('/{question}', 'Admin\QuestionController@update')
+				->name('admin.faq.update');
+			Route::post('/', 'Admin\QuestionController@store')
+				->name('admin.faq.store');
+			Route::delete('/{question}', 'Admin\QuestionController@destroy')
+				->name('admin.faq.destroy');
+		});
+
 	});
 
 });

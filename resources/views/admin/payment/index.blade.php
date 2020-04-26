@@ -121,7 +121,6 @@
                     {data: 'bank.name'},
                     {data: 'status'},
                     {data: 'actions'}
-                    // {data: 'actions'}
                 ]
             });
         })

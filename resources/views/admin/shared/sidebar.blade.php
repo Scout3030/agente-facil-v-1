@@ -39,6 +39,14 @@
                     <i class="metismenu-state-icon caret-left"></i>
                 </a>
             </li>
+            <li class="app-sidebar__heading">Preguntas frecuentes</li>
+            <li>
+                <a href="{{route('admin.faq.index')}}" @if (Request::url() == route('admin.faq.index')) class="mm-active" @endif>
+                    <i class="metismenu-icon pe-7s-attention"></i>
+                    Administrar
+                    <i class="metismenu-state-icon caret-left"></i>
+                </a>
+            </li>
             <li class="app-sidebar__heading">PRO Version</li>
             <li>
                 <a href="https://demo.dashboardpack.com/architectui-html-pro/" target="_blank">

@@ -60,7 +60,7 @@
 						<label class="">Icono</label>
 						<input name="icon" placeholder="caja-huancayo" type="text" class="form-control" autocomplete="off" value="{{$bank->id ? $bank->icon : old('icon')}}">
 					</div>
-					<button class="mt-1 btn btn-primary">Crear</button>
+					<button class="mt-1 btn btn-primary">{{$btn}}</button>
 				</form>
 			</div>
 		</div>

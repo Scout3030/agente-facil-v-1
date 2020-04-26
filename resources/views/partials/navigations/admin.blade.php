@@ -3,7 +3,7 @@
   <nav class="primary-menu navbar navbar-expand-lg">
     <div id="header-nav" class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
-        <li class="active"><a href="{{route('operation.history')}}">Nosotros</a></li>
+        <li class="active"><a href="{{route('admin.index')}}">Panel administrativo</a></li>
       </ul>
     </div>
   </nav>

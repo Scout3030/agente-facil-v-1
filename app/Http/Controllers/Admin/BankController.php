@@ -10,11 +10,13 @@ use Illuminate\Http\Request;
 class BankController extends Controller {
 	public function index() {
 		$bank = new Bank;
-		return view('admin.bank.index', compact('bank'));
+		$btn = 'Crear';
+		return view('admin.bank.index', compact('bank', 'btn'));
 	}
 
 	public function edit(Bank $bank) {
-		return view('admin.bank.index', compact('bank'));
+		$btn = 'Editar';
+		return view('admin.bank.index', compact('bank', 'btn'));
 	}
 
 	public function store(Request $request) {
@@ -33,13 +35,13 @@ class BankController extends Controller {
 
 	public function update(Request $request, Bank $bank) {
 		$validatedData = $request->validate([
-			'name' => 'required|unique:posts|max:255',
+			'name' => 'required|max:255',
 			'description' => 'required',
 			'icon' => 'required',
 		]);
 		if ($request->hasFile('logo')) {
 			\Storage::delete('banks/' . $bank->logo);
-			$logo = Helper::uploadFile("logo", 'courses');
+			$logo = Helper::uploadFile("logo", 'banks');
 			$request->merge(['logo' => $logo]);
 		}
 		$bank->fill($request->input())->save();

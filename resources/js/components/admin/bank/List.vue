@@ -4,7 +4,7 @@
             <div class="widget-content p-0">
                 <div class="widget-content-wrapper">
                     <div class="widget-content-left mr-3">
-                        <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
+                        <i :class="icon(bank.icon)"></i>
                     </div>
                     <div class="widget-content-left">
                         <div class="widget-heading">{{bank.name}}</div>
@@ -65,6 +65,9 @@
 			redirect(bankId){
 				console.log(bankId)
 				window.location.replace(`bank/edit/${bankId}`)
+			},
+			icon(icon){
+				return `bank ${icon} mr-1`
 			}
 		}
 	}
