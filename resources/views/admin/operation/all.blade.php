@@ -12,6 +12,7 @@ pe-7s-paint'])
             <thead>
             <tr>
                 <th>id</th>
+                <th>Operador</th>
                 <th>Operación</th>
                 <th>Desde</th>
                 <th>Depósito</th>
@@ -26,6 +27,7 @@ pe-7s-paint'])
             <tfoot>
             <tr>
                 <th>id</th>
+                <th>Operador</th>
                 <th>Operación</th>
                 <th>Desde</th>
                 <th>Depósito</th>
@@ -57,6 +59,7 @@ pe-7s-paint'])
                 },
                 columns: [
                     {data: 'id', visible: false},
+                    {data: 'operator'},
                     {data: 'operation'},
                     {data: 'from'},
                     {data: 'deposit'},

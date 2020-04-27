@@ -23,11 +23,16 @@
                     <i class="metismenu-state-icon caret-left"></i>
                 </a>
             </li>
-            <li class="app-sidebar__heading">Bancos</li>
+            <li class="app-sidebar__heading">Bancos / cuentas</li>
             <li>
                 <a href="{{route('admin.bank.index')}}" @if (Request::url() == route('admin.bank.index')) class="mm-active" @endif>
-                    <i class="metismenu-icon pe-7s-menu"></i>
-                    Administrar
+                    <i class="metismenu-icon pe-7s-culture"></i>
+                    Bancos
+                    <i class="metismenu-state-icon caret-left"></i>
+                </a>
+                <a href="{{route('admin.account.index')}}" @if (Request::url() == route('admin.account.index')) class="mm-active" @endif>
+                    <i class="metismenu-icon pe-7s-credit"></i>
+                    Números de cuentas
                     <i class="metismenu-state-icon caret-left"></i>
                 </a>
             </li>

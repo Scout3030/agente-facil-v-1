@@ -32,6 +32,7 @@ Vue.component('deposit-transfer-form', require('./components/operations/deposit/
 
 /* ADMIN */
 Vue.component('admin-bank-list', require('./components/admin/bank/List.vue').default);
+Vue.component('admin-account-list', require('./components/admin/account/List.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

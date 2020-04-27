@@ -7,6 +7,7 @@
 @section('content')
 
 <div class="row">
+	@if($operation->transfer_code == null)
 	<div class="col-md-6">
 		<div class="main-card mb-3 card">
 			<div class="card-body"><h5 class="card-title">Información de la operación</h5>
@@ -53,6 +54,59 @@
 			</div>
 		</div>
 	</div>
+	@else
+	<div class="col-md-6">
+		<div class="main-card mb-3 card">
+			<div class="card-body">
+				<div id="message"></div>
+				<h5 class="card-title">Operación confirmada</h5>
+				<p>El número de operación registrado es el:
+					<strong>{{$operation->transfer_code}}</strong>
+				</p>
+				<button class="mt-1 btn btn-primary btnEmail" data-id="{{$operation->id}}">Enviar correo de confirmación</button>
+			</div>
+		</div>
+	</div>
+	@endif
 </div>
 
 @endsection
+
+@push('scripts')
+	<script src="{{asset('assets/vendor/jquery/jquery.min.js')}}"></script>
+	<script>
+		$(document).ready(function() {
+			let message = $('#message')
+			$(document).on("click", '.btnEmail', function (e) {
+                e.preventDefault();
+                const id = $(this).data('id');
+                jQuery.ajax({
+                    url: '{{ route('admin.operation.send_confirmation_message') }}',
+                    type: 'POST',
+                    headers: {
+                        'x-csrf-token': $("meta[name=csrf-token]").attr('content')
+                    },
+                    data: {
+                        id : id
+                    },
+                    success: (res) => {
+                    	console.log("res", res);
+                        if(res.res) {
+                            // modal.find('#modalAction').hide();
+                            message.html('<div class="alert alert-success">{{ __("Confirmación enviada correctamente") }}</div>');
+                        } else {
+                            message.html('<div class="alert alert-danger">{{ __("Ha ocurrido un error enviando la confirmación") }}</div>');
+                        }
+                    }
+                })
+                // modal.find('.modal-title').text('{{ __("Enviar mensaje") }}');
+                // modal.find('#modalAction').text('{{ __("Enviar mensaje") }}').show();
+                // let $form = $("<form id='studentMessage'></form>");
+                // $form.append(`<input type="hidden" name="user_id" value="${id}" />`);
+                // $form.append(`<textarea class="form-control" name="message"></textarea>`);
+                // modal.find('.modal-body').html($form);
+                // modal.modal();
+            });
+		})
+	</script>
+@endpush

@@ -72,27 +72,34 @@ Route::group(['middleware' => ["auth"]], function () {
 
 		Route::get('/', 'Admin\HomeController@index')->name('admin.index');
 
-		Route::get('/operations', 'Admin\OperationController@index')
-			->name('admin.operation.index');
+		/* BANKS */
+		Route::group(['prefix' => "operation"], function () {
 
-		Route::get('/operations-ajax', 'Admin\OperationController@datatable')
-			->name('admin.operation.datatable');
+			Route::get('/', 'Admin\OperationController@index')
+				->name('admin.operation.index');
 
-		Route::put('/deposit', 'Admin\OperationController@acreditDeposit')
-			->name('admin.operation.acreditdeposit');
+			Route::get('/datatable', 'Admin\OperationController@datatable')
+				->name('admin.operation.datatable');
 
-		Route::put('/cancel-operation', 'Admin\OperationController@cancelOperation')
-			->name('admin.operation.canceloperation');
+			Route::put('/deposit', 'Admin\OperationController@acreditDeposit')
+				->name('admin.operation.acreditdeposit');
 
-		Route::get('/complete-operation/{operation}', 'Admin\OperationController@completeOperation')
-			->name('admin.operation.completeoperation');
+			Route::put('/cancel', 'Admin\OperationController@cancelOperation')
+				->name('admin.operation.canceloperation');
 
-		Route::put('/complete-operation/{operation}', 'Admin\OperationController@completeOperationStatus')
-			->name('admin.operation.completeoperationstatus');
+			Route::get('/complete/{operation}', 'Admin\OperationController@completeOperation')
+				->name('admin.operation.completeoperation');
 
-		Route::get('/operations-all', 'Admin\OperationController@all')->name('admin.operation.all');
-		Route::get('/operations-ajax-all', 'Admin\OperationController@datatableAll')
-			->name('admin.operation.datatableall');
+			Route::put('/complete/{operation}', 'Admin\OperationController@completeOperationStatus')
+				->name('admin.operation.completeoperationstatus');
+
+			Route::get('/all', 'Admin\OperationController@all')
+				->name('admin.operation.all');
+			Route::get('/datatable/all', 'Admin\OperationController@datatableAll')
+				->name('admin.operation.datatableall');
+			Route::post('/send-message', 'Admin\OperationController@sendConfirmationMessage')
+				->name('admin.operation.send_confirmation_message');
+		});
 
 		/* BANKS */
 		Route::group(['prefix' => "bank"], function () {
@@ -110,6 +117,24 @@ Route::group(['middleware' => ["auth"]], function () {
 
 			Route::post('/status', 'Admin\BankController@status')
 				->name('admin.bank.status');
+		});
+
+		/* ACCOUNTS*/
+		Route::group(['prefix' => "account"], function () {
+
+			Route::get('/', 'Admin\AccountController@index')
+				->name('admin.account.index');
+			Route::get('/edit/{account}', 'Admin\AccountController@edit')
+				->name('admin.account.edit');
+			Route::put('/{account}', 'Admin\AccountController@update')
+				->name('admin.account.update');
+			Route::post('/', 'Admin\AccountController@store')
+				->name('admin.account.store');
+			Route::delete('/{account}', 'Admin\AccountController@destroy')
+				->name('admin.account.destroy');
+
+			Route::get('/accounts', 'Admin\AccountController@accounts')
+				->name('admin.account.accounts');
 		});
 
 		/* PAYMENTS */

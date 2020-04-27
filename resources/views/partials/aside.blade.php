@@ -5,12 +5,13 @@
   =============================== -->
   <div class="bg-light shadow-sm rounded text-center p-3 mb-4">
     <div class="profile-thumb mt-3 mb-4"> <img class="rounded-circle" src="{{auth()->user()->pathAttachment()}}" alt="">
-      <div class="profile-thumb-edit custom-file bg-primary text-white" data-toggle="tooltip" title="Change Profile Picture"> <i class="fas fa-camera position-absolute"></i>
-        <input type="file" class="custom-file-input" id="customFile">
+      <div class="profile-thumb-edit custom-file bg-primary text-white" data-toggle="tooltip" title="Cambiar imagen de perfil">
+        <i class="fas fa-camera position-absolute"></i>
+        <input type="file" class="custom-file-input" id="customFile" name="image">
       </div>
     </div>
     <p class="text-3 font-weight-500 mb-2">Hola, {{auth()->user()->name}}</p>
-    <p class="mb-2"><a href="profile.html" class="text-5 text-light" data-toggle="tooltip" title="Edit Profile"><i class="fas fa-edit"></i></a></p>
+    <p class="mb-2"><a href="{{route('user.profile')}}" class="text-5 text-light" data-toggle="tooltip" title="Edit Profile"><i class="fas fa-edit"></i></a></p>
   </div>
   <!-- Profile Details End -->
   <!-- Available Balance

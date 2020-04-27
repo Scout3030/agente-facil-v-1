@@ -24,7 +24,7 @@ class Operation extends Model {
 	const DEPOSITINPROCESS = 2;
 
 	protected $fillable = [
-		'user_id', 'operation_type_id', 'amount', 'comission', 'deposit_code', 'deposit_code_status', 'transfer_code', 'status',
+		'user_id', 'operation_type_id', 'amount', 'comission', 'deposit_code', 'deposit_code_status', 'transfer_code', 'status', 'operator_id',
 	];
 
 	public function user() {
@@ -41,6 +41,10 @@ class Operation extends Model {
 
 	public function transfers() {
 		return $this->hasMany(Transfer::class);
+	}
+
+	public function operator() {
+		return $this->belongsTo(User::class);
 	}
 
 }

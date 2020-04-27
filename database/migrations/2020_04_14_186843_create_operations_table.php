@@ -27,6 +27,8 @@ class CreateOperationsTable extends Migration {
 			$table->enum('status', [
 				\App\Operation::COMPLETED, \App\Operation::INPROCESS, \App\Operation::CANCELLED,
 			])->default(\App\Operation::INPROCESS);
+			$table->unsignedBigInteger('operator_id')->nullable();
+			$table->foreign('operator_id')->references('id')->on('users');
 			$table->timestamps();
 			$table->softDeletes();
 		});

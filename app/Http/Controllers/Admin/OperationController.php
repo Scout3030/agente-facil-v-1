@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendConfirmation;
 use App\Operation;
 use DataTables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OperationController extends Controller {
 	public function index() {
@@ -30,11 +32,12 @@ class OperationController extends Controller {
 	}
 
 	public function datatableAll() {
-		$operations = Operation::with(['payment.account.bank', 'transfers.account.bank', 'payment.bankOperation.bank', 'payment.account.user', 'transfers.account.user', 'transfers.bank'])
+		$operations = Operation::with(['operator', 'payment.account.bank', 'transfers.account.bank', 'payment.bankOperation.bank', 'payment.account.user', 'transfers.account.user', 'transfers.bank'])
 			->orderBy('created_at', 'desc')
 			->get();
 
 		return DataTables::of($operations)
+			->editColumn('operator', '{{$operator != null ? $operator["name"] : ""}}')
 			->addColumn('operation', 'admin.operation.datatable.operation')
 			->addColumn('from', 'admin.operation.datatable.from')
 			->addColumn('deposit', 'admin.operation.datatable.deposit-all')
@@ -47,7 +50,7 @@ class OperationController extends Controller {
 
 	public function acreditDeposit(Request $request) {
 		$request->merge(['deposit_code_status' => Operation::DEPOSITDONE]);
-		// dd($request->all());
+		$request->merge(['operator_id' => auth()->user()->id]);
 		$operation = Operation::whereId($request->id)->first();
 		$operation->fill($request->input())->save();
 		return back();
@@ -78,5 +81,21 @@ class OperationController extends Controller {
 
 	public function all() {
 		return view('admin.operation.all');
+	}
+
+	public function sendConfirmationMessage() {
+		if (\request()->ajax()) {
+			$operation = Operation::findOrFail(\request()->id);
+			$operation->load(['user']);
+			// return $operation;
+			try {
+				Mail::to($operation->user->email)->send(new SendConfirmation($operation));
+				$success = true;
+			} catch (\Exception $exception) {
+				$success = false;
+			}
+			return response()->json(['res' => $success]);
+		}
+
 	}
 }
