@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Account;
+use App\BankAccount;
 use Illuminate\Http\Request;
 
-class AccountController extends Controller {
+class BankAccountController extends Controller {
 	public function getAccounts(Request $request) {
-		$accounts = Account::whereBankId($request->bankId)->whereUserId(auth()->user()->id)->get();
+		$accounts = BankAccount::whereBankId($request->bankId)->whereUserId(auth()->user()->id)->get();
 		return response()->json($accounts);
 	}
 
 	public function store(Request $request) {
 		$request->merge(['user_id' => auth()->user()->id]);
-		Account::create($request->input());
+		BankAccount::create($request->input());
 		return back();
 	}
 

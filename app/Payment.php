@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Account;
+use App\BankAccount;
 use App\BankOperation;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +13,7 @@ class Payment extends Model {
 	];
 
 	public function account() {
-		return $this->belongsTo(Account::class);
+		return $this->belongsTo(BankAccount::class);
 	}
 
 	public function bankOperation() {

@@ -2,8 +2,8 @@
 
 namespace App;
 
-use App\Account;
 use App\Bank;
+use App\BankAccount;
 use Illuminate\Database\Eloquent\Model;
 
 class Transfer extends Model {
@@ -13,7 +13,7 @@ class Transfer extends Model {
 	];
 
 	public function account() {
-		return $this->belongsTo(Account::class);
+		return $this->belongsTo(BankAccount::class);
 	}
 
 	public function bank() {

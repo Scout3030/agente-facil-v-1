@@ -27,7 +27,10 @@ class HomeController extends Controller {
 			return redirect()->action('OperationController@transfer');
 		}
 
-		$banks = Bank::orderBy('name', 'asc')->whereStatus(Bank::PUBLISHED)->get();
+		$banks = Bank::with(['accounts'])->whereHas('accounts', function ($q) {
+			$q->where('user_id', 1);
+		})->orderBy('name', 'asc')->whereStatus(Bank::PUBLISHED)->get();
+
 		return view('home', compact('banks'));
 	}
 

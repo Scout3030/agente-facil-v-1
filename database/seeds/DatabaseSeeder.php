@@ -230,11 +230,11 @@ class DatabaseSeeder extends Seeder {
 		// factory(\App\OperationType::class, 1)->create(['type' => 'transfer']);
 		// factory(\App\OperationType::class, 1)->create(['type' => 'payment']);
 
-		// factory(\App\Account::class, 1)->create([
+		// factory(\App\BankAccount::class, 1)->create([
 		// 	'user_id' => 1,
 		// 	'bank_id' => 1,
 		// ]);
-		// factory(\App\Account::class, 50)->create();
+		// factory(\App\BankAccount::class, 50)->create();
 
 		// factory(\App\Operation::class, 25)->create(['operation_type_id' => \App\OperationType::PAYMENT])
 		// 	->each(function (\App\Operation $u) {

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Account;
 use App\Bank;
+use App\BankAccount;
 use App\Mail\NewOperation;
 use App\Operation;
 use App\OperationType;
@@ -14,18 +14,22 @@ use Illuminate\Support\Facades\Mail;
 
 class OperationController extends Controller {
 	public function transfer() {
-		$banks = Bank::orderBy('name', 'asc')->whereStatus(Bank::PUBLISHED)->get();
+		$banks = Bank::with(['accounts'])->whereHas('accounts', function ($q) {
+			$q->where('user_id', 1);
+		})->orderBy('name', 'asc')->whereStatus(Bank::PUBLISHED)->get();
 		return view('operation.transfer', compact('banks'));
 	}
 
 	public function payment() {
-		$banks = Bank::orderBy('name', 'asc')->whereStatus(Bank::PUBLISHED)->get();
+		$banks = Bank::with(['accounts'])->whereHas('accounts', function ($q) {
+			$q->where('user_id', 1);
+		})->orderBy('name', 'asc')->whereStatus(Bank::PUBLISHED)->get();
 		return view('operation.payment', compact('banks'));
 	}
 
 	public function depositCreate(Request $request) {
 		session(['deposit' => true]);
-		$account = Account::with(['bank'])
+		$account = BankAccount::with(['bank'])
 			->whereBankId($request->bankId)
 			->whereUserId(1)
 			->first();

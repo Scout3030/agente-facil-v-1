@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\BankAccount;
 use Illuminate\Database\Eloquent\Model;
 
 class Bank extends Model {
@@ -14,5 +15,9 @@ class Bank extends Model {
 
 	public function pathAttachment() {
 		return "/images/banks/" . $this->logo;
+	}
+
+	public function accounts() {
+		return $this->hasMany(BankAccount::class);
 	}
 }

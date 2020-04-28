@@ -15,8 +15,8 @@ class CreatePaymentsTable extends Migration {
 			$table->id();
 			$table->unsignedBigInteger('operation_id');
 			$table->foreign('operation_id')->references('id')->on('operations');
-			$table->unsignedBigInteger('account_id');
-			$table->foreign('account_id')->references('id')->on('accounts');
+			$table->unsignedBigInteger('bank_account_id');
+			$table->foreign('bank_account_id')->references('id')->on('bank_accounts');
 			$table->unsignedBigInteger('bank_operation_id');
 			$table->foreign('bank_operation_id')->references('id')->on('bank_operations');
 			$table->string('code');

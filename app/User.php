@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Account;
+use App\BankAccount;
 use App\Operation;
 use App\Role;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -55,6 +55,6 @@ class User extends Authenticatable {
 	}
 
 	public function accounts() {
-		return $this->hasMany(Account::class);
+		return $this->hasMany(BankAccount::class);
 	}
 }
