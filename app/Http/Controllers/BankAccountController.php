@@ -17,8 +17,8 @@ class BankAccountController extends Controller {
 		return back();
 	}
 
-	public function destroy(Account $account) {
-		$account->delete();
+	public function destroy(BankAccount $bankAccount) {
+		$bankAccount->delete();
 		return back();
 	}
 }

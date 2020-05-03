@@ -58,12 +58,15 @@ class OperationController extends Controller {
 
 	public function show() {
 		if (\request()->ajax()) {
-			$operation = Operation::with(['payment', 'transfers'])->whereId(\request('id'))->first();
+			$operation = Operation::with([
+				'payment',
+				'transfer',
+			])->whereId(\request('id'))->first();
 			if ($operation->operation_type_id == OperationType::TRANSFER) {
-				$description = 'Transferencia desde ' . $operation->transfers[0]->account->bank->name . ' hasta ' . $operation->transfers[1]->account->bank->name;
+				$description = 'Transferencia desde ' . $operation->transfer->fromAccount->bank->name . ' hasta ' . $operation->transfer->toAccount->bank->name;
 			}
 			if ($operation->operation_type_id == OperationType::PAYMENT) {
-				$description = 'Pago al la institución ' . $operation->payment->bankOperation->name . ' por medio del banco ' . $operation->payment->account->bank->name;
+				$description = 'Pago al la institución ' . $operation->payment->bankOperation->name . ' por medio del banco ' . $operation->payment->bankAccount->bank->name;
 			}
 
 			return response()->json([
@@ -85,7 +88,7 @@ class OperationController extends Controller {
 
 		$request->merge(['user_id' => auth()->user()->id]);
 		$request->merge(['status' => \App\Operation::INPROCESS]);
-		$request->merge(['comission' => $request->amount > 500 ? 2 : 1]);
+		$request->merge(['comission' => $request->amount <= 200 ? 1 : 2]);
 
 		if ($request->operation_type_id == Operation::TRANSFER) {
 
@@ -101,8 +104,9 @@ class OperationController extends Controller {
 
 				$fromAccount = BankAccount::with(['bank'])->findOrFail($request->from);
 				$toAccount = BankAccount::with(['bank', 'user'])->findOrFail($request->to);
-				// dd($fromAccount);
+
 				$text = 'Hola,%20quiero%20hacer%20una%20transferencia%20de%20S/' . $request->amount . '%20a%20mi%20cuenta%20' . $toAccount->bank->name . '%20' . $toAccount->number . '%20a%20nombre%20de%20' . $toAccount->user->name . '%20desde%20mi%20otra%20cuenta%20' . $fromAccount->bank->name . '%20' . $fromAccount->number . '.%20';
+
 			}
 
 			if ($request->has('account_number')) {
@@ -140,15 +144,15 @@ class OperationController extends Controller {
 
 		$fromAccount = BankAccount::with(['bank'])->findOrFail($request->from);
 
-		$depositAccount = BankAccount::with(['bank', 'user'])->whereUserId(1)->whereBankId($fromAccount->id)->get()->first();
+		$depositAccount = BankAccount::with(['bank', 'user'])->whereUserId(1)->whereBankId($fromAccount->bank->id)->get()->first();
 
 		// Mail::to('roberth@gmail.com')->send(new NewOperation($operation));
 		$finalText = 'La%20transferencia%20de%20los%20fondos%20la%20realizo%20al%20banco%20' . $depositAccount->bank->name . ',%20cuenta%20' . $depositAccount->number . '%20(' . $depositAccount->user->name . '),%20el%20numero%20de%20operacion%20es%20el%20' . $request->deposit_code . '.';
 
 		$whatAppUrl = 'https://api.whatsapp.com/send?phone=51944001458&text=' . $text . $finalText;
 
-		session(['deposit' => false]);
-		return redirect($whatAppUrl);
+		// session(['deposit' => false]);
+		// return redirect($whatAppUrl);
 		return view('operation.confirm');
 	}
 

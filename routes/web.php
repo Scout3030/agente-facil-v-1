@@ -60,13 +60,19 @@ Route::group(['middleware' => ["auth"]], function () {
 
 	Route::get('/historial', 'OperationController@history')->name('operation.history');
 
-	Route::get('/perfil', 'UserController@profile')->name('user.profile');
-	Route::put('/perfil', 'UserController@profileUpdate')->name('user.profile.update');
+	/* USER PROFILE */
+	Route::group(['prefix' => "perfil"], function () {
+		Route::get('/', 'UserController@profile')->name('user.profile');
+		Route::put('/', 'UserController@profileUpdate')->name('user.profile.update');
+	});
 
-	Route::get('/mis-cuentas', 'UserController@accounts')->name('user.accounts');
+	/* USER ACCOUNTS */
+	Route::group(['prefix' => "mis-cuentas"], function () {
 
-	Route::post('/mis-cuentas', 'BankAccountController@store')->name('user.accounts.store');
-	Route::delete('/mis-cuentas/{bankAccount}', 'BankAccountController@destroy')->name('user.accounts.destroy');
+		Route::get('/', 'UserController@accounts')->name('user.accounts');
+		Route::post('/', 'BankAccountController@store')->name('user.accounts.store');
+		Route::delete('/{bankAccount}', 'BankAccountController@destroy')->name('user.accounts.destroy');
+	});
 
 	Route::group(['prefix' => "dashboard", "middleware" => [sprintf("role:%s", \App\Role::ADMIN)]], function () {
 

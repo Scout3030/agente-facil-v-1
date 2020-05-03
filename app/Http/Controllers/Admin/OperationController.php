@@ -15,7 +15,19 @@ class OperationController extends Controller {
 	}
 
 	public function datatable() {
-		$operations = Operation::with(['payment.account.bank', 'transfers.account.bank', 'payment.bankOperation.bank', 'payment.account.user', 'transfers.account.user', 'transfers.bank'])
+		$operations = Operation::with([
+			'payment.bankAccount' => function ($q) {
+				$q->with(['bank', 'user']);
+			},
+			'payment.bankOperation.bank',
+			'transfer.fromAccount' => function ($q) {
+				$q->with(['bank', 'user']);
+			},
+			'transfer.toAccount' => function ($q) {
+				$q->with(['bank', 'user']);
+			},
+			'transfer.bank',
+		])
 			->whereStatus(Operation::INPROCESS)
 			->orderBy('created_at', 'asc')
 			->get();
@@ -32,7 +44,20 @@ class OperationController extends Controller {
 	}
 
 	public function datatableAll() {
-		$operations = Operation::with(['operator', 'payment.account.bank', 'transfers.account.bank', 'payment.bankOperation.bank', 'payment.account.user', 'transfers.account.user', 'transfers.bank'])
+		$operations = Operation::with([
+			'operator',
+			'payment.bankAccount' => function ($q) {
+				$q->with(['bank', 'user']);
+			},
+			'payment.bankOperation.bank',
+			'transfer.fromAccount' => function ($q) {
+				$q->with(['bank', 'user']);
+			},
+			'transfer.toAccount' => function ($q) {
+				$q->with(['bank', 'user']);
+			},
+			'transfer.bank',
+		])
 			->orderBy('created_at', 'desc')
 			->get();
 

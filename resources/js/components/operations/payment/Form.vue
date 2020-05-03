@@ -145,14 +145,14 @@
 			},
 			setOperationAmount(){
 				this.setAmount(this.operationAmount)
-				if (this.operationAmount >= 10 && this.operationAmount <= 150) {
+				if (this.operationAmount >= 10 && this.operationAmount <= 500) {
 					this.setComission(1)
 				}
-				if (this.operationAmount >= 151 && this.operationAmount <= 500) {
+				if (this.operationAmount > 500 && this.operationAmount <= 1000) {
 					this.setComission(2)
 				}
-				if (this.operationAmount >= 501 && this.operationAmount <= 997) {
-					this.setComission(2)
+				if (this.operationAmount > 1000 && this.operationAmount <= 1500) {
+					this.setComission(3)
 				}
 			},
 			setOperationFromAccount(){

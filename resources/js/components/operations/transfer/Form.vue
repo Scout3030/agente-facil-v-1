@@ -158,10 +158,10 @@
 			},
 			setOperationAmount(){
 				this.setAmount(this.operationAmount)
-				if (this.operationAmount >= 10 && this.operationAmount <= 150) {
+				if (this.operationAmount >= 10 && this.operationAmount <= 200) {
 					this.setComission(1)
 				}
-				if (this.operationAmount >= 151 && this.operationAmount <= 997) {
+				if (this.operationAmount > 200 && this.operationAmount <= 997) {
 					this.setComission(2)
 				}
 			},

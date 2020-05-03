@@ -104,7 +104,14 @@
                   </div>
 
                   <div class="col-3 col-sm-2 text-left text-3">
-                    <span class="text-nowrap">{{ucfirst($operation->operationType->type)}}</span>
+                    @if($operation->operationType->id === App\Operation::TRANSFER)
+                    <span class="text-nowrap">T. Interbancaria</span>
+                    @endif
+
+                    @if($operation->operationType->id === App\Operation::PAYMENT)
+                    <span class="text-nowrap">Pago</span>
+                    @endif
+
                   </div>
 
                   @if($operation->transfer != null)
@@ -218,6 +225,7 @@
             id: id
         },
         success: (res) => {
+          console.log("res", res);
           var description = (res.type == {{App\OperationType::TRANSFER}} ? 'Transferencia' : 'Pago')
           modal.find('h3').text(description);
           modal.find('.total-amount').text(res.totalAmount);

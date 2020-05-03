@@ -3,13 +3,13 @@
 
 	@if($operation_type_id == App\Operation::TRANSFER)
 
-	Banco: {{$transfers[0]['account']['bank']['name']}}
+	Banco: {{$transfer['from_account']['bank']['name']}}
 
 	@endif
 
 	@if($operation_type_id == App\Operation::PAYMENT)
 
-	Banco: {{$payment['account']['bank']['name']}}
+	Banco: {{$payment['bank_account']['bank']['name']}}
 
 	@endif
 	<br>

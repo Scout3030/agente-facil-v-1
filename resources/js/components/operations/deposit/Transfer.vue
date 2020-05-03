@@ -19,18 +19,18 @@
 			<input v-if="isMine == false" type="hidden" name="name" :value="ownerName">
 			<input v-if="isMine == false" type="hidden" name="bank_id" :value="to.id">
 			<div class="alert alert-info rounded shadow-sm">
+				<div class="row">
+                  <p class="col-sm-5 opacity-7 text-sm-right mb-0">Banco de origen:</p>
+                  <p class="col-sm-7">{{from.name}}</p>
+                  <p class="col-sm-5 opacity-7 text-sm-right">Cuenta de origen:</p>
+                  <p class="col-sm-7">{{fromAccount.number}}</p>
+                </div>
                 <div class="row">
                   <p class="col-sm-5 opacity-7 text-sm-right">Banco de destino:</p>
                   <p class="col-sm-7">{{to.name}}</p>
                   <p class="col-sm-5 opacity-7 text-sm-right">Cuenta de destino :</p>
                   <p v-if="isMine == true"  class="col-sm-7">{{toAccount.number}}</p>
                   <p v-else class="col-sm-7">{{accountNumber}} (terceros)</p>
-                </div>
-                <div class="row">
-                  <p class="col-sm-5 opacity-7 text-sm-right mb-0">Banco de origen:</p>
-                  <p class="col-sm-7">{{from.name}}</p>
-                  <p class="col-sm-5 opacity-7 text-sm-right">Cuenta de origen:</p>
-                  <p class="col-sm-7">{{fromAccount.number}}</p>
                 </div>
                 <div class="row">
                   <p class="col-sm-5 opacity-7 text-sm-right">Monto:</p>

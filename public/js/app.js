@@ -2983,16 +2983,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setOperationAmount: function setOperationAmount() {
       this.setAmount(this.operationAmount);
 
-      if (this.operationAmount >= 10 && this.operationAmount <= 150) {
+      if (this.operationAmount >= 10 && this.operationAmount <= 500) {
         this.setComission(1);
       }
 
-      if (this.operationAmount >= 151 && this.operationAmount <= 500) {
+      if (this.operationAmount > 500 && this.operationAmount <= 1000) {
         this.setComission(2);
       }
 
-      if (this.operationAmount >= 501 && this.operationAmount <= 997) {
-        this.setComission(2);
+      if (this.operationAmount > 1000 && this.operationAmount <= 1500) {
+        this.setComission(3);
       }
     },
     setOperationFromAccount: function setOperationFromAccount() {
@@ -3326,11 +3326,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setOperationAmount: function setOperationAmount() {
       this.setAmount(this.operationAmount);
 
-      if (this.operationAmount >= 10 && this.operationAmount <= 150) {
+      if (this.operationAmount >= 10 && this.operationAmount <= 200) {
         this.setComission(1);
       }
 
-      if (this.operationAmount >= 151 && this.operationAmount <= 997) {
+      if (this.operationAmount > 200 && this.operationAmount <= 997) {
         this.setComission(2);
       }
     },
@@ -8345,6 +8345,26 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "alert alert-info rounded shadow-sm" }, [
             _c("div", { staticClass: "row" }, [
+              _c(
+                "p",
+                { staticClass: "col-sm-5 opacity-7 text-sm-right mb-0" },
+                [_vm._v("Banco de origen:")]
+              ),
+              _vm._v(" "),
+              _c("p", { staticClass: "col-sm-7" }, [
+                _vm._v(_vm._s(_vm.from.name))
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "col-sm-5 opacity-7 text-sm-right" }, [
+                _vm._v("Cuenta de origen:")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "col-sm-7" }, [
+                _vm._v(_vm._s(_vm.fromAccount.number))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
               _c("p", { staticClass: "col-sm-5 opacity-7 text-sm-right" }, [
                 _vm._v("Banco de destino:")
               ]),
@@ -8364,26 +8384,6 @@ var render = function() {
                 : _c("p", { staticClass: "col-sm-7" }, [
                     _vm._v(_vm._s(_vm.accountNumber) + " (terceros)")
                   ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c(
-                "p",
-                { staticClass: "col-sm-5 opacity-7 text-sm-right mb-0" },
-                [_vm._v("Banco de origen:")]
-              ),
-              _vm._v(" "),
-              _c("p", { staticClass: "col-sm-7" }, [
-                _vm._v(_vm._s(_vm.from.name))
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "col-sm-5 opacity-7 text-sm-right" }, [
-                _vm._v("Cuenta de origen:")
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "col-sm-7" }, [
-                _vm._v(_vm._s(_vm.fromAccount.number))
-              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
@@ -31253,7 +31253,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var baseURL = 'https://agentefacil.com/';
+var baseURL = 'https://agente.dev/';
 axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = baseURL;
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_2___default.a, axios__WEBPACK_IMPORTED_MODULE_1___default.a);
 

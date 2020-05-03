@@ -42,8 +42,8 @@
                     </div>
                   </div>
                   <div class="account-card-overlay rounded">
-                    <a href="#" data-target="#bank-account-details" data-toggle="modal" class="text-light btn-link mx-2">
-                      <span class="mr-1"><i class="fas fa-share"></i></span>Más detales
+                    <a href="#" data-target="#bank-account-details-{{$account->id}}" data-toggle="modal" class="text-light btn-link mx-2">
+                      <span class="mr-1"><i class="fas fa-share"></i></span>Más detalles
                     </a>
                     <a href="{{ route('user.accounts.destroy', $account->id) }}"
                        class="text-light btn-link mx-2"

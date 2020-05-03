@@ -1,6 +1,6 @@
 <!-- Edit Bank Account Details Modal
 ======================================== -->
-<div id="bank-account-details" class="modal fade" role="dialog" aria-hidden="true">
+<div id="bank-account-details-{{$account->id}}" class="modal fade" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered transaction-details" role="document">
     <div class="modal-content">
       <div class="modal-body">

@@ -1,10 +1,10 @@
 @if($operation_type_id == App\Operation::TRANSFER)
 
 <div class="card text-white card-body bg-primary">
-	<h5 class="text-white card-title">Banco: {{$transfers[0]['account']['bank']['name']}}</h5>
-	Cuenta: {{$transfers[0]['account']['number']}}
+	<h5 class="text-white card-title">Banco: {{$transfer['from_account']['bank']['name']}}</h5>
+	Cuenta: {{$transfer['from_account']['number']}}
 	<br>
-	Usuario: {{$transfers[0]['account']['name']}}
+	Usuario: {{$transfer['from_account']['name']}}
 </div>
 
 @endif
@@ -12,10 +12,10 @@
 @if($operation_type_id == App\Operation::PAYMENT)
 
 <div class="card text-white card-body bg-primary">
-	<h5 class="text-white card-title">Banco: {{$payment['account']['bank']['name']}}</h5>
-	Cuenta: {{$payment['account']['number']}}
+	<h5 class="text-white card-title">Banco: {{$payment['bank_account']['bank']['name']}}</h5>
+	Cuenta: {{$payment['bank_account']['number']}}
 	<br>
-	Usuario: {{$payment['account']['name']}}
+	Usuario: {{$payment['bank_account']['name']}}
 </div>
 
 @endif
