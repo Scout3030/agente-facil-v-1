@@ -2,7 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-const baseURL = 'https://agente.dev/';
+const baseURL = 'https://agentefacil.com/';
 
 axios.defaults.baseURL = baseURL;
  

@@ -13,5 +13,7 @@ $factory->define(Bank::class, function (Faker $faker) {
 		'logo' => $name . '_logo.png',
 		'icon' => $faker->word,
 		'status' => $faker->randomElement(array(Bank::PUBLISHED, Bank::UNPUBLISHED)),
+		'enable_deposit' => $faker->randomElement(array(Bank::YES, Bank::NO)),
+		'enable_transfer' => $faker->randomElement(array(Bank::YES, Bank::NO)),
 	];
 });

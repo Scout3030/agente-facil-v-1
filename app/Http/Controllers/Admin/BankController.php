@@ -69,4 +69,19 @@ class BankController extends Controller {
 		return response()->json('ok', 200);
 	}
 
+	public function depositStatus(Request $request) {
+
+		$bank = Bank::whereId($request->bankId)->first();
+		$bank->enable_deposit == Bank::YES ? $request->merge(['enable_deposit' => Bank::NO]) : $request->merge(['enable_deposit' => Bank::YES]);
+		$bank->fill($request->input())->save();
+		return response()->json('ok', 200);
+	}
+
+	public function transferStatus(Request $request) {
+		$bank = Bank::whereId($request->bankId)->first();
+		$bank->enable_transfer == Bank::YES ? $request->merge(['enable_transfer' => Bank::NO]) : $request->merge(['enable_transfer' => Bank::YES]);
+		$bank->fill($request->input())->save();
+		return response()->json('ok', 200);
+	}
+
 }

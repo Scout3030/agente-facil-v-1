@@ -115,8 +115,9 @@ Route::group(['middleware' => ["auth"]], function () {
 			Route::delete('/{bank}', 'Admin\BankController@destroy')
 				->name('admin.bank.destroy');
 
-			Route::post('/status', 'Admin\BankController@status')
-				->name('admin.bank.status');
+			Route::post('/status', 'Admin\BankController@status');
+			Route::post('/deposit-status', 'Admin\BankController@depositStatus');
+			Route::post('/transfer-status', 'Admin\BankController@transferStatus');
 		});
 
 		/* ACCOUNTS*/

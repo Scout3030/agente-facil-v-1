@@ -70,7 +70,7 @@
 
 								<option data-icon="bank bank1 mr-1" selected="selected" value="0">Seleccionar banco de emisión</option>
 
-								<option v-for="item in banks" :data-icon="icon(item.icon)" :data-subtext="item.name | capitalize" :value="item">{{item.name | capitalize}}</option>
+								<option v-for="item in banks" v-if="item.enable_deposit == 1" :data-icon="icon(item.icon)" :data-subtext="item.name | capitalize" :value="item">{{item.name | capitalize}}</option>
 
 							</optgroup>
 						</select>

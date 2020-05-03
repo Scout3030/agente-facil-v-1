@@ -20,6 +20,12 @@ class CreateBanksTable extends Migration {
 				\App\Bank::PUBLISHED, \App\Bank::UNPUBLISHED,
 			])->default(\App\Bank::UNPUBLISHED);
 			$table->string('icon');
+			$table->enum('enable_deposit', [
+				\App\Bank::YES, \App\Bank::NO,
+			]);
+			$table->enum('enable_transfer', [
+				\App\Bank::YES, \App\Bank::NO,
+			]);
 			$table->timestamps();
 			$table->softDeletes();
 		});

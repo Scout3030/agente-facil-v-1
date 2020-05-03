@@ -2090,6 +2090,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2140,7 +2160,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    getBanks: function getBanks() {
+    changeDepositStatus: function changeDepositStatus(bankId) {
+      var _this3 = this;
+
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var _yield$Vue$axios2, data;
 
@@ -2150,13 +2172,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.next = 2;
                 return Vue.axios({
-                  url: "/api/admin/bank"
+                  method: 'POST',
+                  url: '/dashboard/bank/deposit-status',
+                  data: {
+                    "_token": document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    bankId: bankId
+                  }
                 });
 
               case 2:
                 _yield$Vue$axios2 = _context2.sent;
                 data = _yield$Vue$axios2.data;
-                return _context2.abrupt("return", data);
+
+                _this3.getBanks().then(function (response) {
+                  _this3.banks = response;
+                });
 
               case 5:
               case "end":
@@ -2164,6 +2194,68 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2);
+      }))();
+    },
+    changeTransferStatus: function changeTransferStatus(bankId) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var _yield$Vue$axios3, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return Vue.axios({
+                  method: 'POST',
+                  url: '/dashboard/bank/transfer-status',
+                  data: {
+                    "_token": document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    bankId: bankId
+                  }
+                });
+
+              case 2:
+                _yield$Vue$axios3 = _context3.sent;
+                data = _yield$Vue$axios3.data;
+
+                _this4.getBanks().then(function (response) {
+                  _this4.banks = response;
+                });
+
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    getBanks: function getBanks() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var _yield$Vue$axios4, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return Vue.axios({
+                  url: "/api/admin/bank"
+                });
+
+              case 2:
+                _yield$Vue$axios4 = _context4.sent;
+                data = _yield$Vue$axios4.data;
+                return _context4.abrupt("return", data);
+
+              case 5:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
       }))();
     },
     redirect: function redirect(bankId) {
@@ -6834,6 +6926,38 @@ var render = function() {
                       _vm._v("Inactivo")
                     ])
                   ])
+                : _vm._e(),
+              _vm._v(" "),
+              bank.enable_deposit == 1
+                ? _c("div", [
+                    _c("div", { staticClass: "badge badge-success" }, [
+                      _vm._v("Acepta depósitos")
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              bank.enable_deposit == 2
+                ? _c("div", [
+                    _c("div", { staticClass: "badge badge-danger" }, [
+                      _vm._v("No acepta depósitos")
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              bank.enable_transfer == 1
+                ? _c("div", [
+                    _c("div", { staticClass: "badge badge-success" }, [
+                      _vm._v("Acepta transferencias")
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              bank.enable_transfer == 2
+                ? _c("div", [
+                    _c("div", { staticClass: "badge badge-danger" }, [
+                      _vm._v("No acepta transferencias")
+                    ])
+                  ])
                 : _vm._e()
             ]),
             _vm._v(" "),
@@ -6897,6 +7021,88 @@ var render = function() {
                           }
                         },
                         [_vm._v("Activar")]
+                      )
+                    : _vm._e()
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "btn-group-sm btn-group",
+                  attrs: { role: "group" }
+                },
+                [
+                  bank.enable_deposit == 1
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn-shadow btn btn-danger",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.changeDepositStatus(bank.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Desac. depósitos")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  bank.enable_deposit == 2
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn-shadow btn btn-success",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.changeDepositStatus(bank.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Act. depósitos")]
+                      )
+                    : _vm._e()
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "btn-group-sm btn-group",
+                  attrs: { role: "group" }
+                },
+                [
+                  bank.enable_transfer == 1
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn-shadow btn btn-danger",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.changeTransferStatus(bank.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Desac. transferencias")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  bank.enable_transfer == 2
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn-shadow btn btn-success",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.changeTransferStatus(bank.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Act. transferencias")]
                       )
                     : _vm._e()
                 ]
@@ -7383,19 +7589,25 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _vm._l(_vm.banks, function(item) {
-                            return _c(
-                              "option",
-                              {
-                                attrs: {
-                                  "data-icon": _vm.icon(item.icon),
-                                  "data-subtext": _vm._f("capitalize")(
-                                    item.name
-                                  )
-                                },
-                                domProps: { value: item }
-                              },
-                              [_vm._v(_vm._s(_vm._f("capitalize")(item.name)))]
-                            )
+                            return item.enable_deposit == 1
+                              ? _c(
+                                  "option",
+                                  {
+                                    attrs: {
+                                      "data-icon": _vm.icon(item.icon),
+                                      "data-subtext": _vm._f("capitalize")(
+                                        item.name
+                                      )
+                                    },
+                                    domProps: { value: item }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm._f("capitalize")(item.name))
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
                           })
                         ],
                         2
@@ -7529,19 +7741,25 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _vm._l(_vm.banks, function(item) {
-                            return _c(
-                              "option",
-                              {
-                                attrs: {
-                                  "data-icon": _vm.icon(item.icon),
-                                  "data-subtext": _vm._f("capitalize")(
-                                    item.name
-                                  )
-                                },
-                                domProps: { value: item }
-                              },
-                              [_vm._v(_vm._s(_vm._f("capitalize")(item.name)))]
-                            )
+                            return item.enable_deposit == 1
+                              ? _c(
+                                  "option",
+                                  {
+                                    attrs: {
+                                      "data-icon": _vm.icon(item.icon),
+                                      "data-subtext": _vm._f("capitalize")(
+                                        item.name
+                                      )
+                                    },
+                                    domProps: { value: item }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm._f("capitalize")(item.name))
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
                           })
                         ],
                         2
@@ -7629,19 +7847,25 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _vm._l(_vm.banks, function(item) {
-                            return _c(
-                              "option",
-                              {
-                                attrs: {
-                                  "data-icon": _vm.icon(item.icon),
-                                  "data-subtext": _vm._f("capitalize")(
-                                    item.name
-                                  )
-                                },
-                                domProps: { value: item }
-                              },
-                              [_vm._v(_vm._s(_vm._f("capitalize")(item.name)))]
-                            )
+                            return item.enable_transfer == 1
+                              ? _c(
+                                  "option",
+                                  {
+                                    attrs: {
+                                      "data-icon": _vm.icon(item.icon),
+                                      "data-subtext": _vm._f("capitalize")(
+                                        item.name
+                                      )
+                                    },
+                                    domProps: { value: item }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm._f("capitalize")(item.name))
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
                           })
                         ],
                         2
@@ -8714,19 +8938,25 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _vm._l(_vm.banks, function(item) {
-                            return _c(
-                              "option",
-                              {
-                                attrs: {
-                                  "data-icon": _vm.icon(item.icon),
-                                  "data-subtext": _vm._f("capitalize")(
-                                    item.name
-                                  )
-                                },
-                                domProps: { value: item }
-                              },
-                              [_vm._v(_vm._s(_vm._f("capitalize")(item.name)))]
-                            )
+                            return item.enable_deposit == 1
+                              ? _c(
+                                  "option",
+                                  {
+                                    attrs: {
+                                      "data-icon": _vm.icon(item.icon),
+                                      "data-subtext": _vm._f("capitalize")(
+                                        item.name
+                                      )
+                                    },
+                                    domProps: { value: item }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm._f("capitalize")(item.name))
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
                           })
                         ],
                         2
@@ -9005,19 +9235,25 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _vm._l(_vm.banks, function(item) {
-                            return _c(
-                              "option",
-                              {
-                                attrs: {
-                                  "data-icon": _vm.icon(item.icon),
-                                  "data-subtext": _vm._f("capitalize")(
-                                    item.name
-                                  )
-                                },
-                                domProps: { value: item }
-                              },
-                              [_vm._v(_vm._s(_vm._f("capitalize")(item.name)))]
-                            )
+                            return item.enable_deposit == 1
+                              ? _c(
+                                  "option",
+                                  {
+                                    attrs: {
+                                      "data-icon": _vm.icon(item.icon),
+                                      "data-subtext": _vm._f("capitalize")(
+                                        item.name
+                                      )
+                                    },
+                                    domProps: { value: item }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm._f("capitalize")(item.name))
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
                           })
                         ],
                         2
@@ -9205,19 +9441,25 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _vm._l(_vm.banks, function(item) {
-                            return _c(
-                              "option",
-                              {
-                                attrs: {
-                                  "data-icon": _vm.icon(item.icon),
-                                  "data-subtext": _vm._f("capitalize")(
-                                    item.name
-                                  )
-                                },
-                                domProps: { value: item }
-                              },
-                              [_vm._v(_vm._s(_vm._f("capitalize")(item.name)))]
-                            )
+                            return item.enable_transfer == 1
+                              ? _c(
+                                  "option",
+                                  {
+                                    attrs: {
+                                      "data-icon": _vm.icon(item.icon),
+                                      "data-subtext": _vm._f("capitalize")(
+                                        item.name
+                                      )
+                                    },
+                                    domProps: { value: item }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm._f("capitalize")(item.name))
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
                           })
                         ],
                         2
@@ -31011,7 +31253,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var baseURL = 'https://agente.dev/';
+var baseURL = 'https://agentefacil.com/';
 axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = baseURL;
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_2___default.a, axios__WEBPACK_IMPORTED_MODULE_1___default.a);
 

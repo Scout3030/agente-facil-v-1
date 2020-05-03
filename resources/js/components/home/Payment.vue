@@ -43,7 +43,7 @@
 						<select id="youSendFrom" data-style="custom-select bg-transparent border-0" data-container="body" data-live-search="true" class="selectpicker form-control bg-transparent" required @change="setFromBank" v-model="operationFrom">
 							<optgroup label="Bancos">
 								<option data-icon="bank bank2 mr-1" data-subtext="United States dollar" selected="selected" value="0">Seleccione banco de emisión de fondos</option>
-								<option v-for="item in banks" :data-icon="icon(item.icon)" :data-subtext="item.name | capitalize" :value="item">{{item.name | capitalize}}</option>
+								<option v-for="item in banks" v-if="item.enable_deposit == 1" :data-icon="icon(item.icon)" :data-subtext="item.name | capitalize" :value="item">{{item.name | capitalize}}</option>
 							</optgroup>
 						</select>
 					</span> 
