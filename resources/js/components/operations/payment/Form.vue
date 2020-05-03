@@ -122,6 +122,7 @@
 			this.getServices(this.operationTo.id).then(response => {
 				this.services = response
 			})
+			this.requiredName = this.name
 		},
 		props: ['banks'],
 		methods: {
@@ -204,7 +205,7 @@
 		  	}
 		},
 		computed: {
-			...mapState('payment', ['from', 'to', 'amount', 'comission', 'fromAccount', 'operation', 'code']),
+			...mapState('payment', ['from', 'to', 'amount', 'comission', 'fromAccount', 'operation', 'code', 'name']),
 			total(){
 				return `S/${parseFloat(this.operationAmount) + parseFloat(this.comission)}`
 			}

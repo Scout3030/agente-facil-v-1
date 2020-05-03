@@ -18,7 +18,7 @@
               </p>
             </div>
           </div>
-          <div class="col-lg-6 my-auto text-center"> <img class="img-fluid shadow-lg rounded-lg" src="{{asset('assets/images/who-we-are.jpg')}}" alt=""> </div>
+          <div class="col-lg-6 my-auto text-center"> <img class="img-fluid shadow-lg rounded-lg" src="{{asset('assets/images/who-we-are2.jpg')}}" alt=""> </div>
         </div>
       </div>
     </section>
@@ -42,8 +42,14 @@
               <p class="tex-3">Brindar servicios virtuales de agente corresponsal multibanco a todo el Perú.</p>
               <h4 class="text-4 font-weight-500 mb-2">Nuestra Vision</h4>
               <p class="tex-3">Ser el agente corresponsal del Perú, brindando cada día soluciones innovadoras a nuestros usuarios.</p>
-              <h4 class="text-4 font-weight-500 mb-2">Nuestra meta</h4>
-              <p class="tex-3">Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. lisque persius interesset his et, in quot quidam mea essent possim iriure.</p>
+              <h4 class="text-4 font-weight-500 mb-2">Nuestros valores</h4>
+              <ul>
+                <li><p class="tex-3">Integridad:</p><p class="text-2">Hacemos lo correcto siempre con transparencia y honestidad.</p></li>
+                <li><p class="tex-3">Pasión por el Servicio:</p><p class="text-2">Pensamos siempre en los demás, en el cliente, dándoles soluciones ágiles.</p></li>
+                <li><p class="tex-3">Innovación:</p><p class="text-2">Hacemos las cosas de forma diferente.</p></li>
+              </ul>
+
+
             </div>
           </div>
         </div>
@@ -56,12 +62,12 @@
     <section class="section">
       <div class="container">
         <h2 class="text-9 text-center">Equipo</h2>
-        <p class="text-4 text-center mb-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        <p class="text-4 text-center mb-5">Un equipo de profesionales a tu servicio.</p>
         <div class="row">
           <div class="col-sm-6 col-md-3 text-center mb-4 mb-md-0 offset-md-3">
             <div class="team rounded d-inline-block"> <img class="img-fluid rounded" alt="" src="{{asset('assets/images/team/leader.jpg')}}">
-              <h3>Neil Patel</h3>
-              <p class="text-muted">CEO &amp; Founder</p>
+              <h3>Roberth Rodríguez</h3>
+              <p class="text-muted">CEO &amp; Fundador</p>
               <ul class="social-icons social-icons-sm d-inline-flex">
                 <li class="social-icons-facebook"><a data-toggle="tooltip" href="#" target="_blank" title="" data-original-title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
                 <li class="social-icons-twitter"><a data-toggle="tooltip" href="" target="_blank" title="" data-original-title="Twitter"><i class="fab fa-twitter"></i></a></li>
@@ -71,8 +77,8 @@
           </div>
           <div class="col-sm-6 col-md-3 text-center mb-4 mb-md-0">
             <div class="team rounded d-inline-block"> <img class="img-fluid rounded" alt="" src="{{asset('assets/images/team/leader-2.jpg')}}">
-              <h3>James Maxwell</h3>
-              <p class="text-muted">Co-Founder</p>
+              <h3>Taylor Contreras</h3>
+              <p class="text-muted">Co-Fundador</p>
               <ul class="social-icons social-icons-sm d-inline-flex">
                 <li class="social-icons-facebook"><a data-toggle="tooltip" href="" target="_blank" title="" data-original-title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
                 <li class="social-icons-twitter"><a data-toggle="tooltip" href="" target="_blank" title="" data-original-title="Twitter"><i class="fab fa-twitter"></i></a></li>
@@ -92,7 +98,7 @@
     <section class="section">
       <div class="container">
         <h2 class="text-9 text-center">Qué dice la geste sobre AGENTE FÁCIL</h2>
-        <p class="text-4 text-center mb-4">A payments experience people love to talk about</p>
+        <p class="text-4 text-center mb-4">Nuestros usuarios comentan sobre Agente Fácil</p>
         <div class="owl-carousel owl-theme" data-autoplay="true" data-nav="true" data-loop="true" data-margin="30" data-slideby="2" data-stagepadding="5" data-items-xs="1" data-items-sm="1" data-items-md="2" data-items-lg="2">
           @foreach(App\Review::all()->random(2) as $review)
             <div class="item">
@@ -118,29 +124,29 @@
           <div class="col-sm-6 col-md-3">
             <div class="featured-box text-center">
               <div class="featured-box-icon text-light mb-2"> <i class="fas fa-globe"></i> </div>
-              <h4 class="text-12 text-white mb-0">180+</h4>
-              <p class="text-4 text-white mb-0">Countries</p>
+              <h4 class="text-12 text-white mb-0">20+</h4>
+              <p class="text-4 text-white mb-0">Bancos</p>
             </div>
           </div>
           <div class="col-sm-6 col-md-3">
             <div class="featured-box text-center">
               <div class="featured-box-icon text-light mb-2"> <i class="fas fa-dollar-sign"></i> </div>
-              <h4 class="text-12 text-white mb-0">120</h4>
-              <p class="text-4 text-white mb-0">Currencies</p>
+              <h4 class="text-12 text-white mb-0">1200</h4>
+              <p class="text-4 text-white mb-0">Transferencias</p>
             </div>
           </div>
           <div class="col-sm-6 col-md-3 mt-4 mt-md-0">
             <div class="featured-box text-center">
               <div class="featured-box-icon text-light mb-2"> <i class="fas fa-users"></i> </div>
-              <h4 class="text-12 text-white mb-0">2.5M</h4>
-              <p class="text-4 text-white mb-0">Users</p>
+              <h4 class="text-12 text-white mb-0">2M</h4>
+              <p class="text-4 text-white mb-0">Usuarios</p>
             </div>
           </div>
           <div class="col-sm-6 col-md-3 mt-4 mt-md-0">
             <div class="featured-box text-center">
               <div class="featured-box-icon text-light mb-2"> <i class="far fa-life-ring"></i> </div>
               <h4 class="text-12 text-white mb-0">24X7</h4>
-              <p class="text-4 text-white mb-0">Support</p>
+              <p class="text-4 text-white mb-0">Soporte</p>
             </div>
           </div>
         </div>

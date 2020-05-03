@@ -6,7 +6,7 @@
 ============================================= -->
 <div id="content" class="py-4">
 	<div class="container">
-		<h2 class="font-weight-400 text-center mt-3 mb-4">Deposit Money</h2>
+		<h2 class="font-weight-400 text-center mt-3 mb-4">Solo tomará unos minutos</h2>
 		<div class="row">
 			<div class="col-md-8 col-lg-6 col-xl-5 mx-auto">
 

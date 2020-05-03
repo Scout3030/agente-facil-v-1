@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model {
 
 	protected $fillable = [
-		'operation_id', 'account_id', 'bank_operation_id', 'code', 'name',
+		'operation_id', 'bank_account_id', 'bank_operation_id', 'code', 'name',
 	];
 
-	public function account() {
+	public function bankAccount() {
 		return $this->belongsTo(BankAccount::class);
 	}
 

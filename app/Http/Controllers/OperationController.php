@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Bank;
 use App\BankAccount;
-use App\Mail\NewOperation;
+use App\BankOperation;
 use App\Operation;
 use App\OperationType;
 use App\Payment;
 use App\Transfer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class OperationController extends Controller {
 	public function transfer() {
@@ -41,17 +40,19 @@ class OperationController extends Controller {
 
 		$operations = Operation::with([
 			'operationType',
-			'payment.account' => function ($q) {
-				$q->withTrashed();
+			'payment.bankAccount' => function ($q) {
+				$q->with(['bank'])->withTrashed();
 			},
-			'transfers.account' => function ($q) {
-				$q->withTrashed();
+			'transfer.fromAccount' => function ($q) {
+				$q->with(['bank'])->withTrashed();
+			},
+			'transfer.toAccount' => function ($q) {
+				$q->with(['bank'])->withTrashed();
 			},
 		])
 			->whereUserId(auth()->user()->id)
 			->orderBy('created_at', 'desc')
 			->paginate(10);
-
 		return view('operation.history', compact('operations'));
 	}
 
@@ -89,27 +90,35 @@ class OperationController extends Controller {
 		if ($request->operation_type_id == Operation::TRANSFER) {
 
 			$operation = Operation::create($request->input());
-			Transfer::create([
-				'operation_id' => $operation->id,
-				'account_id' => $request->from,
-			]);
 
 			if ($request->has('to')) {
-
+				// dd($request->all());
 				Transfer::create([
 					'operation_id' => $operation->id,
-					'account_id' => $request->to,
+					'from_bank_account_id' => $request->from,
+					'to_bank_account_id' => $request->to,
 				]);
+
+				$fromAccount = BankAccount::with(['bank'])->findOrFail($request->from);
+				$toAccount = BankAccount::with(['bank', 'user'])->findOrFail($request->to);
+				// dd($fromAccount);
+				$text = 'Hola,%20quiero%20hacer%20una%20transferencia%20de%20S/' . $request->amount . '%20a%20mi%20cuenta%20' . $toAccount->bank->name . '%20' . $toAccount->number . '%20a%20nombre%20de%20' . $toAccount->user->name . '%20desde%20mi%20otra%20cuenta%20' . $fromAccount->bank->name . '%20' . $fromAccount->number . '.%20';
 			}
+
 			if ($request->has('account_number')) {
 
 				Transfer::create([
 					'operation_id' => $operation->id,
-					'account_id' => null,
+					'from_bank_account_id' => $request->from,
+					'to_bank_account_id' => null,
 					'account_number' => $request->account_number,
 					'bank_id' => $request->bank_id,
 					'name' => $request->name,
 				]);
+
+				$bank = Bank::findOrFail($request->bank_id);
+
+				$text = 'Hola,%20quiero%20hacer%20una%20transferencia%20a%20la%20cuenta%20' . $bank->name . '%20' . $request->account_number . '%20a%20nombre%20de%20' . $request->name . '.%20';
 			}
 
 		}
@@ -118,15 +127,28 @@ class OperationController extends Controller {
 			$operation = Operation::create($request->input());
 			Payment::create([
 				'operation_id' => $operation->id,
-				'account_id' => $request->from,
+				'bank_account_id' => $request->from,
 				'bank_operation_id' => $request->bank_operation_id,
 				'code' => $request->code,
+				'name' => $request->name,
 			]);
+
+			$bankOperation = BankOperation::with(['bank'])->findOrFail($request->bank_operation_id);
+
+			$text = 'Hola,%20quiero%20hacer%20un%20pago%20de%20S/' . $request->amount . '%20a%20la%20empresa%20' . $bankOperation->name . '%20,%20mi%20codigo%20de%20pago%20es%20el%20' . $request->code . '.%20';
 		}
 
-		Mail::to('roberth@gmail.com')->send(new NewOperation($operation));
+		$fromAccount = BankAccount::with(['bank'])->findOrFail($request->from);
+
+		$depositAccount = BankAccount::with(['bank', 'user'])->whereUserId(1)->whereBankId($fromAccount->id)->get()->first();
+
+		// Mail::to('roberth@gmail.com')->send(new NewOperation($operation));
+		$finalText = 'La%20transferencia%20de%20los%20fondos%20la%20realizo%20al%20banco%20' . $depositAccount->bank->name . ',%20cuenta%20' . $depositAccount->number . '%20(' . $depositAccount->user->name . '),%20el%20numero%20de%20operacion%20es%20el%20' . $request->deposit_code . '.';
+
+		$whatAppUrl = 'https://api.whatsapp.com/send?phone=51944001458&text=' . $text . $finalText;
 
 		session(['deposit' => false]);
+		return redirect($whatAppUrl);
 		return view('operation.confirm');
 	}
 

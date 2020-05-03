@@ -2865,6 +2865,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.getServices(this.operationTo.id).then(function (response) {
       _this.services = response;
     });
+    this.requiredName = this.name;
   },
   props: ['banks'],
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapMutations"])('payment', ['setFrom', 'setTo', 'setAmount', 'setFromAccount', 'setAmount', 'setComission', 'setOperation', 'setCode', 'setName']), {
@@ -2993,7 +2994,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])('payment', ['from', 'to', 'amount', 'comission', 'fromAccount', 'operation', 'code']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])('payment', ['from', 'to', 'amount', 'comission', 'fromAccount', 'operation', 'code', 'name']), {
     total: function total() {
       return "S/".concat(parseFloat(this.operationAmount) + parseFloat(this.comission));
     }
@@ -7876,7 +7877,9 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "withdrawto" } }, [
-              _vm._v("Realizar transferencia de fondos a cuenta")
+              _vm._v(
+                "Realiza el depósito de los fondos para realizar tu operación a la cuenta:"
+              )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group" }, [
@@ -8181,7 +8184,11 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "withdrawto" } }, [_vm._v("A cuenta")]),
+            _c("label", { attrs: { for: "withdrawto" } }, [
+              _vm._v(
+                "Realiza el depósito de los fondos para realizar tu operación a la cuenta:"
+              )
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group" }, [
               _c("div", { staticClass: "input-group-append" }, [
@@ -31004,7 +31011,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var baseURL = 'https://agente.dev/';
+var baseURL = 'http://agentefacil.com/';
 axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = baseURL;
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_2___default.a, axios__WEBPACK_IMPORTED_MODULE_1___default.a);
 

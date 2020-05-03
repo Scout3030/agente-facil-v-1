@@ -86,11 +86,11 @@
               <div class="hero-mask rounded opacity-6 bg-dark"></div>
               <div class="hero-bg rounded" style="background-image:url('{{asset('assets/images/bg/image-6.jpg')}}');"></div>
               <div class="hero-content">
-                <h2 class="text-6 text-white mb-3">Why Payyed?</h2>
-                <p class="text-light mb-5">Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. Mutat tacimates id sit. Ridens mediocritatem ius an, eu nec magna imperdiet.</p>
-                <h2 class="text-6 text-white mb-3">Send Money with Payyed</h2>
-                <p class="text-light">Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. Mutat tacimates id sit. Ridens mediocritatem ius an, eu nec magna imperdiet.</p>
-                <p class="text-light mb-0">Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</p>
+                <h2 class="text-6 text-white mb-3">¿Por qué Agente Fácil?</h2>
+                <p class="text-light mb-5">Ya no corras más por distintos lugares a realizar tus pagos y transferencias, desde un solo lugar y desde una única cuenta, puedes realiar todas tus operaciones. Y desde la comodidad de tu casa.</p>
+                <h2 class="text-6 text-white mb-3">Realiza tranferencias interbancarias y pagos</h2>
+                <p class="text-light">Con nuestro sistema multiagente, puedes realizar pagos en distintos bancos, solo transfiere los fondos y nuestros operadores se encargarán de realizar tu operación.</p>
+                <p class="text-light mb-0">Las comisiones son mínimas en comparación a las comisiones de otros medios de pago.</p>
               </div>
             </div>
           </div>
@@ -151,7 +151,7 @@
     <section class="section">
       <div class="container">
         <h2 class="text-9 text-center">¿Qué dice la gente sobre nosotros?</h2>
-        <p class="text-4 text-center mb-4">A payments experience people love to talk about</p>
+        <p class="text-4 text-center mb-4">Nuestros usuarios comentan sobre Agente Fácil</p>
         <div class="row">
           <div class="col-lg-10 col-xl-8 mx-auto">
             <div class="owl-carousel owl-theme" data-autoplay="true" data-nav="true" data-loop="true" data-margin="30" data-stagepadding="5" data-items-xs="1" data-items-sm="1" data-items-md="1" data-items-lg="1">
@@ -221,16 +221,3 @@
   <!-- Content end -->
 
 @endsection
-
-@push('scripts')
-  <script>
-    var theForm = $("form-operation");
-    console.log("theForm", theForm);
-    // var button = $('#button-form')
-    $('#button-form').on('click', function(e){
-      e.preventDefault()
-      console.log('hola')
-    })
-    // console.log("button", button);
-  </script>
-@endpush

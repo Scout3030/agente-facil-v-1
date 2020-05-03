@@ -32,6 +32,13 @@ class DatabaseSeeder extends Seeder {
 			'role_id' => \App\Role::USER,
 		]);
 
+		factory(\App\OperationType::class, 1)->create([
+			'type' => 'transfer',
+		]);
+		factory(\App\OperationType::class, 1)->create([
+			'type' => 'payment',
+		]);
+
 		// factory(\App\User::class, 10)->create();
 
 		// factory(\App\Bank::class, 1)->create([
@@ -39,7 +46,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'mi-banco.png',
 		// 	'icon' => 'mi-banco',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -49,7 +56,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'banco-de-credito.png',
 		// 	'icon' => 'banco-de-credito',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -59,7 +66,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'scotiabank.png',
 		// 	'icon' => 'scotiabank',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -69,7 +76,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'bbva.png',
 		// 	'icon' => 'bbva',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -79,7 +86,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'banco-de-comercio.png',
 		// 	'icon' => 'banco-de-comercio',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -89,7 +96,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'citibank.png',
 		// 	'icon' => 'citibank',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -99,7 +106,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'banbif.png',
 		// 	'icon' => 'banbif',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -109,7 +116,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'banco-de-la-nacion.png',
 		// 	'icon' => 'banco-de-la-nacion',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -119,7 +126,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'banco-pichincha.png',
 		// 	'icon' => 'banco-pichincha',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -129,7 +136,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'cofide.png',
 		// 	'icon' => 'cofide',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -139,7 +146,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'interbank.png',
 		// 	'icon' => 'interbank',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -149,7 +156,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'banco-ripley.png',
 		// 	'icon' => 'banco-ripley',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -159,7 +166,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'banco-central-peru.png',
 		// 	'icon' => 'banco-central-peru',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -169,7 +176,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'banco-falabella.png',
 		// 	'icon' => 'banco-falabella',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -179,7 +186,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'agrobanco.png',
 		// 	'icon' => 'agrobanco',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -189,7 +196,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'banco-gnb.png',
 		// 	'icon' => 'banco-gnb',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -199,7 +206,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'santander.png',
 		// 	'icon' => 'santander',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -209,7 +216,7 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'banco-azteca.png',
 		// 	'icon' => 'banco-azteca',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
@@ -219,16 +226,13 @@ class DatabaseSeeder extends Seeder {
 		// 	'logo' => 'icbc-bank.png',
 		// 	'icon' => 'icbc-bank',
 		// ])->each(function (\App\Bank $u) {
-		// 	factory(\App\Account::class, 1)->create([
+		// 	factory(\App\BankAccount::class, 1)->create([
 		// 		'user_id' => 1,
 		// 		'bank_id' => $u->id,
 		// 	]);
 		// });
 
 		// factory(\App\BankOperation::class, 100)->create();
-
-		// factory(\App\OperationType::class, 1)->create(['type' => 'transfer']);
-		// factory(\App\OperationType::class, 1)->create(['type' => 'payment']);
 
 		// factory(\App\BankAccount::class, 1)->create([
 		// 	'user_id' => 1,
@@ -243,7 +247,7 @@ class DatabaseSeeder extends Seeder {
 
 		// factory(\App\Operation::class, 25)->create(['operation_type_id' => \App\OperationType::TRANSFER])
 		// 	->each(function (\App\Operation $u) {
-		// 		factory(\App\Transfer::class, 2)->create(['operation_id' => $u->id]);
+		// 		factory(\App\Transfer::class, 1)->create(['operation_id' => $u->id]);
 		// 	});
 	}
 }

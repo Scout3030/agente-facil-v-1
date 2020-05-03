@@ -107,23 +107,20 @@
                     <span class="text-nowrap">{{ucfirst($operation->operationType->type)}}</span>
                   </div>
 
-                  @if($operation->operationType->id == \App\OperationType::TRANSFER)
-
-                  @foreach($operation->transfers as $transfer)
+                  @if($operation->transfer != null)
                   <div class="col col-sm-2">
-                    @if($transfer->account_id != null)
-                    <span class="text-nowrap">{{$transfer->account->bank->name}}</span>
+                    <span class="text-nowrap">{{$operation->transfer->fromAccount->bank->name}}</span>
                     <br>
-                    <span class="text-muted">{{$transfer->account->number}}</span>
+                    <span class="text-muted">{{$operation->transfer->fromAccount->number}}</span>
+                  </div>
+                  <div class="col col-sm-2">
+                    @if($operation->transfer->to_bank_account_id != null)
+                    <span class="text-nowrap">{{$operation->transfer->toAccount->bank->name}}</span>
+                    <br>
+                    <span class="text-muted">{{$operation->transfer->toAccount->number}}</span>
                     @else
-                    <span class="text-nowrap">{{$transfer->bank->name}}</span>
-                    <br>
-                    <span class="text-muted">{{$transfer->account_number}}</span>
-                    <br>
-                    <span class="text-muted">(terceros)</span>
                     @endif
                   </div>
-                  @endforeach
 
                   <div class="col-3 col-sm-2">
                     <!-- <span class="text-nowrap">--</span>
@@ -131,11 +128,11 @@
                   </div>
                   @endif
 
-                  @if($operation->operationType->id == \App\OperationType::PAYMENT)
+                  @if($operation->payment != null)
                   <div class="col col-sm-2">
-                    <span class="text-nowrap">{{$operation->payment->account->bank->name}}</span>
+                    <span class="text-nowrap">{{$operation->payment->bankAccount->bank->name}}</span>
                     <br>
-                    <span class="text-muted">{{$operation->payment->account->number}}</span>
+                    <span class="text-muted">{{$operation->payment->bankAccount->number}}</span>
                   </div>
 
                   <div class="col-3 col-sm-2">

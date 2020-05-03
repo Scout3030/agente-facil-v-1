@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Account;
+use App\BankAccount;
 use App\Operation;
 use App\Transfer;
 use Faker\Generator as Faker;
@@ -10,6 +10,7 @@ use Faker\Generator as Faker;
 $factory->define(Transfer::class, function (Faker $faker) {
 	return [
 		'operation_id' => \App\Operation::all()->random()->id,
-		'account_id' => \App\Account::all()->random()->id,
+		'from_bank_account_id' => \App\BankAccount::all()->random()->id,
+		'to_bank_account_id' => \App\BankAccount::all()->random()->id,
 	];
 });

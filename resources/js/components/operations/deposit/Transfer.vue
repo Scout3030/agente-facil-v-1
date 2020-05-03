@@ -42,7 +42,7 @@
                 </div>
             </div>
 			<div class="form-group">
-				<label for="withdrawto">A cuenta</label>
+				<label for="withdrawto">Realiza el depósito de los fondos para realizar tu operación a la cuenta:</label>
 				<div class="input-group">
 					<div class="input-group-append"> 
 						<span class="input-group-text p-0">

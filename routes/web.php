@@ -56,7 +56,7 @@ Route::group(['middleware' => ["auth"]], function () {
 
 	Route::post('/operation/ajax', 'OperationController@show')->name('operation.show');
 
-	Route::post('/accounts', 'AccountController@getAccounts')->name('get.accounts');
+	Route::post('/accounts', 'BankAccountController@getAccounts')->name('get.accounts');
 
 	Route::get('/historial', 'OperationController@history')->name('operation.history');
 
@@ -65,8 +65,8 @@ Route::group(['middleware' => ["auth"]], function () {
 
 	Route::get('/mis-cuentas', 'UserController@accounts')->name('user.accounts');
 
-	Route::post('/mis-cuentas', 'AccountController@store')->name('user.accounts.store');
-	Route::delete('/mis-cuentas/{account}', 'AccountController@destroy')->name('user.accounts.destroy');
+	Route::post('/mis-cuentas', 'BankAccountController@store')->name('user.accounts.store');
+	Route::delete('/mis-cuentas/{bankAccount}', 'BankAccountController@destroy')->name('user.accounts.destroy');
 
 	Route::group(['prefix' => "dashboard", "middleware" => [sprintf("role:%s", \App\Role::ADMIN)]], function () {
 
@@ -122,18 +122,18 @@ Route::group(['middleware' => ["auth"]], function () {
 		/* ACCOUNTS*/
 		Route::group(['prefix' => "account"], function () {
 
-			Route::get('/', 'Admin\AccountController@index')
+			Route::get('/', 'Admin\BankAccountController@index')
 				->name('admin.account.index');
-			Route::get('/edit/{account}', 'Admin\AccountController@edit')
+			Route::get('/edit/{bankAccount}', 'Admin\BankAccountController@edit')
 				->name('admin.account.edit');
-			Route::put('/{account}', 'Admin\AccountController@update')
+			Route::put('/{bankAccount}', 'Admin\BankAccountController@update')
 				->name('admin.account.update');
-			Route::post('/', 'Admin\AccountController@store')
+			Route::post('/', 'Admin\BankAccountController@store')
 				->name('admin.account.store');
-			Route::delete('/{account}', 'Admin\AccountController@destroy')
+			Route::delete('/{bankAccount}', 'Admin\BankAccountController@destroy')
 				->name('admin.account.destroy');
 
-			Route::get('/accounts', 'Admin\AccountController@accounts')
+			Route::get('/accounts', 'Admin\Bank@accounts')
 				->name('admin.account.accounts');
 		});
 

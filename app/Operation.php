@@ -39,8 +39,8 @@ class Operation extends Model {
 		return $this->hasOne(Payment::class);
 	}
 
-	public function transfers() {
-		return $this->hasMany(Transfer::class);
+	public function transfer() {
+		return $this->hasOne(Transfer::class);
 	}
 
 	public function operator() {

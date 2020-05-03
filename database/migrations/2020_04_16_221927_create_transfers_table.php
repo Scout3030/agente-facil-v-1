@@ -15,8 +15,10 @@ class CreateTransfersTable extends Migration {
 			$table->id();
 			$table->unsignedBigInteger('operation_id');
 			$table->foreign('operation_id')->references('id')->on('operations');
-			$table->unsignedBigInteger('bank_account_id')->nullable();
-			$table->foreign('bank_account_id')->references('id')->on('bank_accounts');
+			$table->unsignedBigInteger('from_bank_account_id');
+			$table->foreign('from_bank_account_id')->references('id')->on('bank_accounts');
+			$table->unsignedBigInteger('to_bank_account_id')->nullable();
+			$table->foreign('to_bank_account_id')->references('id')->on('bank_accounts');
 			$table->unsignedBigInteger('bank_id')->nullable();
 			$table->foreign('bank_id')->references('id')->on('banks');
 			$table->string('account_number')->nullable();

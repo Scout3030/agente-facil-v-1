@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Account;
 use App\Bank;
+use App\BankAccount;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AccountController extends Controller {
+class BankAccountController extends Controller {
 	public function index() {
+
 		$banks = Bank::whereStatus(Bank::PUBLISHED)->orderBy('name', 'asc')->get();
-		$account = new Account;
+		$account = new BankAccount;
 		$btn = 'Crear';
 		return view('admin.account.index', compact('account', 'btn', 'banks'));
 	}
 
-	public function edit(Account $account) {
+	public function edit(BankAccount $bankAccount) {
 		$banks = Bank::whereStatus(Bank::PUBLISHED)->orderBy('name', 'asc')->get();
 		$btn = 'Editar';
 		return view('admin.account.index', compact('account', 'btn', 'banks'));
@@ -28,12 +29,12 @@ class AccountController extends Controller {
 			'name' => 'required',
 		]);
 		$request->merge(['user_id' => auth()->user()->id]);
-		Account::create($request->input());
+		BankAccount::create($request->input());
 
 		return back()->with('message', __('Cuenta creada correctamente'));
 	}
 
-	public function update(Request $request, Account $account) {
+	public function update(Request $request, BankAccount $bankAccount) {
 		$request->validate([
 			'bank_id' => 'required',
 			'number' => 'required',
@@ -44,7 +45,7 @@ class AccountController extends Controller {
 		return redirect()->route('admin.account.index')->with('message', __('Cuenta actualizada correctamente'));
 	}
 
-	public function destroy(Account $account) {
+	public function destroy(BankAccount $bankAccount) {
 		try {
 			$account->delete();
 			return response()->json('message', 200);
@@ -54,7 +55,7 @@ class AccountController extends Controller {
 	}
 
 	public function accounts() {
-		$accounts = Account::with(['bank'])->get();
+		$accounts = BankAccount::with(['bank'])->get();
 		return response()->json($accounts);
 	}
 }
