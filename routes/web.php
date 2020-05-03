@@ -72,7 +72,7 @@ Route::group(['middleware' => ["auth"]], function () {
 
 		Route::get('/', 'Admin\HomeController@index')->name('admin.index');
 
-		/* BANKS */
+		/* OPERATION */
 		Route::group(['prefix' => "operation"], function () {
 
 			Route::get('/', 'Admin\OperationController@index')
@@ -133,7 +133,7 @@ Route::group(['middleware' => ["auth"]], function () {
 			Route::delete('/{bankAccount}', 'Admin\BankAccountController@destroy')
 				->name('admin.account.destroy');
 
-			Route::get('/accounts', 'Admin\Bank@accounts')
+			Route::get('/accounts', 'Admin\BankAccountController@accounts')
 				->name('admin.account.accounts');
 		});
 

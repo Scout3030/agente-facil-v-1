@@ -55,7 +55,7 @@ class BankAccountController extends Controller {
 	}
 
 	public function accounts() {
-		$accounts = BankAccount::with(['bank'])->get();
+		$accounts = BankAccount::with(['bank'])->whereUserId(1)->get();
 		return response()->json($accounts);
 	}
 }

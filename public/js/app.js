@@ -31011,7 +31011,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var baseURL = 'http://agentefacil.com/';
+var baseURL = 'https://agente.dev/';
 axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = baseURL;
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_2___default.a, axios__WEBPACK_IMPORTED_MODULE_1___default.a);
 
