@@ -47,4 +47,8 @@
     </div>
   </div>
 </div>
-<!-- Bank Accounts End
+<!-- Bank Accounts End-->
+
+@push('scripts')
+<script src="{{asset('assets/vendor/inputmask/dist/jquery.inputmask.js')}}"></script>
+@endpush

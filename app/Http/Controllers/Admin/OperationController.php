@@ -32,14 +32,16 @@ class OperationController extends Controller {
 			->orderBy('created_at', 'asc')
 			->get();
 
+		// return DataTables::of($operations)
+		// 	->toJson();
+
 		return DataTables::of($operations)
 			->addColumn('operation', 'admin.operation.datatable.operation')
 			->addColumn('from', 'admin.operation.datatable.from')
-			->addColumn('deposit', 'admin.operation.datatable.deposit')
 			->addColumn('to', 'admin.operation.datatable.to')
 			->addColumn('actions', 'admin.operation.datatable.actions')
 			->addColumn('date', 'admin.operation.datatable.date')
-			->rawColumns(['operation', 'from', 'deposit', 'to', 'actions', 'date'])
+			->rawColumns(['operation', 'from', 'to', 'actions', 'date'])
 			->toJson();
 	}
 
@@ -65,18 +67,26 @@ class OperationController extends Controller {
 			->editColumn('operator', '{{$operator != null ? $operator["name"] : ""}}')
 			->addColumn('operation', 'admin.operation.datatable.operation')
 			->addColumn('from', 'admin.operation.datatable.from')
-			->addColumn('deposit', 'admin.operation.datatable.deposit-all')
 			->addColumn('to', 'admin.operation.datatable.to')
 			->addColumn('status', 'admin.operation.datatable.status')
+			->addColumn('actions', 'admin.operation.datatable.actions')
 			->addColumn('date', 'admin.operation.datatable.date')
-			->rawColumns(['operation', 'from', 'deposit', 'to', 'status', 'date'])
+			->rawColumns(['operation', 'from', 'to', 'status', 'actions', 'date'])
 			->toJson();
 	}
 
-	public function acreditDeposit(Request $request) {
+	public function updateDepositCode(Operation $operation, Request $request) {
 		$request->merge(['deposit_code_status' => Operation::DEPOSITDONE]);
+		$request->merge(['status' => Operation::INPROCESS]);
 		$request->merge(['operator_id' => auth()->user()->id]);
-		$operation = Operation::whereId($request->id)->first();
+		$operation->fill($request->input())->save();
+		return back();
+	}
+
+	public function updateTransferCode(Operation $operation, Request $request) {
+		$request->merge(['deposit_code_status' => Operation::DEPOSITDONE]);
+		$request->merge(['status' => Operation::COMPLETED]);
+		$request->merge(['operator_id' => auth()->user()->id]);
 		$operation->fill($request->input())->save();
 		return back();
 	}
@@ -88,22 +98,6 @@ class OperationController extends Controller {
 		return back();
 	}
 
-	public function completeOperation(Operation $operation) {
-		$operation->load([
-			'operationType',
-			'transfers',
-			'payment.bankOperation.bank',
-		]);
-		return view('admin.operation.update', compact('operation'));
-	}
-
-	public function completeOperationStatus(Request $request, Operation $operation) {
-
-		$request->merge(['status' => Operation::COMPLETED]);
-		$operation->fill($request->input())->save();
-		return redirect()->route('admin.operation.index');
-	}
-
 	public function all() {
 		return view('admin.operation.all');
 	}
@@ -112,15 +106,20 @@ class OperationController extends Controller {
 		if (\request()->ajax()) {
 			$operation = Operation::findOrFail(\request()->id);
 			$operation->load(['user']);
-			// return $operation;
 			try {
 				Mail::to($operation->user->email)->send(new SendConfirmation($operation));
 				$success = true;
+				$operation->mail = Operation::SENT;
+				$operation->save();
 			} catch (\Exception $exception) {
 				$success = false;
 			}
 			return response()->json(['res' => $success]);
 		}
 
+	}
+
+	public function show(Operation $operation) {
+		return view('admin.operation.show', compact('operation'));
 	}
 }

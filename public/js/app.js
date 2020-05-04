@@ -2615,28 +2615,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2646,7 +2624,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       depositCode: null
     };
   },
-  props: ['account'],
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('payment', ['amount', 'comission', 'from', 'fromAccount', 'to', 'code', 'operation', 'name']), {
     icon: function icon() {
       return "bank ".concat(this.account.bank.icon);
@@ -2654,20 +2631,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }),
   methods: {
     sendCode: function sendCode() {
-      this.$v.$touch();
-
-      if (this.$v.$invalid) {
-        this.submitStatus = 'ERROR';
-      } else {
-        this.$refs.form.submit();
-      }
-    }
-  },
-  validations: {
-    depositCode: {
-      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
-      numeric: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["numeric"],
-      minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["minLength"])(4)
+      // this.$v.$touch()
+      //    if (this.$v.$invalid) {
+      //        this.submitStatus = 'ERROR'
+      //    } else {
+      this.$refs.form.submit(); // }
     }
   }
 });
@@ -2683,9 +2651,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2746,29 +2712,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2777,29 +2720,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       code: null
     };
   },
-  props: ['account'],
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('transfer', ['isMine', 'amount', 'comission', 'fromAccount', 'toAccount', 'from', 'to', 'ownerName', 'accountNumber']), {
-    icon: function icon() {
-      return "bank ".concat(this.account.bank.icon);
-    }
-  }),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('transfer', ['isMine', 'amount', 'comission', 'fromAccount', 'toAccount', 'from', 'to', 'ownerName', 'accountNumber'])),
   methods: {
     sendCode: function sendCode() {
-      console.log('submit!');
-      this.$v.$touch();
-
-      if (this.$v.$invalid) {
-        this.submitStatus = 'ERROR';
-        console.log('invalido');
-      } else {
-        this.$refs.form.submit();
-      }
-    }
-  },
-  validations: {
-    code: {
-      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
-      numeric: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["numeric"]
+      // console.log('submit!')
+      //    this.$v.$touch()
+      //    if (this.$v.$invalid) {
+      //        this.submitStatus = 'ERROR'
+      //        console.log('invalido')
+      //    } else {
+      this.$refs.form.submit(); // }
     }
   }
 });
@@ -8099,129 +8029,11 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "withdrawto" } }, [
-              _vm._v(
-                "Realiza el depósito de los fondos para realizar tu operación a la cuenta:"
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _c("div", { staticClass: "input-group-append" }, [
-                _c("span", { staticClass: "input-group-text p-0" }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass: "selectpicker form-control bg-transparent",
-                      attrs: {
-                        "data-style": "custom-select bg-transparent border-0",
-                        "data-container": "body",
-                        "data-live-search": "true",
-                        required: "",
-                        disabled: ""
-                      }
-                    },
-                    [
-                      _c("optgroup", { attrs: { label: "Popular Currency" } }, [
-                        _c(
-                          "option",
-                          {
-                            attrs: {
-                              "data-icon": _vm.icon,
-                              "data-subtext": _vm.account.bank.name,
-                              value: ""
-                            }
-                          },
-                          [_vm._v(_vm._s(_vm.account.bank.name))]
-                        )
-                      ])
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text", disabled: "" },
-                domProps: { value: _vm.account.number }
-              })
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "text", disabled: "" },
-              domProps: { value: _vm.account.name }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "youSend" } }, [
-              _vm._v("N° de operación")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.$v.depositCode.$model,
-                    expression: "$v.depositCode.$model",
-                    modifiers: { trim: true }
-                  }
-                ],
-                staticClass: "form-control",
-                class: {
-                  "is-invalid": _vm.$v.depositCode.$error,
-                  "is-valid": !_vm.$v.depositCode.$error
-                },
-                attrs: {
-                  type: "text",
-                  name: "deposit_code",
-                  placeholder: "Ingrese número de operación",
-                  autocomplete: "off"
-                },
-                domProps: { value: _vm.$v.depositCode.$model },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.$v.depositCode,
-                      "$model",
-                      $event.target.value.trim()
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _vm.$v.depositCode.$error
-              ? _c("div", { staticClass: "error" }, [
-                  _c(
-                    "p",
-                    { class: { "text-danger": _vm.$v.depositCode.$error } },
-                    [
-                      _vm._v(
-                        "Ingrese un número de operación válido, " +
-                          _vm._s(_vm.$v.depositCode.$params.minLength.min) +
-                          " dígitos al menos"
-                      )
-                    ]
-                  )
-                ])
-              : _vm._e()
-          ]),
-          _vm._v(" "),
           _c("button", { staticClass: "btn btn-primary btn-block" }, [
-            _vm._v("Confirmar depósito")
-          ])
+            _vm._v("Continuar")
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
         ]
       )
     ]
@@ -8232,8 +8044,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-prepend" }, [
-      _c("span", { staticClass: "input-group-text" }, [_vm._v("N°")])
+    return _c("div", { staticClass: "pt-1" }, [
+      _c("p", [
+        _vm._v("Se te redireccionará a WhatsApp para terminar la operación")
+      ])
     ])
   }
 ]
@@ -8407,117 +8221,11 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "withdrawto" } }, [
-              _vm._v(
-                "Realiza el depósito de los fondos para realizar tu operación a la cuenta:"
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _c("div", { staticClass: "input-group-append" }, [
-                _c("span", { staticClass: "input-group-text p-0" }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass: "selectpicker form-control bg-transparent",
-                      attrs: {
-                        "data-style": "custom-select bg-transparent border-0",
-                        "data-container": "body",
-                        "data-live-search": "true",
-                        required: "",
-                        disabled: ""
-                      }
-                    },
-                    [
-                      _c("optgroup", { attrs: { label: "Popular Currency" } }, [
-                        _c(
-                          "option",
-                          {
-                            attrs: {
-                              "data-icon": _vm.icon,
-                              "data-subtext": _vm.account.bank.name,
-                              value: ""
-                            }
-                          },
-                          [_vm._v(_vm._s(_vm.account.bank.name))]
-                        )
-                      ])
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text", disabled: "" },
-                domProps: { value: _vm.account.number }
-              })
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "text", disabled: "" },
-              domProps: { value: _vm.account.name }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "youSend" } }, [
-              _vm._v("N° de operación")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.$v.code.$model,
-                    expression: "$v.code.$model",
-                    modifiers: { trim: true }
-                  }
-                ],
-                staticClass: "form-control",
-                class: {
-                  "is-invalid": _vm.$v.code.$error,
-                  "is-valid": !_vm.$v.code.$error
-                },
-                attrs: {
-                  type: "text",
-                  name: "deposit_code",
-                  placeholder: "Ingrese número de operación",
-                  autocomplete: "off"
-                },
-                domProps: { value: _vm.$v.code.$model },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.$v.code, "$model", $event.target.value.trim())
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _vm.$v.code.$error
-              ? _c("div", { staticClass: "error" }, [
-                  _c("p", { class: { "text-danger": _vm.$v.code.$error } }, [
-                    _vm._v("Ingrese un número de operación válido")
-                  ])
-                ])
-              : _vm._e()
-          ]),
-          _vm._v(" "),
           _c("button", { staticClass: "btn btn-primary btn-block" }, [
-            _vm._v("Confirmar depósito")
-          ])
+            _vm._v("Continuar")
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
         ]
       )
     ]
@@ -8528,8 +8236,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-prepend" }, [
-      _c("span", { staticClass: "input-group-text" }, [_vm._v("N°")])
+    return _c("div", { staticClass: "pt-1" }, [
+      _c("p", [
+        _vm._v("Se te redireccionará a WhatsApp para terminar la operación")
+      ])
     ])
   }
 ]

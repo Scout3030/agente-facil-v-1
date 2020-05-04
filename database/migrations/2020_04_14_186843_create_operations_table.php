@@ -19,7 +19,7 @@ class CreateOperationsTable extends Migration {
 			$table->foreign('operation_type_id')->references('id')->on('operation_types');
 			$table->float('amount', 8, 2);
 			$table->float('comission', 8, 2);
-			$table->string('deposit_code');
+			$table->string('deposit_code')->nullable();
 			$table->enum('deposit_code_status', [
 				\App\Operation::DEPOSITDONE, \App\Operation::DEPOSITINPROCESS,
 			])->default(\App\Operation::DEPOSITINPROCESS);
@@ -29,6 +29,9 @@ class CreateOperationsTable extends Migration {
 			])->default(\App\Operation::INPROCESS);
 			$table->unsignedBigInteger('operator_id')->nullable();
 			$table->foreign('operator_id')->references('id')->on('users');
+			$table->enum('mail', [
+				\App\Operation::SENT, \App\Operation::NOSENT,
+			])->default(\App\Operation::NOSENT);
 			$table->timestamps();
 			$table->softDeletes();
 		});

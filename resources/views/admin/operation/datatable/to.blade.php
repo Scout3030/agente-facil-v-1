@@ -1,7 +1,7 @@
 @if($operation_type_id == App\Operation::TRANSFER)
 
 <div class="card text-white card-body bg-warning">
-	@if($transfer['to_account'] != null)
+	@if($transfer['to_bank_account_id'] != null)
 	{{--SI la cuenta es propia--}}
 	<h5 class="text-white card-title">Banco: {{$transfer['to_account']['bank']['name']}}</h5>
 	Cuenta: {{$transfer['to_account']['number']}}
@@ -9,10 +9,10 @@
 	<strong>Destinatario:</strong> {{$transfer['to_account']['name']}}
 	@else
 	{{--SI la cuenta es de terceros--}}
-	<h5 class="text-white card-title">Banco: {{$transfer['to_bank']['name']}}</h5>
-	Cuenta: {{$transfer['to_account_number']}}
+	<h5 class="text-white card-title">Banco: {{$transfer['bank']['name']}}</h5>
+	Cuenta: {{$transfer['account_number']}}
 	<br>
-	<strong>Destinatario:</strong> {{$transfer['to_name']}}
+	<strong>Destinatario:</strong> {{$transfer['name']}}
 	@endif
 </div>
 

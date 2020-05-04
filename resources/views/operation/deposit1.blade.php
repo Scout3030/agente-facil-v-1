@@ -9,9 +9,9 @@
 		<div class="row">
 			<div class="col-md-8 col-lg-6 col-xl-5 mx-auto">
 				@if($type == App\OperationType::TRANSFER)
-				<deposit-transfer-form></deposit-transfer-form>
+				<deposit-transfer-form :account="{{$account}}"></deposit-transfer-form>
 				@elseif($type == App\OperationType::PAYMENT)
-				<deposit-payment-form></deposit-payment-form>
+				<deposit-payment-form :account="{{$account}}"></deposit-payment-form>
 				@endif
 			</div>
 		</div>

@@ -20,12 +20,3 @@
 	Total: S/{{$amount + $comission}}
 
 </div>
-
-@if($deposit_code_status == App\Operation::DEPOSITINPROCESS)
-<form action="{{ route('admin.operation.acreditdeposit') }}" method="POST">
-    @csrf
-    @method('put')
-    <input type="hidden" name="id" value="{{$id}}">
-    <button type="submit" class="btn btn-success btn-block mt-3">Acreditar</button>
-</form>
-@endif

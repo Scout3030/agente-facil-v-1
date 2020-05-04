@@ -1,5 +1,9 @@
 @component('mail::message')
 
-# {{ __("¡Nueva operación registrada en el sistema!") }}
+# {{ __("¡Tu operación fue confirmada!") }}
+
+Resumen de operacion
+
+
 
 @endcomponent

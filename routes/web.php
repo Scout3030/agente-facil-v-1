@@ -44,12 +44,15 @@ Route::get('/opiniones', function () {
 Route::group(['middleware' => ["auth"]], function () {
 	Route::get('/transferencia-interbancaria', 'OperationController@transfer')->name('operation.transfer');
 
-	Route::get('/pago-interbancario', 'OperationController@payment')->name('operation.payment');
+	Route::get('/pago-interbancario', 'OperationController@payment')
+		->name('operation.payment');
 
-	Route::post('/deposito', 'OperationController@depositCreate')->name('operation.deposit.create');
+	Route::post('/deposito', 'OperationController@depositCreate')
+		->name('operation.deposit.create');
 
 	Route::group(['middleware' => ['route']], function () {
-		Route::get('/deposito', 'OperationController@depositIndex')->name('operation.deposit.index');
+		Route::get('/deposito', 'OperationController@depositIndex')
+			->name('operation.deposit.index');
 
 		Route::post('/operation/store', 'OperationController@store')->name('operation.store');
 	});
@@ -84,20 +87,23 @@ Route::group(['middleware' => ["auth"]], function () {
 			Route::get('/', 'Admin\OperationController@index')
 				->name('admin.operation.index');
 
+			Route::get('/view/{operation}', 'Admin\OperationController@show')
+				->name('admin.operation.show');
+
 			Route::get('/datatable', 'Admin\OperationController@datatable')
 				->name('admin.operation.datatable');
+
+			Route::put('/deposit/code/{operation}', 'Admin\OperationController@updateDepositCode')
+				->name('admin.operation.updateDepositCode');
+
+			Route::put('/transfer/code/{operation}', 'Admin\OperationController@updateTransferCode')
+				->name('admin.operation.updateTransferCode');
 
 			Route::put('/deposit', 'Admin\OperationController@acreditDeposit')
 				->name('admin.operation.acreditdeposit');
 
 			Route::put('/cancel', 'Admin\OperationController@cancelOperation')
 				->name('admin.operation.canceloperation');
-
-			Route::get('/complete/{operation}', 'Admin\OperationController@completeOperation')
-				->name('admin.operation.completeoperation');
-
-			Route::put('/complete/{operation}', 'Admin\OperationController@completeOperationStatus')
-				->name('admin.operation.completeoperationstatus');
 
 			Route::get('/all', 'Admin\OperationController@all')
 				->name('admin.operation.all');

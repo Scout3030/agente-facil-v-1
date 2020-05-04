@@ -15,9 +15,9 @@ pe-7s-paint'])
                 <th>Operador</th>
                 <th>Operación</th>
                 <th>Desde</th>
-                <th>Depósito</th>
                 <th>Hacia</th>
                 <th>Estado</th>
+                <th>Acciones</th>
                 <th>Fecha</th>
             </tr>
             </thead>
@@ -30,9 +30,9 @@ pe-7s-paint'])
                 <th>Operador</th>
                 <th>Operación</th>
                 <th>Desde</th>
-                <th>Depósito</th>
                 <th>Hacia</th>
                 <th>Estado</th>
+                <th>Acciones</th>
                 <th>Fecha</th>
             </tr>
             </tfoot>
@@ -62,12 +62,12 @@ pe-7s-paint'])
                     {data: 'operator'},
                     {data: 'operation'},
                     {data: 'from'},
-                    {data: 'deposit'},
                     {data: 'to'},
                     {data: 'status'},
+                    {data: 'actions'},
                     {data: 'date'}
                 ],
-                order: [[ 6, "desc" ]]
+                order: [[ 7, "desc" ]]
             });
 
             setInterval( function () {

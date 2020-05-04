@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Bank;
 use App\BankAccount;
 use App\BankOperation;
+use App\Mail\NewOperation;
 use App\Operation;
 use App\OperationType;
 use App\Payment;
 use App\Transfer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OperationController extends Controller {
 	public function transfer() {
@@ -146,13 +148,13 @@ class OperationController extends Controller {
 
 		$depositAccount = BankAccount::with(['bank', 'user'])->whereUserId(1)->whereBankId($fromAccount->bank->id)->get()->first();
 
-		// Mail::to('roberth@gmail.com')->send(new NewOperation($operation));
+		Mail::to('roberth.r.j.30@gmail.com')->send(new NewOperation($operation));
 		$finalText = 'La%20transferencia%20de%20los%20fondos%20la%20realizo%20al%20banco%20' . $depositAccount->bank->name . ',%20cuenta%20' . $depositAccount->number . '%20(' . $depositAccount->user->name . '),%20el%20numero%20de%20operacion%20es%20el%20' . $request->deposit_code . '.';
 
 		$whatAppUrl = 'https://api.whatsapp.com/send?phone=51944001458&text=' . $text . $finalText;
 
-		// session(['deposit' => false]);
-		// return redirect($whatAppUrl);
+		session(['deposit' => false]);
+		return redirect($whatAppUrl);
 		return view('operation.confirm');
 	}
 

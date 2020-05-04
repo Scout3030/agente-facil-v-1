@@ -3,7 +3,6 @@
   <nav class="primary-menu navbar navbar-expand-lg">
     <div id="header-nav" class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
-        <li class="active"><a href="{{route('admin.index')}}">Panel administrativo</a></li>
       </ul>
     </div>
   </nav>
@@ -14,6 +13,7 @@
   ============================== -->
   <nav class="login-signup navbar navbar-expand">
     <ul class="navbar-nav">
+      <li><a href="{{route('admin.index')}}">Panel administrativo</a> </li>
       @include('partials.navigations.logout')
     </ul>
   </nav>

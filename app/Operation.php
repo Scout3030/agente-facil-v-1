@@ -16,15 +16,21 @@ class Operation extends Model {
 	const TRANSFER = 1;
 	const PAYMENT = 2;
 
+	/* OPERATION */
 	const COMPLETED = 1;
 	const INPROCESS = 2;
 	const CANCELLED = 3;
 
+	/* DEPOSIT AND TRANSFER CODE */
 	const DEPOSITDONE = 1;
 	const DEPOSITINPROCESS = 2;
 
+	/* MAIL */
+	const SENT = 1;
+	const NOSENT = 2;
+
 	protected $fillable = [
-		'user_id', 'operation_type_id', 'amount', 'comission', 'deposit_code', 'deposit_code_status', 'transfer_code', 'status', 'operator_id',
+		'user_id', 'operation_type_id', 'amount', 'comission', 'deposit_code', 'deposit_code_status', 'transfer_code', 'status', 'operator_id', 'mail',
 	];
 
 	public function user() {
