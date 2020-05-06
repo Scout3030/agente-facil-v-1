@@ -73,9 +73,8 @@
 			 //        this.submitStatus = 'ERROR'
 			 //        console.log('invalido')
 			 //    } else {
-
 			        this.$refs.form.submit()
-
+			        localStorage.clear();
 			    // }
 			}
 		}

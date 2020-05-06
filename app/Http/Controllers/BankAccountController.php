@@ -12,13 +12,14 @@ class BankAccountController extends Controller {
 	}
 
 	public function store(Request $request) {
+		// dd($request->all());
 		$request->merge(['user_id' => auth()->user()->id]);
 		BankAccount::create($request->input());
-		return back();
+		return back()->with(['message' => 'Cuenta creada correctamente', 'route' => $request->route]);
 	}
 
 	public function destroy(BankAccount $bankAccount) {
 		$bankAccount->delete();
-		return back();
+		return back()->with('message', 'Cuenta eliminada correctamente');
 	}
 }

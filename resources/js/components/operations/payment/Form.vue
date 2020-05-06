@@ -123,10 +123,12 @@
 				this.services = response
 			})
 			this.requiredName = this.name
+			this.setUrlPage()
 		},
 		props: ['banks'],
 		methods: {
 			...mapMutations('payment', ['setFrom', 'setTo', 'setAmount', 'setFromAccount', 'setAmount', 'setComission', 'setOperation', 'setCode', 'setName']),
+			...mapMutations('common', ['setPage']),
 			icon(icon){
 				return `bank ${icon}`
 			},
@@ -192,6 +194,9 @@
 			    } else {
 		        	this.$refs.form.submit()
 			    }
+			},
+			setUrlPage(){
+				this.setPage(2)
 			}
 		},
 		filters: {

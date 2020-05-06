@@ -18,14 +18,17 @@
 
           <!-- Bank Accounts
           ============================================= -->
-          <div class="bg-light shadow-sm rounded p-4 mb-4">
-            <div>
-            <h3 class="text-5 font-weight-400 mb-4">Mis cuentas
-              @if(url()->previous() == route('operation.transfer') || url()->previous() == route('operation.payment'))
-              <a href="{{url()->previous()}}" class="text-3 float-right"><i class="fa fa-chevron-left"></i> Retomar operación</a>
-              @endif
 
-            </h3>
+          <div class="bg-light shadow-sm rounded p-4 mb-4">
+            @if (session('message'))
+              <div class="alert alert-success" style="background: linear-gradient(-45deg, #0f5e9d, #418fce);; color: #fff">
+                {{ session('message') }}
+              </div>
+            @endif
+            <div>
+              <h3 class="text-5 font-weight-400 mb-4">Mis cuentas
+                <operation-button></operation-button>
+              </h3>
             </div>
             @forelse(auth()->user()->accounts->chunk(2) as $chunk)
             <div class="row mb-sm-1 mb-lg-3">

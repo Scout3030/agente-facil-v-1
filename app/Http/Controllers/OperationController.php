@@ -18,14 +18,17 @@ class OperationController extends Controller {
 		$banks = Bank::with(['accounts'])->whereHas('accounts', function ($q) {
 			$q->where('user_id', 1);
 		})->orderBy('name', 'asc')->whereStatus(Bank::PUBLISHED)->get();
-		return view('operation.transfer', compact('banks'));
+		$userAccounts = BankAccount::whereUserId(auth()->id())->get();
+		// dd($userAccounts);
+		return view('operation.transfer', compact('banks', 'userAccounts'));
 	}
 
 	public function payment() {
 		$banks = Bank::with(['accounts'])->whereHas('accounts', function ($q) {
 			$q->where('user_id', 1);
 		})->orderBy('name', 'asc')->whereStatus(Bank::PUBLISHED)->get();
-		return view('operation.payment', compact('banks'));
+		$userAccounts = BankAccount::whereUserId(auth()->id())->get();
+		return view('operation.payment', compact('banks', 'userAccounts'));
 	}
 
 	public function depositCreate(Request $request) {
@@ -92,6 +95,8 @@ class OperationController extends Controller {
 		$request->merge(['status' => \App\Operation::INPROCESS]);
 		$request->merge(['comission' => $request->amount <= 200 ? 1 : 2]);
 
+		$fromAccount = BankAccount::with(['bank'])->findOrFail($request->from);
+
 		if ($request->operation_type_id == Operation::TRANSFER) {
 
 			$operation = Operation::create($request->input());
@@ -104,15 +109,14 @@ class OperationController extends Controller {
 					'to_bank_account_id' => $request->to,
 				]);
 
-				$fromAccount = BankAccount::with(['bank'])->findOrFail($request->from);
 				$toAccount = BankAccount::with(['bank', 'user'])->findOrFail($request->to);
 
-				$text = 'Hola,%20quiero%20hacer%20una%20transferencia%20de%20S/' . $request->amount . '%20a%20mi%20cuenta%20' . $toAccount->bank->name . '%20' . $toAccount->number . '%20a%20nombre%20de%20' . $toAccount->user->name . '%20desde%20mi%20otra%20cuenta%20' . $fromAccount->bank->name . '%20' . $fromAccount->number . '.%20';
+				$text = 'Hola,%20quiero%20hacer%20una%20transferencia%20a%20la%20Cuenta%20Destino%20' . $toAccount->bank->name . '%20N°%20' . $toAccount->number . '%20titular%20' . $toAccount->user->name . '%20desde%20la%20Cuenta%20de%20Origen%20' . $fromAccount->bank->name . '%20N°%20' . $fromAccount->number . '%20titular%20' . $fromAccount->user->name . '.%20Por%20el%20monto%20de%20S/' . $request->amount . '%20(S/' . ($request->comission + $request->amount) . '%20incluido%20comisión).%20';
 
 			}
 
 			if ($request->has('account_number')) {
-
+				// dd($request->all());
 				Transfer::create([
 					'operation_id' => $operation->id,
 					'from_bank_account_id' => $request->from,
@@ -124,7 +128,7 @@ class OperationController extends Controller {
 
 				$bank = Bank::findOrFail($request->bank_id);
 
-				$text = 'Hola,%20quiero%20hacer%20una%20transferencia%20a%20la%20cuenta%20' . $bank->name . '%20' . $request->account_number . '%20a%20nombre%20de%20' . $request->name . '.%20';
+				$text = 'Hola, quiero hacer una transferencia a la Cuenta Destino ' . $bank->name . ' N° ' . $request->account_number . ' titular ' . $request->name . ' desde la Cuenta de Origen ' . $fromAccount->bank->name . ' N° ' . $fromAccount->number . ' titular ' . $fromAccount->user->name . '. Por el monto de S/' . $request->amount . ' (S/' . ($request->comission + $request->amount) . ' incluido comisión).%20';
 			}
 
 		}
@@ -138,10 +142,10 @@ class OperationController extends Controller {
 				'code' => $request->code,
 				'name' => $request->name,
 			]);
-
+			// dd($request->all());
 			$bankOperation = BankOperation::with(['bank'])->findOrFail($request->bank_operation_id);
 
-			$text = 'Hola,%20quiero%20hacer%20un%20pago%20de%20S/' . $request->amount . '%20a%20la%20empresa%20' . $bankOperation->name . '%20,%20mi%20codigo%20de%20pago%20es%20el%20' . $request->code . '.%20';
+			$text = 'Hola,%20quiero%20hacer%20un%20pago%20de%20S/' . $request->amount . '%20(S/' . ($request->comission + $request->amount) . '%20incluido%20comisión)%20a%20la%20empresa%20' . $bankOperation->name . '%20(via ' . $bankOperation->bank->name . '),%20mi%20codigo%20de%20pago%20es%20el%20' . $request->code . ', beneficiario ' . $request->name . ';%20desde%20la%20cuenta%20de%20Origen%20' . $fromAccount->bank->name . '%20N°%20' . $fromAccount->number . ',%20titular%20' . $fromAccount->user->name . '.%20';
 		}
 
 		$fromAccount = BankAccount::with(['bank'])->findOrFail($request->from);
@@ -149,9 +153,8 @@ class OperationController extends Controller {
 		$depositAccount = BankAccount::with(['bank', 'user'])->whereUserId(1)->whereBankId($fromAccount->bank->id)->get()->first();
 
 		Mail::to('roberth.r.j.30@gmail.com')->send(new NewOperation($operation));
-		$finalText = 'La%20transferencia%20de%20los%20fondos%20la%20realizo%20al%20banco%20' . $depositAccount->bank->name . ',%20cuenta%20' . $depositAccount->number . '%20(' . $depositAccount->user->name . '),%20el%20numero%20de%20operacion%20es%20el%20' . $request->deposit_code . '.';
 
-		$whatAppUrl = 'https://api.whatsapp.com/send?phone=51944001458&text=' . $text . $finalText;
+		$whatAppUrl = 'https://api.whatsapp.com/send?phone=51944001458&text=' . $text;
 
 		session(['deposit' => false]);
 		return redirect($whatAppUrl);

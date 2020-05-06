@@ -30,6 +30,9 @@ Vue.component('payment-form', require('./components/operations/payment/Form.vue'
 Vue.component('deposit-payment-form', require('./components/operations/deposit/Payment.vue').default);
 Vue.component('deposit-transfer-form', require('./components/operations/deposit/Transfer.vue').default);
 
+Vue.component('operation-button', require('./components/operations/Button.vue').default);
+
+
 /* ADMIN */
 Vue.component('admin-bank-list', require('./components/admin/bank/List.vue').default);
 Vue.component('admin-account-list', require('./components/admin/account/List.vue').default);

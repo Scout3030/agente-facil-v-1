@@ -16,6 +16,12 @@
         ============================================= -->
         <div class="col-lg-9">
 
+          @if (session('message'))
+            <div class="alert alert-success" style="background: linear-gradient(-45deg, #0f5e9d, #418fce);; color: #fff">
+              {{ session('message') }}
+            </div>
+          @endif
+
           <!-- Personal Details
           ============================================= -->
           <div class="bg-light shadow-sm rounded p-4 mb-4">
@@ -50,17 +56,17 @@
                       <div class="col-12">
                         <div class="form-group">
                           <label for="firstName">Nombre</label>
-                          <input type="text" name="name" value="" class="form-control" required="" placeholder="{{auth()->user()->name}}">
+                          <input type="text" name="name" value="{{auth()->user()->name}}" class="form-control" required="" placeholder="{{auth()->user()->name}}" autocomplete="off">
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
                           <label for="address">Dirección</label>
-                          <input type="text" value="" class="form-control" name="address" required="" placeholder="Dirección">
+                          <input type="text" value="{{auth()->user()->address ? auth()->user()->address : old('address')}}" class="form-control" name="address" required="" placeholder="Dirección" autocomplete="off">
                         </div>
                       </div>
                     </div>
-                    <button class="btn btn-primary btn-block mt-2" type="submit">Save Changes</button>
+                    <button class="btn btn-primary btn-block mt-2" type="submit">Guardar cambios</button>
                   </form>
                 </div>
               </div>
@@ -111,7 +117,7 @@
                       <div class="col-12">
                         <div class="form-group">
                           <label for="mobileNumber"><span class="text-muted font-weight-500">Número</span></label>
-                          <input type="text" value="" name="phone" class="form-control" required="" placeholder="999 999 999">
+                          <input type="text" value="" name="phone" class="form-control" required="" placeholder="999 999 999" autocomplete="off">
                         </div>
                       </div>
                     </div>

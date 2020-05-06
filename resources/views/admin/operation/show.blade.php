@@ -78,7 +78,7 @@ pe-7s-next-2'])
 						<i class="header-icon lnr-screen icon-gradient bg-warm-flame"> </i>Transferencia
 					</div>
 					<div class="card-body">
-						@if($operation->transfer->toAccount->id != null)
+						@if($operation->transfer->toAccount != null)
 						<p class="mb-1">Al banco: {{$operation->transfer->toAccount->bank->name}}</p>
 						<p class="mb-1">A la cuenta: {{$operation->transfer->toAccount->number}}</p>
 						@else
@@ -126,7 +126,7 @@ pe-7s-next-2'])
 					<div class="position-relative form-group">
 						<label for="name" class="">Registrar código de depósito a cuenta de la plataforma</label>
 						<input name="deposit_code" placeholder="N° de operación" type="text" class="form-control" value="{{$operation->deposit_code ? $operation->deposit_code : old('deposit_code')}}"
-						{{$operation->deposit_code == null ? '' : 'readonly'}}>
+						{{$operation->deposit_code == null ? '' : 'readonly'}} autocomplete="off">
 					</div>
 					<button class="mt-1 btn btn-primary float-right">Registrar</button>
 				</form>
@@ -143,7 +143,7 @@ pe-7s-next-2'])
 					<div class="position-relative form-group">
 						<label for="name" class="">Código de operación final del cliente</label>
 						<input name="transfer_code" placeholder="N° de operación" type="text" class="form-control" value="{{$operation->transfer_code ? $operation->transfer_code : old('deposit_code')}}"
-						{{$operation->deposit_code != null && $operation->transfer_code == null ? '' : 'readonly'}}>
+						{{$operation->deposit_code != null && $operation->transfer_code == null ? '' : 'readonly'}} autocomplete="off">
 					</div>
 					<button class="mt-1 btn btn-success float-right">Completar operación</button>
 				</form>

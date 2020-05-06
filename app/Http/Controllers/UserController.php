@@ -11,7 +11,7 @@ class UserController extends Controller {
 	}
 
 	public function accounts() {
-		$banks = Bank::whereStatus(Bank::PUBLISHED)->orderBy('name', 'desc')->get();
+		$banks = Bank::whereStatus(Bank::PUBLISHED)->orderBy('name', 'asc')->get();
 		return view('user.accounts', compact('banks'));
 	}
 
@@ -21,6 +21,6 @@ class UserController extends Controller {
 			$request->merge(['password' => bcrypt($request->password)]);
 		}
 		$user->fill($request->input())->save();
-		return back();
+		return back()->with('message', 'Datos actualizados correctamente');
 	}
 }

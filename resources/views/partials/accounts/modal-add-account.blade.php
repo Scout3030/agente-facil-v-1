@@ -10,6 +10,7 @@
       <div class="modal-body p-4">
         <form id="addbankaccount" method="post" action="{{route('user.accounts.store')}}" novalidate>
           @csrf
+          <input type="hidden" name="route" value="{{url()->previous()}}">
           <!-- <div class="mb-3">
             <div class="custom-control custom-radio custom-control-inline">
               <input id="personal" name="bankAccountType" class="custom-control-input" checked="" required="" type="radio">
@@ -31,11 +32,11 @@
           </div>
           <div class="form-group">
             <label for="accountName">Nombre de cuenta</label>
-            <input type="text" class="form-control" name="name">
+            <input type="text" class="form-control" name="name" autocomplete="off">
           </div>
           <div class="form-group">
             <label for="accountNumber">Numero de cuenta</label>
-            <input type="text" class="form-control" name="number">
+            <input type="text" class="form-control" name="number" autocomplete="off">
           </div>
           <div class="form-check custom-control custom-checkbox mb-3">
             <!-- <input id="remember-me" name="remember" class="custom-control-input" type="checkbox"> -->
@@ -48,7 +49,3 @@
   </div>
 </div>
 <!-- Bank Accounts End-->
-
-@push('scripts')
-<script src="{{asset('assets/vendor/inputmask/dist/jquery.inputmask.js')}}"></script>
-@endpush

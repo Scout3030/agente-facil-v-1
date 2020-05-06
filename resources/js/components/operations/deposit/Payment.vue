@@ -71,9 +71,12 @@ import { required, numeric, minLength } from 'vuelidate/lib/validators'
 			 //    if (this.$v.$invalid) {
 			 //        this.submitStatus = 'ERROR'
 			 //    } else {
+			    
 			        this.$refs.form.submit()
+			        localStorage.clear();
 			    // }
 			}
-		},
+		}
+
 	}
 </script>

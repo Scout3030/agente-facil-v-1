@@ -4,6 +4,7 @@ import bank from './../modules/bank'
 import transfer from './../modules/transfer'
 import payment from './../modules/payment'
 import bankOperation from './../modules/bankoperation'
+import common from './../modules/common'
 
 
 import VuexPersistence from 'vuex-persist'
@@ -12,7 +13,7 @@ Vue.use(Vuex)
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
-  modules: ['transfer', 'payment']
+  modules: ['transfer', 'payment', 'common']
 });
 
 export default new Vuex.Store({
@@ -26,7 +27,8 @@ export default new Vuex.Store({
     bank,
     transfer,
     payment,
-    bankOperation
+    bankOperation,
+    common
   },
   plugins: [vuexLocal.plugin]
 })

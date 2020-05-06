@@ -1,5 +1,6 @@
 <template>
 	<form id="form-send-money" ref="form" method="post" action="/deposito" @submit.prevent="sendData">
+		
 		<input type="hidden" name="_token" :value="csrf">
 		<input type="hidden" name="bankId" :value="from.id">
 		<input type="hidden" name="operationType" :value="1">
@@ -130,6 +131,7 @@
 			this.getBankAccounts(this.operationTo.id).then(response => {
 				this.accounts2 = response
 			})
+			this.setUrlPage()
 		},
 		props: ['banks'],
 		computed: {
@@ -140,6 +142,7 @@
 		},
 		methods: {
 			...mapMutations('transfer', ['setFrom', 'setTo', 'setAmount', 'setComission', 'setFromAccount', 'setToAccount', 'setIsMine', 'setAccountNumber', 'setOwnerName']),
+			...mapMutations('common', ['setPage']),
 			icon(icon){
 				return `bank ${icon}`
 			},
@@ -201,8 +204,10 @@
 				        }
 			        }
 			    }
+			},
+			setUrlPage(){
+				this.setPage(1)
 			}
-
 		},
 		filters: {
 		  	capitalize: function (value) {

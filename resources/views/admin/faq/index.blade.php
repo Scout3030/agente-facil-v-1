@@ -73,9 +73,11 @@
 					</div>
 					<button class="mt-1 btn btn-primary">{{$btn}}</button>
 				</form>
+				<button class="btn btn-lg btnAlert">Lanzar alerta</button>
 			</div>
 		</div>
 	</div>
 </div>
 
 @endsection
+
