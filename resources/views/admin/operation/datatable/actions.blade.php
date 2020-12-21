@@ -1,0 +1,1 @@
+<button class="mb-2 mr-2 btn btn-success" onclick="window.location.replace('{{route('admin.operation.show', $id)}}')">Ver operación</button>
