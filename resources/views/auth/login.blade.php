@@ -49,7 +49,7 @@
                     </div>
 
                 </div>
-                <button class="btn btn-primary btn-block my-4" type="submit">{{ __('Login') }}</button>
+                <button class="btn btn-primary btn-block my-4" type="submit">{{ __('Ingresar') }}</button>
             </form>
             <p class="text-3 text-muted text-center mb-0">¿No tienes una cuenta aún? <a class="btn-link" href="{{route('register')}}">Regístrate</a></p>
         </div>

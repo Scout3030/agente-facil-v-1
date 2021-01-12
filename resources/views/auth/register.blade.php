@@ -39,11 +39,11 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="password-confirm">{{ __('Confirm Password') }}</label>
+                    <label for="password-confirm">{{ __('Confirmar contraseña') }}</label>
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                 </div>
                 <button type="submit" class="btn btn-primary btn-block my-4">
-                    {{ __('Register') }}
+                    {{ __('Registrar') }}
                 </button>
             </form>
             <p class="text-3 text-muted text-center mb-0">¿Ya tiene una cuenta? <a class="btn-link" href="{{route('login')}}">Ingresa</a></p>

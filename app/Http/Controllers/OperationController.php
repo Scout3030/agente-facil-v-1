@@ -15,18 +15,14 @@ use Illuminate\Support\Facades\Mail;
 
 class OperationController extends Controller {
 	public function transfer() {
-		$banks = Bank::with(['accounts'])->whereHas('accounts', function ($q) {
-			$q->where('user_id', 1);
-		})->orderBy('name', 'asc')->whereStatus(Bank::PUBLISHED)->get();
+		$banks = Bank::with(['accounts'])->orderBy('name', 'asc')->whereStatus(Bank::PUBLISHED)->get();
 		$userAccounts = BankAccount::whereUserId(auth()->id())->get();
 		// dd($userAccounts);
 		return view('operation.transfer', compact('banks', 'userAccounts'));
 	}
 
 	public function payment() {
-		$banks = Bank::with(['accounts'])->whereHas('accounts', function ($q) {
-			$q->where('user_id', 1);
-		})->orderBy('name', 'asc')->whereStatus(Bank::PUBLISHED)->get();
+		$banks = Bank::with(['accounts'])->orderBy('name', 'asc')->whereStatus(Bank::PUBLISHED)->get();
 		$userAccounts = BankAccount::whereUserId(auth()->id())->get();
 		return view('operation.payment', compact('banks', 'userAccounts'));
 	}
@@ -152,7 +148,7 @@ class OperationController extends Controller {
 
 		$depositAccount = BankAccount::with(['bank', 'user'])->whereUserId(1)->whereBankId($fromAccount->bank->id)->get()->first();
 
-		Mail::to('roberth.r.j.30@gmail.com')->send(new NewOperation($operation));
+		Mail::to('administracion@agentefacil.com')->send(new NewOperation($operation));
 
 		$whatAppUrl = 'https://api.whatsapp.com/send?phone=51944001458&text=' . $text;
 

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/images/{path}/{attachment}', function ($path, $attachment) {
 	$file = sprintf('storage/%s/%s', $path, $attachment);
@@ -41,7 +41,7 @@ Route::get('/opiniones', function () {
 	return view('reviews');
 })->name('reviews');
 
-Route::group(['middleware' => ["auth"]], function () {
+Route::group(['middleware' => ["verified", "auth"]], function () {
 	Route::get('/transferencia-interbancaria', 'OperationController@transfer')->name('operation.transfer');
 
 	Route::get('/pago-interbancario', 'OperationController@payment')
